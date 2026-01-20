@@ -1,5 +1,4 @@
 import { useState, useCallback, useImperativeHandle, forwardRef, useRef, useEffect } from 'react';
-import { Communicate } from 'edge-tts-universal';
 
 interface TextToSpeechProps {
   text: string;
@@ -13,151 +12,176 @@ export interface TextToSpeechRef {
   stop: () => void;
 }
 
-// Edge TTS 語音設定
-const VOICE_CONFIG = {
-  // 台灣女聲 - 曉臻（自然親切）
-  zh: 'zh-TW-HsiaoChenNeural',
-  // 美式英文女聲 - Jenny（自然流暢）
-  en: 'en-US-JennyNeural'
+// 語音偏好設定（按優先順序排列）
+const VOICE_PREFERENCES = {
+  en: [
+    // Windows 11 Neural voices
+    'Microsoft Aria Online (Natural)',
+    'Microsoft Jenny Online (Natural)',
+    'Microsoft Guy Online (Natural)',
+    // macOS voices
+    'Samantha',
+    'Karen',
+    'Daniel',
+    // Chrome/Android
+    'Google US English',
+    // 備用
+    'en-US',
+    'en'
+  ],
+  zh: [
+    // Windows 11 Neural voices (Taiwan)
+    'Microsoft HsiaoChen Online (Natural)',
+    'Microsoft YunJhe Online (Natural)',
+    // Windows 11 Neural voices (China)
+    'Microsoft Xiaoxiao Online (Natural)',
+    'Microsoft Yunyang Online (Natural)',
+    // macOS voices
+    'Mei-Jia',
+    'Ting-Ting',
+    // Chrome/Android
+    'Google 國語（臺灣）',
+    'Google 普通话（中国大陆）',
+    // 備用
+    'zh-TW',
+    'zh-CN',
+    'zh'
+  ]
 };
+
+// 找到最佳語音
+function findBestVoice(voices: SpeechSynthesisVoice[], lang: 'en' | 'zh'): SpeechSynthesisVoice | null {
+  const preferences = VOICE_PREFERENCES[lang];
+
+  // 按偏好順序尋找
+  for (const pref of preferences) {
+    const found = voices.find(v =>
+      v.name.includes(pref) ||
+      v.lang.startsWith(pref)
+    );
+    if (found) return found;
+  }
+
+  // 如果都找不到，找任何符合語言的
+  const langPrefix = lang === 'en' ? 'en' : 'zh';
+  return voices.find(v => v.lang.startsWith(langPrefix)) || null;
+}
 
 export const TextToSpeech = forwardRef<TextToSpeechRef, TextToSpeechProps>(
   function TextToSpeech({ text, onSpeakStart, onSpeakEnd }, ref) {
     const [isSpeaking, setIsSpeaking] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const audioRef = useRef<HTMLAudioElement | null>(null);
-    const audioUrlRef = useRef<string | null>(null);
+    const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
+    const [selectedVoices, setSelectedVoices] = useState<{en: string; zh: string}>({en: '', zh: ''});
+    const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
     const isStoppedRef = useRef(false);
 
-    // 清理 Object URL
-    const cleanupAudioUrl = useCallback(() => {
-      if (audioUrlRef.current) {
-        URL.revokeObjectURL(audioUrlRef.current);
-        audioUrlRef.current = null;
-      }
+    // 載入語音列表
+    useEffect(() => {
+      const loadVoices = () => {
+        const availableVoices = speechSynthesis.getVoices();
+        if (availableVoices.length > 0) {
+          setVoices(availableVoices);
+
+          // 找到最佳語音並記錄
+          const bestEn = findBestVoice(availableVoices, 'en');
+          const bestZh = findBestVoice(availableVoices, 'zh');
+
+          setSelectedVoices({
+            en: bestEn?.name || '系統預設',
+            zh: bestZh?.name || '系統預設'
+          });
+
+          console.log('Available voices:', availableVoices.map(v => `${v.name} (${v.lang})`));
+          console.log('Selected EN voice:', bestEn?.name);
+          console.log('Selected ZH voice:', bestZh?.name);
+        }
+      };
+
+      loadVoices();
+      speechSynthesis.onvoiceschanged = loadVoices;
+
+      return () => {
+        speechSynthesis.onvoiceschanged = null;
+      };
     }, []);
 
     // 停止播放
     const stop = useCallback(() => {
       isStoppedRef.current = true;
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
-        audioRef.current = null;
-      }
-      cleanupAudioUrl();
+      speechSynthesis.cancel();
+      utteranceRef.current = null;
       setIsSpeaking(false);
       setIsLoading(false);
-    }, [cleanupAudioUrl]);
+    }, []);
 
     // 元件卸載時清理
     useEffect(() => {
       return () => {
-        if (audioRef.current) {
-          audioRef.current.pause();
-          audioRef.current = null;
-        }
-        cleanupAudioUrl();
+        speechSynthesis.cancel();
       };
-    }, [cleanupAudioUrl]);
+    }, []);
 
-    // 使用 Edge TTS 朗讀
-    const speakWithEdgeTTS = useCallback(async (
+    // 使用 Web Speech API 朗讀
+    const speakWithWebSpeech = useCallback((
       textToSpeak: string,
       lang: 'en' | 'zh',
-      rate: number = 0
+      rate: number = 1
     ): Promise<void> => {
-      // 重設停止標記
-      isStoppedRef.current = false;
+      return new Promise((resolve) => {
+        // 重設停止標記
+        isStoppedRef.current = false;
 
-      try {
-        const voice = VOICE_CONFIG[lang];
+        // 先取消任何進行中的語音
+        speechSynthesis.cancel();
 
-        // 設定語速 rate: -50 到 +100，0 是正常速度
-        const rateStr = rate >= 0 ? `+${rate}%` : `${rate}%`;
+        const utterance = new SpeechSynthesisUtterance(textToSpeak);
+        utteranceRef.current = utterance;
 
-        // 建立 Communicate 實例
-        const communicate = new Communicate(textToSpeak, {
-          voice,
-          rate: rateStr,
-          pitch: '+0Hz',
-          volume: '+0%'
-        });
+        // 設定語言
+        utterance.lang = lang === 'en' ? 'en-US' : 'zh-TW';
+        utterance.rate = rate;
+        utterance.pitch = 1;
+        utterance.volume = 1;
 
-        // 收集音訊資料
-        const audioChunks: Uint8Array[] = [];
-
-        // 串流取得音訊（檢查是否被停止）
-        for await (const chunk of communicate.stream()) {
-          if (isStoppedRef.current) {
-            return; // 提前結束
-          }
-          if (chunk.type === 'audio' && chunk.data) {
-            audioChunks.push(new Uint8Array(chunk.data));
-          }
+        // 選擇最佳語音
+        const bestVoice = findBestVoice(voices, lang);
+        if (bestVoice) {
+          utterance.voice = bestVoice;
         }
 
-        // 再次檢查是否被停止
+        utterance.onend = () => {
+          utteranceRef.current = null;
+          resolve();
+        };
+
+        utterance.onerror = (event) => {
+          utteranceRef.current = null;
+          // 忽略 interrupted 錯誤（手動停止時會觸發）
+          if (event.error !== 'interrupted') {
+            console.error('Speech error:', event.error);
+          }
+          resolve();
+        };
+
+        // 檢查是否被停止
         if (isStoppedRef.current) {
+          resolve();
           return;
         }
 
-        // 合併音訊資料
-        const totalLength = audioChunks.reduce((acc, chunk) => acc + chunk.length, 0);
-        const audioData = new Uint8Array(totalLength);
-        let offset = 0;
-        for (const chunk of audioChunks) {
-          audioData.set(chunk, offset);
-          offset += chunk.length;
-        }
-
-        // 建立 Blob 和播放
-        const audioBlob = new Blob([audioData], { type: 'audio/mpeg' });
-
-        // 清理舊的 URL
-        cleanupAudioUrl();
-
-        const audioUrl = URL.createObjectURL(audioBlob);
-        audioUrlRef.current = audioUrl;
-
-        const audio = new Audio(audioUrl);
-        audioRef.current = audio;
-
-        // 使用 Promise 等待播放完成
-        await new Promise<void>((resolve) => {
-          audio.onended = () => {
-            cleanupAudioUrl();
-            audioRef.current = null;
-            resolve();
-          };
-
-          audio.onerror = () => {
-            cleanupAudioUrl();
-            audioRef.current = null;
-            console.error('Audio playback error');
-            resolve();
-          };
-
-          audio.play().catch(() => {
-            cleanupAudioUrl();
-            audioRef.current = null;
-            resolve();
-          });
-        });
-      } catch (error) {
-        console.error('Edge TTS error:', error);
-        // 發生錯誤時不拋出，避免流程中斷
-      }
-    }, [cleanupAudioUrl]);
+        speechSynthesis.speak(utterance);
+      });
+    }, [voices]);
 
     // 暴露方法給外部呼叫（供 CarMode 使用）
     useImperativeHandle(ref, () => ({
       speakText: async (textToSpeak: string, lang: 'en' | 'zh') => {
-        const rate = lang === 'en' ? -15 : -5; // 英文稍慢，中文正常偏慢
-        await speakWithEdgeTTS(textToSpeak, lang, rate);
+        const rate = lang === 'en' ? 0.85 : 0.95; // 英文稍慢，中文正常偏慢
+        await speakWithWebSpeech(textToSpeak, lang, rate);
       },
       stop
-    }), [speakWithEdgeTTS, stop]);
+    }), [speakWithWebSpeech, stop]);
 
     // 完整朗讀流程：提示語 + 例句
     const handleSpeak = useCallback(async () => {
@@ -172,17 +196,26 @@ export const TextToSpeech = forwardRef<TextToSpeechRef, TextToSpeechProps>(
 
       try {
         // 1. 說 "Please repeat after me"（英文提示）
-        await speakWithEdgeTTS("Please repeat after me", 'en', 0);
+        await speakWithWebSpeech("Please repeat after me", 'en', 1);
+
+        if (isStoppedRef.current) return;
 
         // 2. 短暫停頓
         await new Promise(resolve => setTimeout(resolve, 500));
 
+        if (isStoppedRef.current) return;
+
         // 3. 朗讀例句（較慢速度，英文）
-        await speakWithEdgeTTS(text, 'en', -20);
+        await speakWithWebSpeech(text, 'en', 0.8);
+
+        if (isStoppedRef.current) return;
 
         // 4. 停頓後再朗讀一次
         await new Promise(resolve => setTimeout(resolve, 1000));
-        await speakWithEdgeTTS(text, 'en', -20);
+
+        if (isStoppedRef.current) return;
+
+        await speakWithWebSpeech(text, 'en', 0.8);
       } catch (error) {
         console.error('TTS error:', error);
       }
@@ -190,7 +223,7 @@ export const TextToSpeech = forwardRef<TextToSpeechRef, TextToSpeechProps>(
       setIsSpeaking(false);
       setIsLoading(false);
       onSpeakEnd?.();
-    }, [text, isSpeaking, isLoading, speakWithEdgeTTS, stop, onSpeakStart, onSpeakEnd]);
+    }, [text, isSpeaking, isLoading, speakWithWebSpeech, stop, onSpeakStart, onSpeakEnd]);
 
     // 只朗讀例句一次
     const handleSpeakOnce = useCallback(async () => {
@@ -204,7 +237,7 @@ export const TextToSpeech = forwardRef<TextToSpeechRef, TextToSpeechProps>(
       onSpeakStart?.();
 
       try {
-        await speakWithEdgeTTS(text, 'en', -15);
+        await speakWithWebSpeech(text, 'en', 0.85);
       } catch (error) {
         console.error('TTS error:', error);
       }
@@ -212,14 +245,14 @@ export const TextToSpeech = forwardRef<TextToSpeechRef, TextToSpeechProps>(
       setIsSpeaking(false);
       setIsLoading(false);
       onSpeakEnd?.();
-    }, [text, isSpeaking, isLoading, speakWithEdgeTTS, stop, onSpeakStart, onSpeakEnd]);
+    }, [text, isSpeaking, isLoading, speakWithWebSpeech, stop, onSpeakStart, onSpeakEnd]);
 
     return (
       <div className="text-to-speech">
         {/* 語音資訊 */}
         <div className="voice-info">
-          <span>🗣️ 英文：Jenny (美式)</span>
-          <span>🗣️ 中文：曉臻 (台灣)</span>
+          <span>🗣️ 英文：{selectedVoices.en || '載入中...'}</span>
+          <span>🗣️ 中文：{selectedVoices.zh || '載入中...'}</span>
         </div>
 
         <div className="tts-buttons">
