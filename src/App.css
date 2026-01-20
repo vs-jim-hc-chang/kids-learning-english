@@ -297,6 +297,15 @@ body {
   margin-top: 8px;
 }
 
+.voice-info {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #666;
+}
+
 /* 語音選擇器 */
 .voice-selector {
   display: flex;

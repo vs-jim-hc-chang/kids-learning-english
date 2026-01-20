@@ -1,4 +1,5 @@
-import { useState, useCallback, useEffect, useImperativeHandle, forwardRef } from 'react';
+import { useState, useCallback, useImperativeHandle, forwardRef, useRef, useEffect } from 'react';
+import { Communicate } from 'edge-tts-universal';
 
 interface TextToSpeechProps {
   text: string;
@@ -12,238 +13,233 @@ export interface TextToSpeechRef {
   stop: () => void;
 }
 
-// 推薦的英文女生語音列表
-const ENGLISH_FEMALE_VOICES = [
-  'Samantha',  // 美式英語，最自然
-  'Karen',     // 澳洲英語，親切
-  'Flo',       // 年輕女聲
-  'Shelley',   // 溫和女聲
-  'Sandy',     // 女聲
-  'Moira',     // 愛爾蘭英語
-  'Kathy',     // 美式英語
-  'Tessa',     // 南非英語
-];
-
-// 推薦的中文女生語音列表
-const CHINESE_FEMALE_VOICES = [
-  'Meijia',    // 台灣中文
-  'Tingting',  // 中國中文
-  'Sinji',     // 廣東話
-];
+// Edge TTS 語音設定
+const VOICE_CONFIG = {
+  // 台灣女聲 - 曉臻（自然親切）
+  zh: 'zh-TW-HsiaoChenNeural',
+  // 美式英文女聲 - Jenny（自然流暢）
+  en: 'en-US-JennyNeural'
+};
 
 export const TextToSpeech = forwardRef<TextToSpeechRef, TextToSpeechProps>(
   function TextToSpeech({ text, onSpeakStart, onSpeakEnd }, ref) {
-  const [isSpeaking, setIsSpeaking] = useState(false);
-  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
-  const [selectedEnglishVoice, setSelectedEnglishVoice] = useState<SpeechSynthesisVoice | null>(null);
-  const [selectedChineseVoice, setSelectedChineseVoice] = useState<SpeechSynthesisVoice | null>(null);
-  const [availableEnglishVoices, setAvailableEnglishVoices] = useState<SpeechSynthesisVoice[]>([]);
-  const [availableChineseVoices, setAvailableChineseVoices] = useState<SpeechSynthesisVoice[]>([]);
+    const [isSpeaking, setIsSpeaking] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const audioRef = useRef<HTMLAudioElement | null>(null);
+    const audioUrlRef = useRef<string | null>(null);
+    const isStoppedRef = useRef(false);
 
-  // 載入可用的語音
-  useEffect(() => {
-    const loadVoices = () => {
-      const allVoices = window.speechSynthesis.getVoices();
-      setVoices(allVoices);
+    // 清理 Object URL
+    const cleanupAudioUrl = useCallback(() => {
+      if (audioUrlRef.current) {
+        URL.revokeObjectURL(audioUrlRef.current);
+        audioUrlRef.current = null;
+      }
+    }, []);
 
-      // 篩選英語女聲
-      const englishVoices = allVoices.filter(voice => {
-        if (!voice.lang.startsWith('en')) return false;
-        return ENGLISH_FEMALE_VOICES.some(name =>
-          voice.name.toLowerCase().includes(name.toLowerCase())
-        );
-      });
-      setAvailableEnglishVoices(englishVoices);
+    // 停止播放
+    const stop = useCallback(() => {
+      isStoppedRef.current = true;
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+        audioRef.current = null;
+      }
+      cleanupAudioUrl();
+      setIsSpeaking(false);
+      setIsLoading(false);
+    }, [cleanupAudioUrl]);
 
-      // 篩選中文女聲 (zh-TW, zh-CN, zh-HK)
-      const chineseVoices = allVoices.filter(voice => {
-        if (!voice.lang.startsWith('zh')) return false;
-        // 優先選擇推薦的語音，否則接受所有中文語音
-        const isRecommended = CHINESE_FEMALE_VOICES.some(name =>
-          voice.name.toLowerCase().includes(name.toLowerCase())
-        );
-        return isRecommended || voice.lang.startsWith('zh');
-      });
-      setAvailableChineseVoices(chineseVoices);
+    // 元件卸載時清理
+    useEffect(() => {
+      return () => {
+        if (audioRef.current) {
+          audioRef.current.pause();
+          audioRef.current = null;
+        }
+        cleanupAudioUrl();
+      };
+    }, [cleanupAudioUrl]);
 
-      // 預設選擇英文語音 Samantha
-      const defaultEnglishVoice = englishVoices.find(v => v.name === 'Samantha')
-        || englishVoices[0]
-        || allVoices.find(v => v.lang.startsWith('en'));
-      if (defaultEnglishVoice && !selectedEnglishVoice) {
-        setSelectedEnglishVoice(defaultEnglishVoice);
+    // 使用 Edge TTS 朗讀
+    const speakWithEdgeTTS = useCallback(async (
+      textToSpeak: string,
+      lang: 'en' | 'zh',
+      rate: number = 0
+    ): Promise<void> => {
+      // 重設停止標記
+      isStoppedRef.current = false;
+
+      try {
+        const voice = VOICE_CONFIG[lang];
+
+        // 設定語速 rate: -50 到 +100，0 是正常速度
+        const rateStr = rate >= 0 ? `+${rate}%` : `${rate}%`;
+
+        // 建立 Communicate 實例
+        const communicate = new Communicate(textToSpeak, {
+          voice,
+          rate: rateStr,
+          pitch: '+0Hz',
+          volume: '+0%'
+        });
+
+        // 收集音訊資料
+        const audioChunks: Uint8Array[] = [];
+
+        // 串流取得音訊（檢查是否被停止）
+        for await (const chunk of communicate.stream()) {
+          if (isStoppedRef.current) {
+            return; // 提前結束
+          }
+          if (chunk.type === 'audio' && chunk.data) {
+            audioChunks.push(new Uint8Array(chunk.data));
+          }
+        }
+
+        // 再次檢查是否被停止
+        if (isStoppedRef.current) {
+          return;
+        }
+
+        // 合併音訊資料
+        const totalLength = audioChunks.reduce((acc, chunk) => acc + chunk.length, 0);
+        const audioData = new Uint8Array(totalLength);
+        let offset = 0;
+        for (const chunk of audioChunks) {
+          audioData.set(chunk, offset);
+          offset += chunk.length;
+        }
+
+        // 建立 Blob 和播放
+        const audioBlob = new Blob([audioData], { type: 'audio/mpeg' });
+
+        // 清理舊的 URL
+        cleanupAudioUrl();
+
+        const audioUrl = URL.createObjectURL(audioBlob);
+        audioUrlRef.current = audioUrl;
+
+        const audio = new Audio(audioUrl);
+        audioRef.current = audio;
+
+        // 使用 Promise 等待播放完成
+        await new Promise<void>((resolve) => {
+          audio.onended = () => {
+            cleanupAudioUrl();
+            audioRef.current = null;
+            resolve();
+          };
+
+          audio.onerror = () => {
+            cleanupAudioUrl();
+            audioRef.current = null;
+            console.error('Audio playback error');
+            resolve();
+          };
+
+          audio.play().catch(() => {
+            cleanupAudioUrl();
+            audioRef.current = null;
+            resolve();
+          });
+        });
+      } catch (error) {
+        console.error('Edge TTS error:', error);
+        // 發生錯誤時不拋出，避免流程中斷
+      }
+    }, [cleanupAudioUrl]);
+
+    // 暴露方法給外部呼叫（供 CarMode 使用）
+    useImperativeHandle(ref, () => ({
+      speakText: async (textToSpeak: string, lang: 'en' | 'zh') => {
+        const rate = lang === 'en' ? -15 : -5; // 英文稍慢，中文正常偏慢
+        await speakWithEdgeTTS(textToSpeak, lang, rate);
+      },
+      stop
+    }), [speakWithEdgeTTS, stop]);
+
+    // 完整朗讀流程：提示語 + 例句
+    const handleSpeak = useCallback(async () => {
+      if (isSpeaking || isLoading) {
+        stop();
+        return;
       }
 
-      // 預設選擇中文語音（優先台灣中文）
-      const defaultChineseVoice = chineseVoices.find(v => v.lang === 'zh-TW')
-        || chineseVoices.find(v => v.name.toLowerCase().includes('meijia'))
-        || chineseVoices[0]
-        || allVoices.find(v => v.lang.startsWith('zh'));
-      if (defaultChineseVoice && !selectedChineseVoice) {
-        setSelectedChineseVoice(defaultChineseVoice);
-      }
-    };
+      setIsLoading(true);
+      setIsSpeaking(true);
+      onSpeakStart?.();
 
-    loadVoices();
-    window.speechSynthesis.onvoiceschanged = loadVoices;
+      try {
+        // 1. 說 "Please repeat after me"（英文提示）
+        await speakWithEdgeTTS("Please repeat after me", 'en', 0);
 
-    return () => {
-      window.speechSynthesis.onvoiceschanged = null;
-    };
-  }, []);
+        // 2. 短暫停頓
+        await new Promise(resolve => setTimeout(resolve, 500));
 
-  // 處理英文語音選擇
-  const handleEnglishVoiceChange = useCallback((voiceName: string) => {
-    const voice = voices.find(v => v.name === voiceName);
-    if (voice) {
-      setSelectedEnglishVoice(voice);
-    }
-  }, [voices]);
+        // 3. 朗讀例句（較慢速度，英文）
+        await speakWithEdgeTTS(text, 'en', -20);
 
-  // 處理中文語音選擇
-  const handleChineseVoiceChange = useCallback((voiceName: string) => {
-    const voice = voices.find(v => v.name === voiceName);
-    if (voice) {
-      setSelectedChineseVoice(voice);
-    }
-  }, [voices]);
-
-  // 通用朗讀功能（可指定語言）
-  const speakWithLang = useCallback((textToSpeak: string, lang: 'en' | 'zh', rate: number = 0.8) => {
-    return new Promise<void>((resolve) => {
-      const utterance = new SpeechSynthesisUtterance(textToSpeak);
-
-      const voice = lang === 'en' ? selectedEnglishVoice : selectedChineseVoice;
-      if (voice) {
-        utterance.voice = voice;
+        // 4. 停頓後再朗讀一次
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        await speakWithEdgeTTS(text, 'en', -20);
+      } catch (error) {
+        console.error('TTS error:', error);
       }
 
-      // 中文語速稍微慢一點，更清楚
-      utterance.rate = lang === 'zh' ? Math.max(rate - 0.1, 0.5) : rate;
-      utterance.pitch = lang === 'zh' ? 1.0 : 1.1;
-      utterance.volume = 1;
+      setIsSpeaking(false);
+      setIsLoading(false);
+      onSpeakEnd?.();
+    }, [text, isSpeaking, isLoading, speakWithEdgeTTS, stop, onSpeakStart, onSpeakEnd]);
 
-      utterance.onend = () => resolve();
-      utterance.onerror = () => resolve();
+    // 只朗讀例句一次
+    const handleSpeakOnce = useCallback(async () => {
+      if (isSpeaking || isLoading) {
+        stop();
+        return;
+      }
 
-      window.speechSynthesis.speak(utterance);
-    });
-  }, [selectedEnglishVoice, selectedChineseVoice]);
+      setIsLoading(true);
+      setIsSpeaking(true);
+      onSpeakStart?.();
 
-  // 停止朗讀
-  const stop = useCallback(() => {
-    window.speechSynthesis.cancel();
-    setIsSpeaking(false);
-  }, []);
+      try {
+        await speakWithEdgeTTS(text, 'en', -15);
+      } catch (error) {
+        console.error('TTS error:', error);
+      }
 
-  // 暴露方法給外部呼叫（供 CarMode 使用）
-  useImperativeHandle(ref, () => ({
-    speakText: (textToSpeak: string, lang: 'en' | 'zh') => {
-      return speakWithLang(textToSpeak, lang, lang === 'en' ? 0.7 : 0.85);
-    },
-    stop
-  }), [speakWithLang, stop]);
+      setIsSpeaking(false);
+      setIsLoading(false);
+      onSpeakEnd?.();
+    }, [text, isSpeaking, isLoading, speakWithEdgeTTS, stop, onSpeakStart, onSpeakEnd]);
 
-  // 完整朗讀流程：提示語 + 例句
-  const handleSpeak = useCallback(async () => {
-    if (isSpeaking) {
-      stop();
-      return;
-    }
-
-    setIsSpeaking(true);
-    onSpeakStart?.();
-
-    // 1. 說 "Please repeat after me"（英文提示）
-    await speakWithLang("Please repeat after me", 'en', 0.9);
-
-    // 2. 短暫停頓
-    await new Promise(resolve => setTimeout(resolve, 500));
-
-    // 3. 朗讀例句（較慢速度，英文）
-    await speakWithLang(text, 'en', 0.7);
-
-    // 4. 停頓後再朗讀一次
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    await speakWithLang(text, 'en', 0.7);
-
-    setIsSpeaking(false);
-    onSpeakEnd?.();
-  }, [text, isSpeaking, speakWithLang, stop, onSpeakStart, onSpeakEnd]);
-
-  // 只朗讀例句一次
-  const handleSpeakOnce = useCallback(async () => {
-    if (isSpeaking) {
-      stop();
-      return;
-    }
-
-    setIsSpeaking(true);
-    await speakWithLang(text, 'en', 0.75);
-    setIsSpeaking(false);
-  }, [text, isSpeaking, speakWithLang, stop]);
-
-  return (
-    <div className="text-to-speech">
-      {/* 英文語音選擇 */}
-      {availableEnglishVoices.length > 1 && (
-        <div className="voice-selector">
-          <label>👩‍🏫 英文老師：</label>
-          <select
-            value={selectedEnglishVoice?.name || ''}
-            onChange={(e) => handleEnglishVoiceChange(e.target.value)}
-            disabled={isSpeaking}
-          >
-            {availableEnglishVoices.map(voice => (
-              <option key={voice.name} value={voice.name}>
-                {voice.name} ({voice.lang})
-              </option>
-            ))}
-          </select>
+    return (
+      <div className="text-to-speech">
+        {/* 語音資訊 */}
+        <div className="voice-info">
+          <span>🗣️ 英文：Jenny (美式)</span>
+          <span>🗣️ 中文：曉臻 (台灣)</span>
         </div>
-      )}
 
-      {/* 中文語音選擇（如果有多個選項才顯示） */}
-      {availableChineseVoices.length > 1 && (
-        <div className="voice-selector">
-          <label>👩 中文老師：</label>
-          <select
-            value={selectedChineseVoice?.name || ''}
-            onChange={(e) => handleChineseVoiceChange(e.target.value)}
-            disabled={isSpeaking}
+        <div className="tts-buttons">
+          <button
+            onClick={handleSpeak}
+            className={`tts-btn main-speak ${isSpeaking ? 'speaking' : ''}`}
+            disabled={isLoading && !isSpeaking}
           >
-            {availableChineseVoices.map(voice => (
-              <option key={voice.name} value={voice.name}>
-                {voice.name} ({voice.lang})
-              </option>
-            ))}
-          </select>
+            {isLoading && !isSpeaking ? '⏳ 載入中...' : isSpeaking ? '🔊 朗讀中...' : '🗣️ 跟著說'}
+          </button>
+
+          <button
+            onClick={handleSpeakOnce}
+            className="tts-btn quick-speak"
+            disabled={isSpeaking || isLoading}
+          >
+            🔈 再聽一次
+          </button>
         </div>
-      )}
-
-      <div className="tts-buttons">
-        <button
-          onClick={handleSpeak}
-          className={`tts-btn main-speak ${isSpeaking ? 'speaking' : ''}`}
-          disabled={voices.length === 0}
-        >
-          {isSpeaking ? '🔊 朗讀中...' : '🗣️ 跟著說'}
-        </button>
-
-        <button
-          onClick={handleSpeakOnce}
-          className="tts-btn quick-speak"
-          disabled={isSpeaking || voices.length === 0}
-        >
-          🔈 再聽一次
-        </button>
       </div>
-
-      {voices.length === 0 && (
-        <div className="tts-warning">
-          ⚠️ 您的瀏覽器不支援語音功能
-        </div>
-      )}
-    </div>
-  );
-});
+    );
+  }
+);
