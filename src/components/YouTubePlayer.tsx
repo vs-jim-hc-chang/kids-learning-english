@@ -143,11 +143,18 @@ export const YouTubePlayer = forwardRef<YouTubePlayerRef, YouTubePlayerProps>(
   useEffect(() => {
     if (!playerRef.current || !isPlayerReady) return;
 
-    // 停止當前播放
-    playerRef.current.pauseVideo();
-
-    // 跳到新的起始位置
-    playerRef.current.seekTo(startTime, true);
+    try {
+      // 確認 player 方法存在再呼叫（避免初始化中的錯誤）
+      if (typeof playerRef.current.pauseVideo === 'function') {
+        playerRef.current.pauseVideo();
+      }
+      if (typeof playerRef.current.seekTo === 'function') {
+        playerRef.current.seekTo(startTime, true);
+      }
+    } catch (e) {
+      // 播放器可能還在初始化中
+      console.warn('Player not ready yet');
+    }
 
     // 如果正在循環，清除舊的循環
     if (loopIntervalRef.current) {
@@ -171,8 +178,17 @@ export const YouTubePlayer = forwardRef<YouTubePlayerRef, YouTubePlayerProps>(
     }
 
     // 開始循環：跳到起始位置並播放
-    playerRef.current.seekTo(startTimeRef.current, true);
-    playerRef.current.playVideo();
+    try {
+      if (typeof playerRef.current.seekTo === 'function') {
+        playerRef.current.seekTo(startTimeRef.current, true);
+      }
+      if (typeof playerRef.current.playVideo === 'function') {
+        playerRef.current.playVideo();
+      }
+    } catch (e) {
+      // 播放器可能還沒準備好
+      return;
+    }
 
     // 檢查是否超過結束時間
     loopIntervalRef.current = window.setInterval(() => {
@@ -181,7 +197,9 @@ export const YouTubePlayer = forwardRef<YouTubePlayerRef, YouTubePlayerProps>(
       try {
         const currentTime = playerRef.current.getCurrentTime();
         if (currentTime >= endTimeRef.current) {
-          playerRef.current.seekTo(startTimeRef.current, true);
+          if (typeof playerRef.current.seekTo === 'function') {
+            playerRef.current.seekTo(startTimeRef.current, true);
+          }
         }
       } catch (e) {
         // 播放器可能還沒準備好
@@ -211,9 +229,18 @@ export const YouTubePlayer = forwardRef<YouTubePlayerRef, YouTubePlayerProps>(
     // 清除舊的檢測
     stopSegmentCheck();
 
-    playerRef.current.seekTo(startTimeRef.current, true);
-    playerRef.current.playVideo();
-    setIsCurrentlyPlaying(true);
+    try {
+      if (typeof playerRef.current.seekTo === 'function') {
+        playerRef.current.seekTo(startTimeRef.current, true);
+      }
+      if (typeof playerRef.current.playVideo === 'function') {
+        playerRef.current.playVideo();
+      }
+      setIsCurrentlyPlaying(true);
+    } catch (e) {
+      // 播放器可能還沒準備好
+      return;
+    }
 
     // 開始檢測片段是否結束（用於車上模式）
     segmentCheckRef.current = window.setInterval(() => {
@@ -224,7 +251,9 @@ export const YouTubePlayer = forwardRef<YouTubePlayerRef, YouTubePlayerProps>(
         // 當播放超過結束時間時觸發 onSegmentEnd
         if (currentTime >= endTimeRef.current) {
           stopSegmentCheck();
-          playerRef.current.pauseVideo();
+          if (typeof playerRef.current.pauseVideo === 'function') {
+            playerRef.current.pauseVideo();
+          }
           setIsCurrentlyPlaying(false);
           onSegmentEndRef.current?.();
         }
@@ -235,9 +264,15 @@ export const YouTubePlayer = forwardRef<YouTubePlayerRef, YouTubePlayerProps>(
   }, [isPlayerReady, stopSegmentCheck]);
 
   const pauseVideo = useCallback(() => {
-    if (!playerRef.current) return;
     stopSegmentCheck();
-    playerRef.current.pauseVideo();
+    if (!playerRef.current) return;
+    try {
+      if (typeof playerRef.current.pauseVideo === 'function') {
+        playerRef.current.pauseVideo();
+      }
+    } catch (e) {
+      // 播放器可能還沒準備好
+    }
     setIsCurrentlyPlaying(false);
   }, [stopSegmentCheck]);
 
