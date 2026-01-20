@@ -34,6 +34,7 @@ export function CarMode({ onExit }: CarModeProps) {
   const [step, setStep] = useState<CarModeStepType>(CarModeStep.IDLE);
   const [isPlaying, setIsPlaying] = useState(false);
   const [pauseCountdown, setPauseCountdown] = useState(0);
+  const [showSelector, setShowSelector] = useState(false);
 
   const youtubeRef = useRef<YouTubePlayerRef>(null);
   const ttsRef = useRef<TextToSpeechRef>(null);
@@ -235,6 +236,17 @@ export function CarMode({ onExit }: CarModeProps) {
     }
   }, [clearPauseTimer]);
 
+  // 跳到指定句子
+  const jumpToSentence = useCallback((index: number) => {
+    clearPauseTimer();
+    ttsRef.current?.stop();
+    youtubeRef.current?.pauseVideo();
+    setIsPlaying(false);
+    setCurrentIndex(index);
+    setStep(CarModeStep.IDLE);
+    setShowSelector(false);
+  }, [clearPauseTimer]);
+
   // 清理
   useEffect(() => {
     return () => {
@@ -250,9 +262,12 @@ export function CarMode({ onExit }: CarModeProps) {
           ← 返回
         </button>
         <h1>車上模式</h1>
-        <div className="car-mode-progress">
-          第 {currentIndex + 1} 句 / 共 {sentences.length} 句
-        </div>
+        <button
+          className="select-btn"
+          onClick={() => setShowSelector(true)}
+        >
+          📋 第 {currentIndex + 1}/{sentences.length}
+        </button>
       </header>
 
       {/* YouTube 影片區域 */}
@@ -320,6 +335,37 @@ export function CarMode({ onExit }: CarModeProps) {
            currentSentence.difficulty === 'medium' ? '中等' : '困難'}
         </span>
       </div>
+
+      {/* 句子選擇彈窗 */}
+      {showSelector && (
+        <div className="sentence-selector-overlay" onClick={() => setShowSelector(false)}>
+          <div className="sentence-selector-modal" onClick={e => e.stopPropagation()}>
+            <div className="selector-header">
+              <h2>選擇句子</h2>
+              <button className="close-btn" onClick={() => setShowSelector(false)}>✕</button>
+            </div>
+            <div className="selector-list">
+              {sentences.map((sentence, index) => (
+                <button
+                  key={sentence.id}
+                  className={`selector-item ${index === currentIndex ? 'active' : ''} ${sentence.difficulty}`}
+                  onClick={() => jumpToSentence(index)}
+                >
+                  <span className="selector-number">{index + 1}</span>
+                  <div className="selector-content">
+                    <div className="selector-english">{sentence.english}</div>
+                    <div className="selector-chinese">{sentence.chinese}</div>
+                  </div>
+                  <span className={`selector-difficulty ${sentence.difficulty}`}>
+                    {sentence.difficulty === 'easy' ? '簡' :
+                     sentence.difficulty === 'medium' ? '中' : '難'}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
