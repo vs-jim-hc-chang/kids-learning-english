@@ -39,6 +39,26 @@ export function CarMode({ onExit }: CarModeProps) {
   const ttsRef = useRef<TextToSpeechRef>(null);
   const pauseTimerRef = useRef<number | null>(null);
 
+  // 用 ref 追蹤最新狀態，避免 closure 問題
+  const stepRef = useRef(step);
+  const isPlayingRef = useRef(isPlaying);
+  const currentIndexRef = useRef(currentIndex);
+  const currentSentenceRef = useRef(sentences[currentIndex]);
+
+  // 同步更新 refs
+  useEffect(() => {
+    stepRef.current = step;
+  }, [step]);
+
+  useEffect(() => {
+    isPlayingRef.current = isPlaying;
+  }, [isPlaying]);
+
+  useEffect(() => {
+    currentIndexRef.current = currentIndex;
+    currentSentenceRef.current = sentences[currentIndex];
+  }, [currentIndex]);
+
   const currentSentence = sentences[currentIndex];
 
   // 步驟描述
@@ -61,7 +81,7 @@ export function CarMode({ onExit }: CarModeProps) {
 
   // 移動到下一句
   const goToNext = useCallback(() => {
-    if (currentIndex < sentences.length - 1) {
+    if (currentIndexRef.current < sentences.length - 1) {
       setCurrentIndex(prev => prev + 1);
       setStep(CarModeStep.IDLE);
     } else {
@@ -69,43 +89,31 @@ export function CarMode({ onExit }: CarModeProps) {
       setIsPlaying(false);
       setStep(CarModeStep.COMPLETE);
     }
-  }, [currentIndex]);
+  }, []);
 
   // 步驟 1: 播放中文引導
   const playChineseGuide = useCallback(async () => {
+    if (!isPlayingRef.current) return;
+
     setStep(CarModeStep.CHINESE_GUIDE);
     if (ttsRef.current) {
-      await ttsRef.current.speakText(currentSentence.chineseGuide, 'zh');
+      await ttsRef.current.speakText(currentSentenceRef.current.chineseGuide, 'zh');
     }
+
+    // 檢查是否仍在播放
+    if (!isPlayingRef.current) return;
+
     // 短暫停頓後播放影片
     await new Promise(resolve => setTimeout(resolve, 500));
+
+    if (!isPlayingRef.current) return;
+
     setStep(CarModeStep.VIDEO_PLAY);
-  }, [currentSentence.chineseGuide]);
+  }, []);
 
-  // 步驟 2: 影片播放結束後的回調
-  const handleVideoSegmentEnd = useCallback(() => {
-    if (step === CarModeStep.VIDEO_PLAY && isPlaying) {
-      // 開始英文朗讀
-      playEnglishTTS();
-    }
-  }, [step, isPlaying]);
-
-  // 步驟 3: 播放英文朗讀
-  const playEnglishTTS = useCallback(async () => {
-    setStep(CarModeStep.ENGLISH_TTS);
-    if (ttsRef.current) {
-      // 朗讀兩次英文
-      await ttsRef.current.speakText(currentSentence.english, 'en');
-      await new Promise(resolve => setTimeout(resolve, 800));
-      await ttsRef.current.speakText(currentSentence.english, 'en');
-    }
-    // 開始跟讀等待時間
-    startRepeatPause();
-  }, [currentSentence.english]);
-
-  // 步驟 4: 開始跟讀等待
+  // 步驟 4: 開始跟讀等待（移到前面避免依賴問題）
   const startRepeatPause = useCallback(() => {
-    const duration = REPEAT_PAUSE_DURATION[currentSentence.difficulty];
+    const duration = REPEAT_PAUSE_DURATION[currentSentenceRef.current.difficulty];
     setPauseCountdown(duration);
     setStep(CarModeStep.REPEAT_PAUSE);
 
@@ -118,18 +126,49 @@ export function CarMode({ onExit }: CarModeProps) {
 
       if (remaining <= 0) {
         clearPauseTimer();
-        // 自動進入下一句
-        if (isPlaying) {
+        // 自動進入下一句（使用 ref 取得最新值）
+        if (isPlayingRef.current) {
           goToNext();
         }
       }
     }, 1000);
-  }, [currentSentence.difficulty, clearPauseTimer, goToNext, isPlaying]);
+  }, [clearPauseTimer, goToNext]);
+
+  // 步驟 3: 播放英文朗讀
+  const playEnglishTTS = useCallback(async () => {
+    if (!isPlayingRef.current) return;
+
+    setStep(CarModeStep.ENGLISH_TTS);
+    if (ttsRef.current) {
+      // 朗讀兩次英文
+      await ttsRef.current.speakText(currentSentenceRef.current.english, 'en');
+      if (!isPlayingRef.current) return;
+      await new Promise(resolve => setTimeout(resolve, 800));
+      if (!isPlayingRef.current) return;
+      await ttsRef.current.speakText(currentSentenceRef.current.english, 'en');
+    }
+    // 開始跟讀等待時間
+    if (isPlayingRef.current) {
+      startRepeatPause();
+    }
+  }, [startRepeatPause]);
+
+  // 步驟 2: 影片播放結束後的回調
+  const handleVideoSegmentEnd = useCallback(() => {
+    // 使用 ref 取得最新狀態
+    if (stepRef.current === CarModeStep.VIDEO_PLAY && isPlayingRef.current) {
+      // 開始英文朗讀
+      playEnglishTTS();
+    }
+  }, [playEnglishTTS]);
 
   // 開始播放流程
   const startPlayback = useCallback(async () => {
     setIsPlaying(true);
     await playChineseGuide();
+
+    // 檢查是否仍在播放
+    if (!isPlayingRef.current) return;
 
     // 播放影片片段
     if (youtubeRef.current) {
@@ -140,7 +179,14 @@ export function CarMode({ onExit }: CarModeProps) {
   // 當步驟為 IDLE 且正在播放時，自動開始下一輪
   useEffect(() => {
     if (step === CarModeStep.IDLE && isPlaying) {
-      startPlayback();
+      // 使用 setTimeout 避免在 render 期間調用 setState
+      const timeoutId = setTimeout(() => {
+        if (isPlayingRef.current && stepRef.current === CarModeStep.IDLE) {
+          startPlayback();
+        }
+      }, 0);
+
+      return () => clearTimeout(timeoutId);
     }
   }, [step, isPlaying, startPlayback]);
 
@@ -183,11 +229,11 @@ export function CarMode({ onExit }: CarModeProps) {
     ttsRef.current?.stop();
     youtubeRef.current?.pauseVideo();
 
-    if (currentIndex > 0) {
+    if (currentIndexRef.current > 0) {
       setCurrentIndex(prev => prev - 1);
       setStep(CarModeStep.IDLE);
     }
-  }, [clearPauseTimer, currentIndex]);
+  }, [clearPauseTimer]);
 
   // 清理
   useEffect(() => {
