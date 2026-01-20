@@ -83,6 +83,9 @@ export const TextToSpeech = forwardRef<TextToSpeechRef, TextToSpeechProps>(
 
     // 載入語音列表
     useEffect(() => {
+      let retryCount = 0;
+      let retryTimer: number | null = null;
+
       const loadVoices = () => {
         const availableVoices = speechSynthesis.getVoices();
         if (availableVoices.length > 0) {
@@ -100,6 +103,10 @@ export const TextToSpeech = forwardRef<TextToSpeechRef, TextToSpeechProps>(
           console.log('Available voices:', availableVoices.map(v => `${v.name} (${v.lang})`));
           console.log('Selected EN voice:', bestEn?.name);
           console.log('Selected ZH voice:', bestZh?.name);
+        } else if (retryCount < 10) {
+          // iOS 有時候需要多次嘗試才能載入語音
+          retryCount++;
+          retryTimer = window.setTimeout(loadVoices, 200);
         }
       };
 
@@ -108,6 +115,9 @@ export const TextToSpeech = forwardRef<TextToSpeechRef, TextToSpeechProps>(
 
       return () => {
         speechSynthesis.onvoiceschanged = null;
+        if (retryTimer) {
+          clearTimeout(retryTimer);
+        }
       };
     }, []);
 
@@ -140,42 +150,56 @@ export const TextToSpeech = forwardRef<TextToSpeechRef, TextToSpeechProps>(
         // 先取消任何進行中的語音
         speechSynthesis.cancel();
 
-        const utterance = new SpeechSynthesisUtterance(textToSpeak);
-        utteranceRef.current = utterance;
-
-        // 設定語言
-        utterance.lang = lang === 'en' ? 'en-US' : 'zh-TW';
-        utterance.rate = rate;
-        utterance.pitch = 1;
-        utterance.volume = 1;
-
-        // 選擇最佳語音
-        const bestVoice = findBestVoice(voices, lang);
-        if (bestVoice) {
-          utterance.voice = bestVoice;
-        }
-
-        utterance.onend = () => {
-          utteranceRef.current = null;
-          resolve();
-        };
-
-        utterance.onerror = (event) => {
-          utteranceRef.current = null;
-          // 忽略 interrupted 錯誤（手動停止時會觸發）
-          if (event.error !== 'interrupted') {
-            console.error('Speech error:', event.error);
+        // iOS Safari 需要在 cancel 後稍微等待
+        setTimeout(() => {
+          if (isStoppedRef.current) {
+            resolve();
+            return;
           }
-          resolve();
-        };
 
-        // 檢查是否被停止
-        if (isStoppedRef.current) {
-          resolve();
-          return;
-        }
+          const utterance = new SpeechSynthesisUtterance(textToSpeak);
+          utteranceRef.current = utterance;
 
-        speechSynthesis.speak(utterance);
+          // 設定語言
+          utterance.lang = lang === 'en' ? 'en-US' : 'zh-TW';
+          utterance.rate = rate;
+          utterance.pitch = 1;
+          utterance.volume = 1;
+
+          // 選擇最佳語音
+          const bestVoice = findBestVoice(voices, lang);
+          if (bestVoice) {
+            utterance.voice = bestVoice;
+          }
+
+          utterance.onend = () => {
+            utteranceRef.current = null;
+            resolve();
+          };
+
+          utterance.onerror = (event) => {
+            utteranceRef.current = null;
+            // 忽略 interrupted 錯誤（手動停止時會觸發）
+            if (event.error !== 'interrupted') {
+              console.error('Speech error:', event.error);
+            }
+            resolve();
+          };
+
+          // iOS Safari 特殊處理：有時候語音會卡住，需要先 resume
+          if (speechSynthesis.paused) {
+            speechSynthesis.resume();
+          }
+
+          speechSynthesis.speak(utterance);
+
+          // iOS Safari 有時候需要再次 resume 來觸發播放
+          setTimeout(() => {
+            if (speechSynthesis.paused) {
+              speechSynthesis.resume();
+            }
+          }, 100);
+        }, 50);
       });
     }, [voices]);
 
