@@ -1,0 +1,746 @@
+/* 全域樣式 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary-color: #FF69B4;
+  --secondary-color: #FFB6C1;
+  --accent-color: #FF1493;
+  --background-color: #FFF0F5;
+  --text-color: #333;
+  --white: #FFFFFF;
+  --success-color: #90EE90;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#root {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* App 容器 */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 500px;
+  margin: 0 auto;
+  background: var(--white);
+}
+
+/* 頂部標題 */
+.app-header {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  color: var(--white);
+  padding: 16px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow);
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.app-header h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.car-mode-enter-btn {
+  padding: 8px 16px;
+  border: 2px solid var(--white);
+  border-radius: 20px;
+  background: transparent;
+  color: var(--white);
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.car-mode-enter-btn:hover {
+  background: var(--white);
+  color: var(--accent-color);
+}
+
+.car-mode-enter-btn:active {
+  transform: scale(0.95);
+}
+
+/* 進度條 */
+.progress-bar {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  height: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill {
+  background: var(--success-color);
+  height: 100%;
+  border-radius: 20px;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+/* 主要內容區 */
+.main-content {
+  flex: 1;
+  padding: 16px;
+  padding-bottom: 80px;
+  overflow-y: auto;
+}
+
+/* YouTube 播放器 */
+.youtube-player-container {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+}
+
+.youtube-player {
+  width: 100%;
+  aspect-ratio: 16/9;
+}
+
+.player-controls {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  background: var(--secondary-color);
+}
+
+.control-btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.control-btn:active {
+  transform: scale(0.95);
+}
+
+.play-btn {
+  background: var(--success-color);
+  color: var(--text-color);
+}
+
+.pause-btn {
+  background: var(--white);
+  color: var(--text-color);
+}
+
+/* 當前句子顯示 */
+.current-sentence {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+  border: 3px solid var(--secondary-color);
+}
+
+.sentence-display {
+  margin-bottom: 16px;
+}
+
+.english-text {
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--accent-color);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.chinese-text {
+  font-size: 18px;
+  color: #666;
+}
+
+.loop-btn {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  background: var(--secondary-color);
+  color: var(--text-color);
+  transition: all 0.2s;
+}
+
+.loop-btn.active {
+  background: var(--accent-color);
+  color: var(--white);
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* AI 語音朗讀區 */
+.tts-section {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.tts-section h3 {
+  margin-bottom: 16px;
+  color: var(--primary-color);
+  font-size: 20px;
+}
+
+.text-to-speech {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tts-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.tts-btn {
+  padding: 16px 24px;
+  border: none;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: all 0.2s;
+}
+
+.tts-btn:active {
+  transform: scale(0.95);
+}
+
+.tts-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.main-speak {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: var(--white);
+  flex: 2;
+}
+
+.main-speak.speaking {
+  background: linear-gradient(135deg, #FF9800, #F57C00);
+  animation: speaking-pulse 0.8s infinite;
+}
+
+@keyframes speaking-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 152, 0, 0.7);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 15px rgba(255, 152, 0, 0);
+    transform: scale(1.02);
+  }
+}
+
+.quick-speak {
+  background: var(--secondary-color);
+  color: var(--text-color);
+  flex: 1;
+}
+
+.tts-warning {
+  color: #FF5722;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+/* 語音選擇器 */
+.voice-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 12px;
+  background: var(--background-color);
+  border-radius: 12px;
+}
+
+.voice-selector label {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.voice-selector select {
+  padding: 10px 16px;
+  font-size: 16px;
+  border: 2px solid var(--secondary-color);
+  border-radius: 8px;
+  background: var(--white);
+  color: var(--text-color);
+  cursor: pointer;
+  min-width: 150px;
+}
+
+.voice-selector select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.voice-selector select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.5); }
+}
+
+/* 底部導航 */
+.navigation {
+  display: flex;
+  gap: 8px;
+  padding: 12px 0;
+}
+
+.nav-btn {
+  flex: 1;
+  padding: 16px 8px;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  background: var(--secondary-color);
+  color: var(--text-color);
+  transition: transform 0.1s;
+}
+
+.nav-btn:active {
+  transform: scale(0.95);
+}
+
+.complete-btn {
+  flex: 1.5;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background: var(--success-color);
+  color: var(--text-color);
+  transition: transform 0.1s;
+}
+
+.complete-btn:active {
+  transform: scale(0.95);
+}
+
+/* 句子列表 */
+.sentence-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sentence-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+
+.sentence-card:active {
+  transform: scale(0.98);
+}
+
+.sentence-card.selected {
+  border-color: var(--accent-color);
+  background: var(--background-color);
+}
+
+.sentence-card.completed {
+  border-color: var(--success-color);
+}
+
+.sentence-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.sentence-number {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.difficulty {
+  font-size: 12px;
+}
+
+.completed-badge {
+  font-size: 18px;
+}
+
+.sentence-english {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--accent-color);
+  margin-bottom: 4px;
+}
+
+.sentence-chinese {
+  font-size: 14px;
+  color: #666;
+}
+
+/* 底部 Tab */
+.app-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  background: var(--white);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 16px;
+  border: none;
+  background: var(--white);
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #999;
+  transition: all 0.2s;
+}
+
+.tab-btn.active {
+  color: var(--accent-color);
+  background: var(--background-color);
+}
+
+/* 響應式調整 */
+@media (max-width: 375px) {
+  .english-text {
+    font-size: 22px;
+  }
+
+  .record-btn {
+    padding: 16px 32px;
+    font-size: 18px;
+  }
+}
+
+/* ========================================
+   車上模式樣式
+   ======================================== */
+
+.car-mode {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 500px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+  color: var(--white);
+}
+
+/* 車上模式頂部 */
+.car-mode-header {
+  background: linear-gradient(135deg, #0f3460, #16213e);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.car-mode-header h1 {
+  font-size: 28px;
+  text-align: center;
+  color: #e94560;
+  margin: 8px 0;
+}
+
+.exit-btn {
+  align-self: flex-start;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.exit-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.car-mode-progress {
+  text-align: center;
+  font-size: 16px;
+  color: #a0a0a0;
+}
+
+/* 車上模式影片區 */
+.car-mode-video {
+  padding: 16px;
+}
+
+.car-mode-video .youtube-player-container {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.car-mode-video .player-controls {
+  display: none; /* 隱藏原本的控制按鈕 */
+}
+
+/* 車上模式句子顯示 */
+.car-mode-sentence {
+  padding: 20px 24px;
+  text-align: center;
+}
+
+.car-mode-english {
+  font-size: 32px;
+  font-weight: bold;
+  color: #e94560;
+  margin-bottom: 12px;
+  line-height: 1.3;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.car-mode-chinese {
+  font-size: 20px;
+  color: #a0a0a0;
+}
+
+/* 車上模式狀態指示 */
+.car-mode-status {
+  text-align: center;
+  padding: 16px;
+  margin: 0 24px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s;
+}
+
+.car-mode-status.step-chinese {
+  background: linear-gradient(135deg, #f39c12, #e74c3c);
+  animation: status-pulse 1s infinite;
+}
+
+.car-mode-status.step-video {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  animation: status-pulse 1s infinite;
+}
+
+.car-mode-status.step-english {
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  animation: status-pulse 1s infinite;
+}
+
+.car-mode-status.step-pause {
+  background: linear-gradient(135deg, #9b59b6, #8e44ad);
+  animation: countdown-pulse 1s infinite;
+}
+
+.car-mode-status.step-complete {
+  background: linear-gradient(135deg, #1abc9c, #16a085);
+}
+
+@keyframes status-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes countdown-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(155, 89, 182, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(155, 89, 182, 0);
+  }
+}
+
+/* 車上模式控制按鈕 */
+.car-mode-controls {
+  display: flex;
+  gap: 12px;
+  padding: 24px;
+  margin-top: auto;
+}
+
+.car-btn {
+  flex: 1;
+  padding: 20px 16px;
+  border: none;
+  border-radius: 16px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 70px;
+}
+
+.car-btn:active {
+  transform: scale(0.95);
+}
+
+.car-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.prev-btn, .next-btn {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--white);
+  flex: 0.8;
+}
+
+.prev-btn:hover:not(:disabled),
+.next-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.main-btn {
+  background: linear-gradient(135deg, #e94560, #c23a51);
+  color: var(--white);
+  flex: 1.5;
+  font-size: 22px;
+  box-shadow: 0 6px 15px rgba(233, 69, 96, 0.4);
+}
+
+.main-btn:hover {
+  box-shadow: 0 8px 20px rgba(233, 69, 96, 0.6);
+}
+
+.main-btn.playing {
+  background: linear-gradient(135deg, #f39c12, #e67e22);
+  box-shadow: 0 6px 15px rgba(243, 156, 18, 0.4);
+  animation: playing-glow 1.5s infinite;
+}
+
+@keyframes playing-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(243, 156, 18, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(243, 156, 18, 0.8);
+  }
+}
+
+/* 車上模式難度指示 */
+.car-mode-difficulty {
+  text-align: center;
+  padding: 12px;
+  font-size: 14px;
+  color: #a0a0a0;
+}
+
+.difficulty-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: bold;
+  margin-left: 8px;
+}
+
+.difficulty-badge.easy {
+  background: #27ae60;
+  color: var(--white);
+}
+
+.difficulty-badge.medium {
+  background: #f39c12;
+  color: var(--white);
+}
+
+.difficulty-badge.hard {
+  background: #e74c3c;
+  color: var(--white);
+}
+
+/* 車上模式響應式 */
+@media (max-width: 375px) {
+  .car-mode-english {
+    font-size: 26px;
+  }
+
+  .car-btn {
+    padding: 16px 12px;
+    font-size: 16px;
+    min-height: 60px;
+  }
+
+  .main-btn {
+    font-size: 18px;
+  }
+}
