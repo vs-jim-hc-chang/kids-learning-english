@@ -19,7 +19,8 @@ const VOICE_PREFERENCES = {
     'Microsoft Aria Online (Natural)',
     'Microsoft Jenny Online (Natural)',
     'Microsoft Guy Online (Natural)',
-    // macOS voices
+    // iOS/macOS enhanced voices (優先)
+    'Samantha (Enhanced)',
     'Samantha',
     'Karen',
     'Daniel',
@@ -36,8 +37,12 @@ const VOICE_PREFERENCES = {
     // Windows 11 Neural voices (China)
     'Microsoft Xiaoxiao Online (Natural)',
     'Microsoft Yunyang Online (Natural)',
-    // macOS voices
+    // iOS/macOS enhanced voices (Taiwan - 優先)
+    'Mei-Jia (Enhanced)',
     'Mei-Jia',
+    '美佳',
+    // iOS/macOS voices (China)
+    'Ting-Ting (Enhanced)',
     'Ting-Ting',
     // Chrome/Android
     'Google 國語（臺灣）',
