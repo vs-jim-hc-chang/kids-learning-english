@@ -216,13 +216,15 @@ export const sentences: Sentence[] = [
 
   // === Mr Dinosaur Is Lost (恐龍先生不見了) ===
   // 影片連結: https://www.youtube.com/watch?v=8t1WdjVZbiE
+  // 影片長度: 4:56 (296秒)
+  // 時間戳已根據實際影片校正 (2024-01)
   {
     id: 21,
     english: "George's favourite toy is Mr Dinosaur.",
     chinese: "喬治最喜歡的玩具是恐龍先生。",
     videoId: "8t1WdjVZbiE",
-    startTime: 14.5,
-    endTime: 19.8,
+    startTime: 24,
+    endTime: 30,
     difficulty: 'medium',
     chineseGuide: "喬治有一個最愛的玩具，就是恐龍先生！favourite 就是「最喜歡的」意思，聽聽看！"
   },
@@ -231,8 +233,8 @@ export const sentences: Sentence[] = [
     english: "Where's Mr Dinosaur?",
     chinese: "恐龍先生在哪裡？",
     videoId: "8t1WdjVZbiE",
-    startTime: 55.5,
-    endTime: 59.8,
+    startTime: 88,
+    endTime: 92,
     difficulty: 'easy',
     chineseGuide: "喬治找不到恐龍先生了！Where's 是「在哪裡」的意思，想問東西在哪就用這個字喔！"
   },
@@ -241,8 +243,8 @@ export const sentences: Sentence[] = [
     english: "George, don't cry.",
     chinese: "喬治，不要哭。",
     videoId: "8t1WdjVZbiE",
-    startTime: 75.5,
-    endTime: 79.8,
+    startTime: 98,
+    endTime: 102,
     difficulty: 'easy',
     chineseGuide: "喬治哭了！Peppa 安慰他說「不要哭」，don't cry 就是不要哭的意思喔！"
   },
@@ -251,8 +253,8 @@ export const sentences: Sentence[] = [
     english: "We'll find Mr Dinosaur.",
     chinese: "我們會找到恐龍先生的。",
     videoId: "8t1WdjVZbiE",
-    startTime: 79.5,
-    endTime: 84.8,
+    startTime: 102,
+    endTime: 107,
     difficulty: 'easy',
     chineseGuide: "Peppa 說「我們會找到的」！We'll 是「我們會」，find 是找，好溫暖的話喔！"
   },
@@ -261,8 +263,8 @@ export const sentences: Sentence[] = [
     english: "Maybe the dinosaur is in the garden.",
     chinese: "也許恐龍在花園裡。",
     videoId: "8t1WdjVZbiE",
-    startTime: 119.5,
-    endTime: 124.8,
+    startTime: 150,
+    endTime: 156,
     difficulty: 'medium',
     chineseGuide: "Maybe 是「也許」的意思，garden 是花園。大家在猜恐龍先生在哪裡呢！"
   },
@@ -271,21 +273,23 @@ export const sentences: Sentence[] = [
     english: "There it is! In the tree!",
     chinese: "在那裡！在樹上！",
     videoId: "8t1WdjVZbiE",
-    startTime: 185.5,
-    endTime: 190.8,
+    startTime: 232,
+    endTime: 238,
     difficulty: 'easy',
     chineseGuide: "找到了！There it is 是「就在那裡」，tree 是樹。恐龍先生在樹上耶！"
   },
 
   // === Best Friend (好朋友) ===
   // 影片連結: https://www.youtube.com/watch?v=-qjzaeBNNOs
+  // 影片長度: 4:56 (296秒)
+  // 時間戳已根據實際影片校正 (2024-01)
   {
     id: 27,
     english: "Suzy Sheep is Peppa's best friend.",
     chinese: "蘇西羊是佩佩最好的朋友。",
     videoId: "-qjzaeBNNOs",
-    startTime: 14.5,
-    endTime: 19.8,
+    startTime: 21,
+    endTime: 28,
     difficulty: 'medium',
     chineseGuide: "Peppa 有一個最好的朋友叫蘇西！best friend 就是「最好的朋友」，牧誠、奕荷有 best friend 嗎？"
   },
@@ -294,8 +298,8 @@ export const sentences: Sentence[] = [
     english: "Hello, Suzy!",
     chinese: "哈囉，蘇西！",
     videoId: "-qjzaeBNNOs",
-    startTime: 29.5,
-    endTime: 33.8,
+    startTime: 40,
+    endTime: 45,
     difficulty: 'easy',
     chineseGuide: "Peppa 跟蘇西打招呼！Hello 是「哈囉」，見到朋友要開心地說 Hello 喔！"
   },
@@ -304,8 +308,8 @@ export const sentences: Sentence[] = [
     english: "Let's play in my bedroom.",
     chinese: "我們去我房間玩吧。",
     videoId: "-qjzaeBNNOs",
-    startTime: 45.5,
-    endTime: 50.8,
+    startTime: 58,
+    endTime: 64,
     difficulty: 'easy',
     chineseGuide: "Peppa 邀請蘇西去房間玩！Let's play 是「我們一起玩」，bedroom 是臥室喔！"
   },
@@ -314,8 +318,8 @@ export const sentences: Sentence[] = [
     english: "I'm a doctor!",
     chinese: "我是醫生！",
     videoId: "-qjzaeBNNOs",
-    startTime: 85.5,
-    endTime: 89.8,
+    startTime: 168,
+    endTime: 173,
     difficulty: 'easy',
     chineseGuide: "她們在玩扮家家酒！doctor 是醫生，I'm a 是「我是一個」，你想當什麼呢？"
   },
@@ -324,8 +328,8 @@ export const sentences: Sentence[] = [
     english: "And I'm a nurse!",
     chinese: "我是護士！",
     videoId: "-qjzaeBNNOs",
-    startTime: 89.5,
-    endTime: 93.8,
+    startTime: 173,
+    endTime: 178,
     difficulty: 'easy',
     chineseGuide: "蘇西說她要當護士！nurse 是護士，And 是「而且」的意思，醫生和護士一起照顧病人喔！"
   },
