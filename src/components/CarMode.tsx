@@ -6,6 +6,14 @@ import type { YouTubePlayerRef } from './YouTubePlayer';
 import { TextToSpeech } from './TextToSpeech';
 import type { TextToSpeechRef } from './TextToSpeech';
 
+// Wake Lock API 類型
+interface WakeLockSentinel {
+  released: boolean;
+  release: () => Promise<void>;
+  addEventListener: (type: string, listener: () => void) => void;
+  removeEventListener: (type: string, listener: () => void) => void;
+}
+
 // 播放流程步驟
 const CarModeStep = {
   IDLE: 'idle',              // 等待開始
@@ -32,12 +40,89 @@ export function CarMode() {
   const [pauseCountdown, setPauseCountdown] = useState(0);
   const [showSelector, setShowSelector] = useState(false);
   const [isPlayerReady, setIsPlayerReady] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [wakeLockActive, setWakeLockActive] = useState(false);
 
   const youtubeRef = useRef<YouTubePlayerRef>(null);
   const ttsRef = useRef<TextToSpeechRef>(null);
   const pauseTimerRef = useRef<number | null>(null);
   const pendingPlayRef = useRef(false);  // 追蹤是否有待播放的請求
   const prevVideoIdRef = useRef<string | null>(null);  // 追蹤上一個影片 ID
+  const wakeLockRef = useRef<WakeLockSentinel | null>(null);
+
+  // 螢幕常亮功能 (Wake Lock API)
+  const requestWakeLock = useCallback(async () => {
+    if ('wakeLock' in navigator) {
+      try {
+        wakeLockRef.current = await (navigator as unknown as { wakeLock: { request: (type: string) => Promise<WakeLockSentinel> } }).wakeLock.request('screen');
+        setWakeLockActive(true);
+
+        wakeLockRef.current.addEventListener('release', () => {
+          setWakeLockActive(false);
+        });
+      } catch (err) {
+        console.log('Wake Lock 請求失敗:', err);
+      }
+    }
+  }, []);
+
+  const releaseWakeLock = useCallback(async () => {
+    if (wakeLockRef.current) {
+      try {
+        await wakeLockRef.current.release();
+        wakeLockRef.current = null;
+        setWakeLockActive(false);
+      } catch (err) {
+        console.log('Wake Lock 釋放失敗:', err);
+      }
+    }
+  }, []);
+
+  // 全螢幕切換
+  const toggleFullscreen = useCallback(async () => {
+    if (!document.fullscreenElement) {
+      try {
+        await document.documentElement.requestFullscreen();
+        setIsFullscreen(true);
+      } catch (err) {
+        console.log('全螢幕請求失敗:', err);
+      }
+    } else {
+      try {
+        await document.exitFullscreen();
+        setIsFullscreen(false);
+      } catch (err) {
+        console.log('退出全螢幕失敗:', err);
+      }
+    }
+  }, []);
+
+  // 監聽全螢幕變化
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
+
+  // 播放時自動啟用螢幕常亮
+  useEffect(() => {
+    if (isPlaying) {
+      requestWakeLock();
+    } else {
+      releaseWakeLock();
+    }
+  }, [isPlaying, requestWakeLock, releaseWakeLock]);
+
+  // 頁面離開時釋放 Wake Lock
+  useEffect(() => {
+    return () => {
+      if (wakeLockRef.current) {
+        wakeLockRef.current.release();
+      }
+    };
+  }, []);
 
   // 用 ref 追蹤最新狀態，避免 closure 問題
   const stepRef = useRef(step);
@@ -285,7 +370,25 @@ export function CarMode() {
     <div className="car-mode">
       {/* 頂部標題 */}
       <header className="car-mode-header">
-        <h1>🐷 佩佩豬英文跟讀</h1>
+        <div className="header-row">
+          <h1>🐷 佩佩豬英文跟讀</h1>
+          <div className="header-buttons">
+            <button
+              className="icon-btn"
+              onClick={toggleFullscreen}
+              title={isFullscreen ? '退出全螢幕' : '全螢幕'}
+            >
+              {isFullscreen ? '⛶' : '⛶'}
+            </button>
+            <button
+              className={`icon-btn ${wakeLockActive ? 'active' : ''}`}
+              onClick={wakeLockActive ? releaseWakeLock : requestWakeLock}
+              title={wakeLockActive ? '關閉螢幕常亮' : '螢幕常亮'}
+            >
+              {wakeLockActive ? '🔆' : '🔅'}
+            </button>
+          </div>
+        </div>
         <button
           className="select-btn"
           onClick={() => setShowSelector(true)}
@@ -359,7 +462,7 @@ export function CarMode() {
           {currentSentence.difficulty === 'easy' ? '簡單' :
            currentSentence.difficulty === 'medium' ? '中等' : '困難'}
         </span>
-        <span className="version-info">v1.2.1</span>
+        <span className="version-info">v1.3.0</span>
       </div>
 
       {/* 句子選擇彈窗 */}

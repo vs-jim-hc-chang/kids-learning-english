@@ -515,18 +515,53 @@ body {
 /* 車上模式頂部 */
 .car-mode-header {
   background: linear-gradient(135deg, #0f3460, #16213e);
-  padding: 16px;
+  padding: 12px 16px;
   display: flex;
   flex-direction: column;
   gap: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.icon-btn {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--white);
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.icon-btn.active {
+  background: #f39c12;
+  color: #fff;
+}
+
 .car-mode-header h1 {
-  font-size: 28px;
-  text-align: center;
+  font-size: 24px;
+  text-align: left;
   color: #e94560;
-  margin: 8px 0;
+  margin: 0;
 }
 
 .exit-btn {
@@ -963,4 +998,144 @@ body {
 .selector-difficulty.hard {
   background: #f8d7da;
   color: #721c24;
+}
+
+/* ========================================
+   橫向螢幕優化 (車上使用)
+   ======================================== */
+@media (orientation: landscape) and (max-height: 500px) {
+  .car-mode {
+    max-width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .car-mode-header {
+    width: 100%;
+    padding: 8px 16px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .car-mode-header h1 {
+    font-size: 20px;
+  }
+
+  .select-btn {
+    margin: 0;
+  }
+
+  .car-mode-video {
+    width: 50%;
+    padding: 8px;
+  }
+
+  .car-mode-sentence {
+    width: 50%;
+    padding: 8px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .car-mode-english {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  .car-mode-chinese {
+    font-size: 16px;
+  }
+
+  .car-mode-status {
+    width: 100%;
+    margin: 8px 16px;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .car-mode-controls {
+    width: 100%;
+    padding: 8px 16px;
+    gap: 8px;
+  }
+
+  .car-btn {
+    padding: 16px 12px;
+    font-size: 16px;
+    min-height: 56px;
+  }
+
+  .main-btn {
+    font-size: 18px;
+  }
+
+  .car-mode-difficulty {
+    width: 100%;
+    padding: 8px;
+  }
+}
+
+/* 更大的橫向螢幕（平板或車機）*/
+@media (orientation: landscape) and (min-height: 500px) {
+  .car-mode {
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr auto auto;
+    grid-template-areas:
+      "header header"
+      "video sentence"
+      "status status"
+      "controls controls"
+      "difficulty difficulty";
+  }
+
+  .car-mode-header {
+    grid-area: header;
+  }
+
+  .car-mode-video {
+    grid-area: video;
+    padding: 16px;
+  }
+
+  .car-mode-sentence {
+    grid-area: sentence;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 16px 24px;
+  }
+
+  .car-mode-status {
+    grid-area: status;
+  }
+
+  .car-mode-controls {
+    grid-area: controls;
+  }
+
+  .car-mode-difficulty {
+    grid-area: difficulty;
+  }
+
+  .car-mode-english {
+    font-size: 36px;
+  }
+
+  .car-mode-chinese {
+    font-size: 22px;
+  }
+
+  .car-btn {
+    padding: 24px 20px;
+    font-size: 20px;
+    min-height: 80px;
+  }
+
+  .main-btn {
+    font-size: 24px;
+  }
 }
