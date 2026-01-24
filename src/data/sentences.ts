@@ -641,6 +641,450 @@ export const sentences: Sentence[] = [
     difficulty: 'easy',
     chineseGuide: "找到義大利麵了！spaghetti 是義大利麵喔！"
   },
+
+  // ========================================
+  // 小朋友實用句子 (20句)
+  // ========================================
+
+  // --- Muddy Puddles ---
+  {
+    id: 60,
+    english: "Sorry, Mommy.",
+    chinese: "對不起，媽咪。",
+    videoId: "z9wHUokAyvI",
+    startTime: 65,
+    endTime: 69,
+    difficulty: 'easy',
+    chineseGuide: "做錯事要說對不起！Sorry 是道歉的話，Mommy 是媽咪，牧誠、奕荷做錯事也要說 Sorry 喔！"
+  },
+  {
+    id: 61,
+    english: "Look, George, there's a really big puddle!",
+    chinese: "看，喬治，有一個超大的水坑！",
+    videoId: "z9wHUokAyvI",
+    startTime: 130,
+    endTime: 136,
+    difficulty: 'medium',
+    chineseGuide: "Peppa 發現好東西要跟弟弟分享！Look 是「看」，really big 是「真的很大」喔！"
+  },
+
+  // --- Best Friend ---
+  {
+    id: 62,
+    english: "George wants to play too!",
+    chinese: "喬治也想玩！",
+    videoId: "-qjzaeBNNOs",
+    startTime: 120,
+    endTime: 126,
+    difficulty: 'easy',
+    chineseGuide: "George 想加入遊戲！wants to 是「想要」，too 是「也」的意思喔！"
+  },
+  {
+    id: 63,
+    english: "Can I help?",
+    chinese: "我可以幫忙嗎？",
+    videoId: "-qjzaeBNNOs",
+    startTime: 216,
+    endTime: 222,
+    difficulty: 'easy',
+    chineseGuide: "想幫忙的時候可以這樣問！Can I 是「我可以嗎」，help 是幫忙喔！"
+  },
+
+  // --- Hide and Seek ---
+  {
+    id: 64,
+    english: "Ready or not, here I come!",
+    chinese: "準備好了沒，我來了！",
+    videoId: "z0JlpI0KfVU",
+    startTime: 51,
+    endTime: 57,
+    difficulty: 'medium',
+    chineseGuide: "玩捉迷藏數完數說這句！Ready or not 是「準備好沒」，here I come 是「我來囉」！"
+  },
+  {
+    id: 65,
+    english: "I found you!",
+    chinese: "我找到你了！",
+    videoId: "z0JlpI0KfVU",
+    startTime: 61,
+    endTime: 65,
+    difficulty: 'easy',
+    chineseGuide: "找到人的時候大喊！found 是「找到」的過去式喔！"
+  },
+  {
+    id: 66,
+    english: "Where is he?",
+    chinese: "他在哪裡？",
+    videoId: "z0JlpI0KfVU",
+    startTime: 227,
+    endTime: 233,
+    difficulty: 'easy',
+    chineseGuide: "找人的時候問！Where is 是「在哪裡」的意思喔！"
+  },
+
+  // --- Playgroup ---
+  {
+    id: 67,
+    english: "I'm very good at painting!",
+    chinese: "我很會畫畫！",
+    videoId: "4cKnoK2KYPc",
+    startTime: 163,
+    endTime: 170,
+    difficulty: 'medium',
+    chineseGuide: "Peppa 很有自信！I'm good at 是「我很擅長」，painting 是畫畫喔！"
+  },
+  {
+    id: 68,
+    english: "George is my brother. He's brilliant!",
+    chinese: "喬治是我弟弟，他很棒！",
+    videoId: "4cKnoK2KYPc",
+    startTime: 141,
+    endTime: 148,
+    difficulty: 'medium',
+    chineseGuide: "Peppa 誇獎弟弟！brilliant 是「很棒、很聰明」的意思喔！"
+  },
+
+  // --- Bicycles ---
+  {
+    id: 69,
+    english: "Look at me! Look at me!",
+    chinese: "看我！看我！",
+    videoId: "HqYNifbUzzY",
+    startTime: 207,
+    endTime: 213,
+    difficulty: 'easy',
+    chineseGuide: "想讓別人看的時候說！Look at me 是「看我」，可以用來展示自己喔！"
+  },
+  {
+    id: 70,
+    english: "I can do it!",
+    chinese: "我可以的！",
+    videoId: "HqYNifbUzzY",
+    startTime: 177,
+    endTime: 183,
+    difficulty: 'easy',
+    chineseGuide: "有自信的說法！I can do it 是「我做得到」，表示你很有信心喔！"
+  },
+  {
+    id: 71,
+    english: "Sorry, Daddy. I squashed your pumpkin.",
+    chinese: "對不起，爸爸。我壓扁了你的南瓜。",
+    videoId: "HqYNifbUzzY",
+    startTime: 250,
+    endTime: 258,
+    difficulty: 'hard',
+    chineseGuide: "做錯事要道歉！squashed 是「壓扁」，pumpkin 是南瓜喔！"
+  },
+
+  // --- Pancakes ---
+  {
+    id: 72,
+    english: "Mommy, can we help make the pancakes please?",
+    chinese: "媽咪，我們可以幫忙做鬆餅嗎？",
+    videoId: "hpBDNzokIdg",
+    startTime: 56,
+    endTime: 64,
+    difficulty: 'hard',
+    chineseGuide: "有禮貌地請求幫忙！Can we help 是「我們可以幫忙嗎」，最後說 please 更有禮貌喔！"
+  },
+  {
+    id: 73,
+    english: "Can I stir?",
+    chinese: "我可以攪拌嗎？",
+    videoId: "hpBDNzokIdg",
+    startTime: 79,
+    endTime: 85,
+    difficulty: 'easy',
+    chineseGuide: "想參與的時候問！stir 是攪拌的意思喔！"
+  },
+
+  // --- Camping ---
+  {
+    id: 74,
+    english: "What is that sound?",
+    chinese: "那是什麼聲音？",
+    videoId: "J2DrjpYPjo4",
+    startTime: 152,
+    endTime: 158,
+    difficulty: 'easy',
+    chineseGuide: "聽到聲音好奇的問！What is that 是「那是什麼」，sound 是聲音喔！"
+  },
+  {
+    id: 75,
+    english: "Wow! Look at that!",
+    chinese: "哇！看那個！",
+    videoId: "J2DrjpYPjo4",
+    startTime: 168,
+    endTime: 174,
+    difficulty: 'easy',
+    chineseGuide: "看到驚奇的東西！Wow 表示驚嘆，Look at that 是「看那個」喔！"
+  },
+
+  // --- Beach ---
+  {
+    id: 76,
+    english: "Can we play in the water?",
+    chinese: "我們可以在水裡玩嗎？",
+    videoId: "cu6xvXv-YTU",
+    startTime: 88,
+    endTime: 94,
+    difficulty: 'easy',
+    chineseGuide: "想玩水的時候問！play in the water 是「在水裡玩」喔！"
+  },
+  {
+    id: 77,
+    english: "Yes please, Daddy!",
+    chinese: "好的，謝謝爸爸！",
+    videoId: "cu6xvXv-YTU",
+    startTime: 156,
+    endTime: 162,
+    difficulty: 'easy',
+    chineseGuide: "有禮貌地答應！Yes please 是很有禮貌的說「好，謝謝」喔！"
+  },
+
+  // --- Shopping ---
+  {
+    id: 78,
+    english: "I can see it! This way!",
+    chinese: "我看到了！這邊！",
+    videoId: "EL6rvG9qVAc",
+    startTime: 111,
+    endTime: 117,
+    difficulty: 'easy',
+    chineseGuide: "找到東西的時候說！I can see it 是「我看到了」，This way 是「這邊」喔！"
+  },
+  {
+    id: 79,
+    english: "Daddy, can I sit in the trolley too?",
+    chinese: "爸爸，我也可以坐在購物車裡嗎？",
+    videoId: "EL6rvG9qVAc",
+    startTime: 36,
+    endTime: 44,
+    difficulty: 'medium',
+    chineseGuide: "有禮貌地請求！trolley 是購物推車，too 是「也」的意思喔！"
+  },
+
+  // ========================================
+  // 爸爸媽媽實用句子 (20句)
+  // ========================================
+
+  // --- Muddy Puddles ---
+  {
+    id: 80,
+    english: "All right, run along, you two.",
+    chinese: "好的，你們兩個去玩吧。",
+    videoId: "z9wHUokAyvI",
+    startTime: 38,
+    endTime: 44,
+    difficulty: 'medium',
+    chineseGuide: "爸爸允許小朋友去玩！run along 是「去吧、去玩吧」，you two 是「你們兩個」喔！爸爸媽媽可以這樣說！"
+  },
+  {
+    id: 81,
+    english: "If you jump in muddy puddles, you must wear your boots.",
+    chinese: "如果你要跳泥巴水坑，必須穿靴子。",
+    videoId: "z9wHUokAyvI",
+    startTime: 60,
+    endTime: 66,
+    difficulty: 'hard',
+    chineseGuide: "媽媽提醒規則！If... you must... 是「如果...你必須...」，boots 是靴子。這句很適合爸媽學起來提醒小朋友喔！"
+  },
+  {
+    id: 82,
+    english: "Let's clean up quickly before Mommy sees the mess.",
+    chinese: "趁媽咪看到之前趕快清理乾淨。",
+    videoId: "z9wHUokAyvI",
+    startTime: 228,
+    endTime: 236,
+    difficulty: 'hard',
+    chineseGuide: "爸爸說要趕快清理！clean up 是「清理」，quickly 是「快速地」，mess 是「亂」喔！"
+  },
+  {
+    id: 83,
+    english: "Look at the mess you're in!",
+    chinese: "看看你們弄得多髒！",
+    videoId: "z9wHUokAyvI",
+    startTime: 215,
+    endTime: 222,
+    difficulty: 'medium',
+    chineseGuide: "看到小朋友弄髒的時候說！mess 是「亂、髒」的意思喔！"
+  },
+
+  // --- Mr Dinosaur Is Lost ---
+  {
+    id: 84,
+    english: "Don't worry, George. We'll find it.",
+    chinese: "別擔心，喬治。我們會找到的。",
+    videoId: "8t1WdjVZbiE",
+    startTime: 133,
+    endTime: 140,
+    difficulty: 'medium',
+    chineseGuide: "安慰小朋友的話！Don't worry 是「別擔心」，We'll find it 是「我們會找到」。爸媽可以用這句安慰小朋友喔！"
+  },
+  {
+    id: 85,
+    english: "Good night, Peppa. Good night, George.",
+    chinese: "晚安，佩佩。晚安，喬治。",
+    videoId: "8t1WdjVZbiE",
+    startTime: 76,
+    endTime: 84,
+    difficulty: 'easy',
+    chineseGuide: "睡前說晚安！Good night 是「晚安」，每天睡前都可以說喔！"
+  },
+  {
+    id: 86,
+    english: "Well done, Peppa! You really are good at finding things.",
+    chinese: "做得好，佩佩！你真的很會找東西。",
+    videoId: "8t1WdjVZbiE",
+    startTime: 250,
+    endTime: 258,
+    difficulty: 'hard',
+    chineseGuide: "稱讚小朋友！Well done 是「做得好」，good at 是「擅長」。爸媽誇獎小朋友的時候可以說！"
+  },
+
+  // --- Best Friend ---
+  {
+    id: 87,
+    english: "Why don't you go and play in your bedroom?",
+    chinese: "妳們何不去房間玩呢？",
+    videoId: "-qjzaeBNNOs",
+    startTime: 55,
+    endTime: 62,
+    difficulty: 'medium',
+    chineseGuide: "媽媽建議去房間玩！Why don't you 是「你何不...」，bedroom 是臥室。這是很客氣的建議方式喔！"
+  },
+
+  // --- Hide and Seek ---
+  {
+    id: 88,
+    english: "Have you thought of looking upstairs?",
+    chinese: "你有想過往樓上找嗎？",
+    videoId: "z0JlpI0KfVU",
+    startTime: 113,
+    endTime: 120,
+    difficulty: 'hard',
+    chineseGuide: "給提示的說法！Have you thought of 是「你有想過嗎」，upstairs 是樓上喔！"
+  },
+  {
+    id: 89,
+    english: "Close your eyes and start counting.",
+    chinese: "閉上眼睛開始數數。",
+    videoId: "z0JlpI0KfVU",
+    startTime: 179,
+    endTime: 186,
+    difficulty: 'medium',
+    chineseGuide: "玩捉迷藏的指令！Close your eyes 是「閉上眼睛」，start counting 是「開始數數」喔！"
+  },
+
+  // --- Playgroup ---
+  {
+    id: 90,
+    english: "He'll be fine.",
+    chinese: "他會沒事的。",
+    videoId: "4cKnoK2KYPc",
+    startTime: 73,
+    endTime: 78,
+    difficulty: 'easy',
+    chineseGuide: "安慰別人的話！He'll be fine 是「他會沒事的」，可以用來安慰擔心的人喔！"
+  },
+  {
+    id: 91,
+    english: "You must be very proud of your brother.",
+    chinese: "你一定很以弟弟為榮。",
+    videoId: "4cKnoK2KYPc",
+    startTime: 237,
+    endTime: 244,
+    difficulty: 'hard',
+    chineseGuide: "稱讚的話！proud of 是「以...為榮」，爸媽可以說 I'm proud of you（我以你為榮）喔！"
+  },
+
+  // --- Bicycles ---
+  {
+    id: 92,
+    english: "Would you like some help?",
+    chinese: "你需要幫忙嗎？",
+    videoId: "HqYNifbUzzY",
+    startTime: 173,
+    endTime: 179,
+    difficulty: 'medium',
+    chineseGuide: "主動提供幫助！Would you like 是「你想要嗎」，這是很有禮貌的問法喔！"
+  },
+  {
+    id: 93,
+    english: "Don't worry, I've got you.",
+    chinese: "別擔心，我扶著你。",
+    videoId: "HqYNifbUzzY",
+    startTime: 182,
+    endTime: 188,
+    difficulty: 'medium',
+    chineseGuide: "扶著小朋友的時候說！I've got you 是「我抓著你」，讓小朋友安心喔！"
+  },
+  {
+    id: 94,
+    english: "Never mind the pumpkin. The important thing is that you are okay.",
+    chinese: "南瓜沒關係。重要的是你沒事。",
+    videoId: "HqYNifbUzzY",
+    startTime: 258,
+    endTime: 268,
+    difficulty: 'hard',
+    chineseGuide: "安慰小朋友！Never mind 是「沒關係」，important thing 是「重要的事」。爸媽可以用這句告訴小朋友你最重要！"
+  },
+  {
+    id: 95,
+    english: "In future, you really must look where you are going.",
+    chinese: "以後你真的要看路。",
+    videoId: "HqYNifbUzzY",
+    startTime: 268,
+    endTime: 276,
+    difficulty: 'hard',
+    chineseGuide: "提醒小朋友注意安全！In future 是「以後」，look where you are going 是「看路」喔！"
+  },
+
+  // --- Pancakes ---
+  {
+    id: 96,
+    english: "Okay, that's enough. Sit at the table while I cook.",
+    chinese: "好了，夠了。坐在桌子旁邊，我來煮。",
+    videoId: "hpBDNzokIdg",
+    startTime: 100,
+    endTime: 108,
+    difficulty: 'hard',
+    chineseGuide: "媽媽下指令！That's enough 是「夠了」，Sit at the table 是「坐在桌子旁」。做飯時可以這樣說喔！"
+  },
+
+  // --- Camping ---
+  {
+    id: 97,
+    english: "Come on, children. Into the tent. It's bedtime.",
+    chinese: "來吧，孩子們。進帳篷。該睡覺了。",
+    videoId: "J2DrjpYPjo4",
+    startTime: 189,
+    endTime: 198,
+    difficulty: 'hard',
+    chineseGuide: "叫小朋友睡覺！Come on 是「來吧」，It's bedtime 是「該睡覺了」。爸媽每晚都可以用喔！"
+  },
+  {
+    id: 98,
+    english: "Listen to the sounds of nature.",
+    chinese: "聽聽大自然的聲音。",
+    videoId: "J2DrjpYPjo4",
+    startTime: 145,
+    endTime: 152,
+    difficulty: 'medium',
+    chineseGuide: "欣賞大自然！Listen to 是「聽」，nature 是大自然。帶小朋友出去玩的時候可以說喔！"
+  },
+
+  // --- Beach ---
+  {
+    id: 99,
+    english: "Before you start playing, you need some sun cream on.",
+    chinese: "在你開始玩之前，要擦防曬乳。",
+    videoId: "cu6xvXv-YTU",
+    startTime: 43,
+    endTime: 52,
+    difficulty: 'hard',
+    chineseGuide: "去海邊要擦防曬！Before you 是「在你...之前」，sun cream 是防曬乳喔！"
+  },
 ];
 
 // 以下影片已確認不可用（影片被移除或設為私人），無法加入句子：
