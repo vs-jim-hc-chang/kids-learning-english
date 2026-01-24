@@ -503,10 +503,13 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  min-height: 100dvh; /* 使用 dynamic viewport height 處理手機瀏覽器 */
   max-width: 500px;
   margin: 0 auto;
   background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
   color: var(--white);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* 車上模式頂部 */
@@ -735,6 +738,24 @@ body {
 .difficulty-badge.hard {
   background: #e74c3c;
   color: var(--white);
+}
+
+/* 版本號 */
+.version-info {
+  margin-left: 16px;
+  font-size: 12px;
+  color: #666;
+  opacity: 0.6;
+}
+
+/* 移除按鈕 focus 樣式 */
+.car-btn:focus {
+  outline: none;
+}
+
+.car-btn:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
 }
 
 /* 車上模式響應式 */
