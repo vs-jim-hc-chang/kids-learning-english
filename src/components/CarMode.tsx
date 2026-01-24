@@ -25,11 +25,7 @@ const REPEAT_PAUSE_DURATION: Record<Sentence['difficulty'], number> = {
   hard: 7
 };
 
-interface CarModeProps {
-  onExit: () => void;
-}
-
-export function CarMode({ onExit }: CarModeProps) {
+export function CarMode() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [step, setStep] = useState<CarModeStepType>(CarModeStep.IDLE);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -258,10 +254,7 @@ export function CarMode({ onExit }: CarModeProps) {
     <div className="car-mode">
       {/* 頂部標題 */}
       <header className="car-mode-header">
-        <button className="exit-btn" onClick={onExit}>
-          ← 返回
-        </button>
-        <h1>車上模式</h1>
+        <h1>🐷 佩佩豬英文跟讀</h1>
         <button
           className="select-btn"
           onClick={() => setShowSelector(true)}

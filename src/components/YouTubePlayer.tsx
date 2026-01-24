@@ -101,15 +101,26 @@ export const YouTubePlayer = forwardRef<YouTubePlayerRef, YouTubePlayerProps>(
   useEffect(() => {
     if (!isAPIReady || !containerRef.current) return;
 
-    // 清除舊的循環
+    // 清除所有計時器和狀態
     if (loopIntervalRef.current) {
       clearInterval(loopIntervalRef.current);
       loopIntervalRef.current = null;
     }
 
+    if (segmentCheckRef.current) {
+      clearInterval(segmentCheckRef.current);
+      segmentCheckRef.current = null;
+    }
+
+    setIsCurrentlyPlaying(false);
+
     // 清除舊播放器
     if (playerRef.current) {
-      playerRef.current.destroy();
+      try {
+        playerRef.current.destroy();
+      } catch {
+        console.warn('Error destroying player');
+      }
       playerRef.current = null;
       setIsPlayerReady(false);
     }
@@ -135,13 +146,39 @@ export const YouTubePlayer = forwardRef<YouTubePlayerRef, YouTubePlayerProps>(
     return () => {
       if (loopIntervalRef.current) {
         clearInterval(loopIntervalRef.current);
+        loopIntervalRef.current = null;
+      }
+      if (segmentCheckRef.current) {
+        clearInterval(segmentCheckRef.current);
+        segmentCheckRef.current = null;
+      }
+      // 組件卸載時銷毀播放器
+      if (playerRef.current) {
+        try {
+          playerRef.current.destroy();
+        } catch {
+          // 忽略銷毀錯誤
+        }
+        playerRef.current = null;
       }
     };
   }, [isAPIReady, videoId, onReady]);
 
+  // 停止片段結束檢測
+  const stopSegmentCheck = useCallback(() => {
+    if (segmentCheckRef.current) {
+      clearInterval(segmentCheckRef.current);
+      segmentCheckRef.current = null;
+    }
+  }, []);
+
   // 當句子切換時（startTime 改變），跳到新位置並停止播放
   useEffect(() => {
     if (!playerRef.current || !isPlayerReady) return;
+
+    // 停止所有播放活動
+    stopSegmentCheck();
+    setIsCurrentlyPlaying(false);
 
     try {
       // 確認 player 方法存在再呼叫（避免初始化中的錯誤）
@@ -151,7 +188,7 @@ export const YouTubePlayer = forwardRef<YouTubePlayerRef, YouTubePlayerProps>(
       if (typeof playerRef.current.seekTo === 'function') {
         playerRef.current.seekTo(startTime, true);
       }
-    } catch (e) {
+    } catch {
       // 播放器可能還在初始化中
       console.warn('Player not ready yet');
     }
@@ -161,7 +198,7 @@ export const YouTubePlayer = forwardRef<YouTubePlayerRef, YouTubePlayerProps>(
       clearInterval(loopIntervalRef.current);
       loopIntervalRef.current = null;
     }
-  }, [startTime, isPlayerReady]);
+  }, [startTime, isPlayerReady, stopSegmentCheck]);
 
   // A-B 循環邏輯
   useEffect(() => {
@@ -185,7 +222,7 @@ export const YouTubePlayer = forwardRef<YouTubePlayerRef, YouTubePlayerProps>(
       if (typeof playerRef.current.playVideo === 'function') {
         playerRef.current.playVideo();
       }
-    } catch (e) {
+    } catch {
       // 播放器可能還沒準備好
       return;
     }
@@ -201,7 +238,7 @@ export const YouTubePlayer = forwardRef<YouTubePlayerRef, YouTubePlayerProps>(
             playerRef.current.seekTo(startTimeRef.current, true);
           }
         }
-      } catch (e) {
+      } catch {
         // 播放器可能還沒準備好
       }
     }, 100);
@@ -213,14 +250,6 @@ export const YouTubePlayer = forwardRef<YouTubePlayerRef, YouTubePlayerProps>(
       }
     };
   }, [isLooping, isPlayerReady]);
-
-  // 停止片段結束檢測
-  const stopSegmentCheck = useCallback(() => {
-    if (segmentCheckRef.current) {
-      clearInterval(segmentCheckRef.current);
-      segmentCheckRef.current = null;
-    }
-  }, []);
 
   // 播放片段並監聽結束
   const playSegment = useCallback(() => {
@@ -237,7 +266,7 @@ export const YouTubePlayer = forwardRef<YouTubePlayerRef, YouTubePlayerProps>(
         playerRef.current.playVideo();
       }
       setIsCurrentlyPlaying(true);
-    } catch (e) {
+    } catch {
       // 播放器可能還沒準備好
       return;
     }
@@ -257,7 +286,7 @@ export const YouTubePlayer = forwardRef<YouTubePlayerRef, YouTubePlayerProps>(
           setIsCurrentlyPlaying(false);
           onSegmentEndRef.current?.();
         }
-      } catch (e) {
+      } catch {
         // 播放器可能還沒準備好
       }
     }, 100);
@@ -270,7 +299,7 @@ export const YouTubePlayer = forwardRef<YouTubePlayerRef, YouTubePlayerProps>(
       if (typeof playerRef.current.pauseVideo === 'function') {
         playerRef.current.pauseVideo();
       }
-    } catch (e) {
+    } catch {
       // 播放器可能還沒準備好
     }
     setIsCurrentlyPlaying(false);
