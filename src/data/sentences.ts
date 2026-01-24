@@ -336,23 +336,24 @@ export const sentences: Sentence[] = [
 
   // === Hide and Seek (捉迷藏) ===
   // 影片連結: https://www.youtube.com/watch?v=z0JlpI0KfVU
+  // 時間戳已根據實際影片校正 (2025-01)
   {
     id: 32,
-    english: "Let's play hide and seek!",
-    chinese: "我們來玩捉迷藏！",
+    english: "Peppa and George are playing hide and seek.",
+    chinese: "佩佩和喬治在玩捉迷藏。",
     videoId: "z0JlpI0KfVU",
-    startTime: 14.5,
-    endTime: 19.8,
+    startTime: 28,
+    endTime: 33,
     difficulty: 'easy',
-    chineseGuide: "來玩捉迷藏囉！Peppa 說「我們來玩捉迷藏吧」，hide and seek 就是捉迷藏喔！"
+    chineseGuide: "來玩捉迷藏囉！hide and seek 就是捉迷藏喔！"
   },
   {
     id: 33,
     english: "One, two, three, four, five!",
     chinese: "一、二、三、四、五！",
     videoId: "z0JlpI0KfVU",
-    startTime: 35.5,
-    endTime: 42.8,
+    startTime: 38,
+    endTime: 46,
     difficulty: 'easy',
     chineseGuide: "來數數字囉！one 是一，two 是二，three 是三，four 是四，five 是五！牧誠、奕荷跟著數！"
   },
@@ -361,8 +362,8 @@ export const sentences: Sentence[] = [
     english: "Ready or not, here I come!",
     chinese: "準備好了沒，我來了！",
     videoId: "z0JlpI0KfVU",
-    startTime: 44.5,
-    endTime: 49.8,
+    startTime: 51,
+    endTime: 56,
     difficulty: 'medium',
     chineseGuide: "數完了要去找人囉！Ready or not 是「準備好了沒」，here I come 是「我來了」！"
   },
@@ -371,819 +372,291 @@ export const sentences: Sentence[] = [
     english: "Found you!",
     chinese: "找到你了！",
     videoId: "z0JlpI0KfVU",
-    startTime: 65.5,
-    endTime: 69.8,
+    startTime: 61,
+    endTime: 65,
     difficulty: 'easy',
     chineseGuide: "找到了！Found 是「找到」的意思，玩捉迷藏找到人就大喊 Found you！"
   },
   {
     id: 36,
-    english: "Where is George hiding?",
-    chinese: "喬治躲在哪裡？",
+    english: "Where can he be?",
+    chinese: "他在哪裡呢？",
     videoId: "z0JlpI0KfVU",
-    startTime: 99.5,
-    endTime: 104.8,
+    startTime: 227,
+    endTime: 233,
     difficulty: 'easy',
-    chineseGuide: "喬治躲起來了！hiding 是「躲藏」的意思，Where is 是「在哪裡」，你猜他躲在哪？"
+    chineseGuide: "喬治躲起來了！Where can he be 是「他在哪裡呢」的意思，你猜他躲在哪？"
   },
 
   // === The Playgroup (幼兒園) ===
   // 影片連結: https://www.youtube.com/watch?v=4cKnoK2KYPc
+  // 時間戳已根據實際影片校正 (2025-01)
   {
     id: 37,
-    english: "Today is George's first day at playgroup.",
-    chinese: "今天是喬治第一天上幼兒園。",
+    english: "It is George's first day.",
+    chinese: "這是喬治的第一天。",
     videoId: "4cKnoK2KYPc",
-    startTime: 14.5,
-    endTime: 20.8,
-    difficulty: 'medium',
-    chineseGuide: "喬治今天第一次去上學！first day 是「第一天」，playgroup 是幼兒園，好興奮喔！"
+    startTime: 27,
+    endTime: 32,
+    difficulty: 'easy',
+    chineseGuide: "喬治今天第一次去幼兒園！first day 是「第一天」，好興奮喔！"
   },
   {
     id: 38,
-    english: "Good morning, everyone!",
-    chinese: "大家早安！",
+    english: "Hello, this is my little brother George.",
+    chinese: "你好，這是我弟弟喬治。",
     videoId: "4cKnoK2KYPc",
-    startTime: 35.5,
-    endTime: 40.8,
+    startTime: 95,
+    endTime: 101,
     difficulty: 'easy',
-    chineseGuide: "早安！Peppa 跟大家打招呼說「大家早安」，Good morning 是早上見面時說的話喔！"
+    chineseGuide: "Peppa 介紹她的弟弟！Hello 是打招呼，little brother 是小弟弟！"
   },
   {
     id: 39,
-    english: "Today we will paint pictures.",
-    chinese: "今天我們要畫畫。",
+    english: "George is my brother. He's brilliant!",
+    chinese: "喬治是我弟弟，他很棒！",
     videoId: "4cKnoK2KYPc",
-    startTime: 55.5,
-    endTime: 60.8,
+    startTime: 141,
+    endTime: 148,
     difficulty: 'easy',
-    chineseGuide: "今天要畫畫！paint 是「畫」，pictures 是「圖畫」，你喜歡畫畫嗎？"
+    chineseGuide: "Peppa 很驕傲她的弟弟！brilliant 是「很棒」的意思喔！"
   },
   {
     id: 40,
-    english: "What are you painting, Peppa?",
-    chinese: "佩佩，你在畫什麼？",
+    english: "I will show him how to paint a flower.",
+    chinese: "我會教他怎麼畫花。",
     videoId: "4cKnoK2KYPc",
-    startTime: 95.5,
-    endTime: 100.8,
-    difficulty: 'easy',
-    chineseGuide: "老師問 Peppa 在畫什麼！What are you 是「你在」，painting 是正在畫，聽聽看！"
-  },
-  {
-    id: 41,
-    english: "I'm painting a flower.",
-    chinese: "我在畫一朵花。",
-    videoId: "4cKnoK2KYPc",
-    startTime: 100.5,
-    endTime: 105.8,
-    difficulty: 'easy',
-    chineseGuide: "Peppa 在畫一朵花！flower 是花的意思，I'm painting 是「我正在畫」喔！"
+    startTime: 163,
+    endTime: 170,
+    difficulty: 'medium',
+    chineseGuide: "Peppa 要教喬治畫畫！paint 是畫，flower 是花喔！"
   },
 
   // === Bicycles (腳踏車) ===
   // 影片連結: https://www.youtube.com/watch?v=HqYNifbUzzY
+  // 時間戳已根據實際影片校正 (2025-01)
+  {
+    id: 41,
+    english: "George is riding his tricycle.",
+    chinese: "喬治在騎三輪車。",
+    videoId: "HqYNifbUzzY",
+    startTime: 54,
+    endTime: 59,
+    difficulty: 'easy',
+    chineseGuide: "喬治騎三輪車！tricycle 是三輪車，tri 是三的意思喔！"
+  },
   {
     id: 42,
-    english: "Peppa has a bicycle.",
-    chinese: "佩佩有一輛腳踏車。",
+    english: "Let's race to Daddy Pig's pumpkin!",
+    chinese: "我們來比賽跑到豬爸爸的南瓜那裡！",
     videoId: "HqYNifbUzzY",
-    startTime: 14.5,
-    endTime: 19.8,
-    difficulty: 'easy',
-    chineseGuide: "Peppa 有一輛腳踏車！bicycle 是腳踏車，has 是「有」的意思喔！"
+    startTime: 61,
+    endTime: 67,
+    difficulty: 'medium',
+    chineseGuide: "要比賽了！race 是比賽，pumpkin 是南瓜喔！"
   },
   {
     id: 43,
-    english: "George has a tricycle.",
-    chinese: "喬治有一輛三輪車。",
+    english: "Ready, steady, go!",
+    chinese: "預備，開始！",
     videoId: "HqYNifbUzzY",
-    startTime: 24.5,
-    endTime: 29.8,
+    startTime: 173,
+    endTime: 178,
     difficulty: 'easy',
-    chineseGuide: "喬治騎三輪車！tricycle 是三輪車，tri 是三的意思，因為有三個輪子喔！"
+    chineseGuide: "比賽要開始了！Ready 是準備好，steady 是穩住，go 是開始！"
   },
   {
     id: 44,
-    english: "Watch me! I can go really fast!",
-    chinese: "看我！我可以騎很快！",
+    english: "Peppa is riding on her own!",
+    chinese: "佩佩自己在騎車！",
     videoId: "HqYNifbUzzY",
-    startTime: 55.5,
-    endTime: 61.8,
-    difficulty: 'medium',
-    chineseGuide: "Peppa 要表演給大家看！Watch me 是「看我」，really fast 是「真的很快」喔！"
-  },
-  {
-    id: 45,
-    english: "Be careful, Peppa!",
-    chinese: "佩佩，小心！",
-    videoId: "HqYNifbUzzY",
-    startTime: 75.5,
-    endTime: 79.8,
+    startTime: 190,
+    endTime: 196,
     difficulty: 'easy',
-    chineseGuide: "騎太快要小心！Be careful 是「小心」的意思，爸爸媽媽也常這樣提醒我們喔！"
+    chineseGuide: "Peppa 學會自己騎車了！on her own 是「靠自己」的意思喔！"
   },
 
   // === Pancakes (鬆餅) ===
   // 影片連結: https://www.youtube.com/watch?v=hpBDNzokIdg
+  // 時間戳已根據實際影片校正 (2025-01)
   {
-    id: 46,
-    english: "Daddy Pig is making pancakes.",
-    chinese: "豬爸爸在做鬆餅。",
-    videoId: "hpBDNzokIdg",
-    startTime: 14.5,
-    endTime: 19.8,
-    difficulty: 'easy',
-    chineseGuide: "豬爸爸在做鬆餅！making 是「製作」，pancakes 是好吃的鬆餅，你吃過嗎？"
-  },
-  {
-    id: 47,
+    id: 45,
     english: "I love pancakes!",
     chinese: "我愛鬆餅！",
     videoId: "hpBDNzokIdg",
-    startTime: 29.5,
-    endTime: 33.8,
+    startTime: 33,
+    endTime: 39,
     difficulty: 'easy',
-    chineseGuide: "哇，早餐有鬆餅耶！Peppa 開心地說「我愛鬆餅」，pancakes 就是好吃的鬆餅喔！"
+    chineseGuide: "好吃的鬆餅！pancakes 是鬆餅，I love 是「我愛」喔！"
   },
   {
-    id: 48,
-    english: "Can you flip it, Daddy?",
-    chinese: "爸爸，你可以把它翻面嗎？",
+    id: 46,
+    english: "Everyone loves pancakes!",
+    chinese: "大家都愛鬆餅！",
     videoId: "hpBDNzokIdg",
-    startTime: 85.5,
-    endTime: 90.8,
-    difficulty: 'medium',
-    chineseGuide: "做鬆餅要翻面！flip 是「翻」的意思，Can you 是「你可以嗎」，聽聽看！"
+    startTime: 38,
+    endTime: 43,
+    difficulty: 'easy',
+    chineseGuide: "大家都喜歡吃鬆餅！Everyone 是「每個人」的意思！"
   },
   {
-    id: 49,
-    english: "Yummy yummy!",
-    chinese: "好吃好吃！",
+    id: 47,
+    english: "Peppa loves stirring.",
+    chinese: "佩佩喜歡攪拌。",
     videoId: "hpBDNzokIdg",
-    startTime: 155.5,
-    endTime: 159.8,
+    startTime: 83,
+    endTime: 89,
     difficulty: 'easy',
-    chineseGuide: "好吃！Yummy 就是「好吃」的意思，吃到喜歡的東西就說 Yummy！"
+    chineseGuide: "Peppa 在幫忙做鬆餅！stirring 是攪拌的意思喔！"
   },
 
   // === Camping (露營) ===
   // 影片連結: https://www.youtube.com/watch?v=J2DrjpYPjo4
+  // 時間戳已根據實際影片校正 (2025-01)
+  {
+    id: 48,
+    english: "I love camping!",
+    chinese: "我愛露營！",
+    videoId: "J2DrjpYPjo4",
+    startTime: 19,
+    endTime: 25,
+    difficulty: 'easy',
+    chineseGuide: "要去露營囉！camping 是露營，好好玩喔！"
+  },
+  {
+    id: 49,
+    english: "I'm an expert at camping.",
+    chinese: "我是露營專家。",
+    videoId: "J2DrjpYPjo4",
+    startTime: 40,
+    endTime: 46,
+    difficulty: 'medium',
+    chineseGuide: "豬爸爸說他是專家！expert 是「專家」的意思喔！"
+  },
   {
     id: 50,
-    english: "We're going camping!",
-    chinese: "我們要去露營！",
+    english: "Collecting sticks is fun!",
+    chinese: "撿樹枝很好玩！",
     videoId: "J2DrjpYPjo4",
-    startTime: 14.5,
-    endTime: 19.8,
+    startTime: 96,
+    endTime: 103,
     difficulty: 'easy',
-    chineseGuide: "要去露營囉！camping 是露營，We're going 是「我們要去」，好興奮喔！"
+    chineseGuide: "露營要撿樹枝生火！sticks 是樹枝，fun 是好玩！"
   },
   {
     id: 51,
-    english: "This is our tent.",
-    chinese: "這是我們的帳篷。",
+    english: "Listen to the sounds of nature.",
+    chinese: "聽聽大自然的聲音。",
     videoId: "J2DrjpYPjo4",
-    startTime: 65.5,
-    endTime: 70.8,
-    difficulty: 'easy',
-    chineseGuide: "露營要住帳篷！tent 是帳篷，our 是「我們的」意思，聽聽看怎麼說！"
-  },
-  {
-    id: 52,
-    english: "Can we have a campfire?",
-    chinese: "我們可以生營火嗎？",
-    videoId: "J2DrjpYPjo4",
-    startTime: 115.5,
-    endTime: 120.8,
+    startTime: 145,
+    endTime: 151,
     difficulty: 'medium',
-    chineseGuide: "露營可以生營火！campfire 是營火，Can we have 是「我們可以有嗎」，聽聽看！"
-  },
-  {
-    id: 53,
-    english: "Look at all the stars!",
-    chinese: "看那些星星！",
-    videoId: "J2DrjpYPjo4",
-    startTime: 185.5,
-    endTime: 190.8,
-    difficulty: 'easy',
-    chineseGuide: "哇，好多星星！stars 是星星，Look at 是「看」的意思，牧誠、奕荷，你們看過滿天星星嗎？"
+    chineseGuide: "露營可以聽到大自然！nature 是大自然，sounds 是聲音喔！"
   },
 
   // === At The Beach (在海灘) ===
   // 影片連結: https://www.youtube.com/watch?v=cu6xvXv-YTU
+  // 時間戳已根據實際影片校正 (2025-01)
+  {
+    id: 52,
+    english: "Peppa and George love going to the beach.",
+    chinese: "佩佩和喬治喜歡去海邊。",
+    videoId: "cu6xvXv-YTU",
+    startTime: 22,
+    endTime: 30,
+    difficulty: 'easy',
+    chineseGuide: "去海邊玩囉！beach 是海邊，牧誠、奕荷喜歡去海邊嗎？"
+  },
+  {
+    id: 53,
+    english: "Is the water cold?",
+    chinese: "水冷嗎？",
+    videoId: "cu6xvXv-YTU",
+    startTime: 117,
+    endTime: 122,
+    difficulty: 'easy',
+    chineseGuide: "問問看水冷不冷！cold 是冷的意思喔！"
+  },
   {
     id: 54,
-    english: "We're at the beach!",
-    chinese: "我們在海灘！",
+    english: "I love being at the beach.",
+    chinese: "我喜歡在海邊。",
     videoId: "cu6xvXv-YTU",
-    startTime: 14.5,
-    endTime: 19.8,
+    startTime: 141,
+    endTime: 147,
     difficulty: 'easy',
-    chineseGuide: "耶！到海邊玩囉！Peppa 興奮地說「我們在海灘」，beach 就是海邊的意思！"
+    chineseGuide: "Peppa 好開心！being at 是「待在」的意思喔！"
   },
   {
     id: 55,
-    english: "Let's build a sandcastle!",
-    chinese: "我們來蓋沙堡！",
+    english: "George, let's make sand castles!",
+    chinese: "喬治，我們來蓋沙堡！",
     videoId: "cu6xvXv-YTU",
-    startTime: 45.5,
-    endTime: 50.8,
+    startTime: 205,
+    endTime: 212,
     difficulty: 'easy',
-    chineseGuide: "來蓋沙堡！sandcastle 是沙堡，sand 是沙，castle 是城堡，牧誠、奕荷喜歡玩沙嗎？"
-  },
-  {
-    id: 56,
-    english: "The water is very cold!",
-    chinese: "水好冷！",
-    videoId: "cu6xvXv-YTU",
-    startTime: 95.5,
-    endTime: 100.8,
-    difficulty: 'easy',
-    chineseGuide: "海水好冷！cold 是「冷」，very 是「很」，The water 是水，聽聽看！"
-  },
-  {
-    id: 57,
-    english: "I found a shell!",
-    chinese: "我找到一個貝殼！",
-    videoId: "cu6xvXv-YTU",
-    startTime: 145.5,
-    endTime: 150.8,
-    difficulty: 'easy',
-    chineseGuide: "找到貝殼了！shell 是貝殼，found 是「找到」的意思，海邊有好多貝殼喔！"
+    chineseGuide: "來蓋沙堡！sand castles 是沙堡，sand 是沙，castle 是城堡喔！"
   },
 
   // === Shopping (購物) ===
   // 影片連結: https://www.youtube.com/watch?v=EL6rvG9qVAc
+  // 時間戳已根據實際影片校正 (2025-01)
+  {
+    id: 56,
+    english: "Peppa and George like shopping.",
+    chinese: "佩佩和喬治喜歡購物。",
+    videoId: "EL6rvG9qVAc",
+    startTime: 27,
+    endTime: 34,
+    difficulty: 'easy',
+    chineseGuide: "去購物囉！shopping 是購物，牧誠、奕荷有跟爸爸媽媽去過超市嗎？"
+  },
+  {
+    id: 57,
+    english: "First, we need tomatoes.",
+    chinese: "首先，我們需要番茄。",
+    videoId: "EL6rvG9qVAc",
+    startTime: 68,
+    endTime: 74,
+    difficulty: 'easy',
+    chineseGuide: "要買番茄！First 是「首先」，tomatoes 是番茄喔！"
+  },
   {
     id: 58,
-    english: "We're going to the supermarket.",
-    chinese: "我們要去超市。",
+    english: "I can see it! This way!",
+    chinese: "我看到了！這邊！",
     videoId: "EL6rvG9qVAc",
-    startTime: 14.5,
-    endTime: 19.8,
-    difficulty: 'medium',
-    chineseGuide: "要去超市買東西！supermarket 是超市，牧誠、奕荷有跟爸爸媽媽去過超市嗎？"
+    startTime: 111,
+    endTime: 117,
+    difficulty: 'easy',
+    chineseGuide: "Peppa 找到東西了！This way 是「這邊」的意思喔！"
   },
   {
     id: 59,
-    english: "We need some fruit and vegetables.",
-    chinese: "我們需要一些水果和蔬菜。",
+    english: "Here's the spaghetti!",
+    chinese: "義大利麵在這裡！",
     videoId: "EL6rvG9qVAc",
-    startTime: 35.5,
-    endTime: 41.8,
-    difficulty: 'medium',
-    chineseGuide: "要買水果和蔬菜！fruit 是水果，vegetables 是蔬菜，要多吃蔬菜水果才會健康喔！"
-  },
-  {
-    id: 60,
-    english: "Can I have some chocolate?",
-    chinese: "我可以吃巧克力嗎？",
-    videoId: "EL6rvG9qVAc",
-    startTime: 95.5,
-    endTime: 100.8,
-    difficulty: 'medium',
-    chineseGuide: "想吃巧克力！chocolate 是巧克力，Can I have 是「我可以有嗎」，牧誠、奕荷喜歡吃巧克力嗎？"
-  },
-
-  // === Swimming (游泳) ===
-  // 影片連結: https://www.youtube.com/watch?v=0zrqVJg7O1g
-  {
-    id: 61,
-    english: "We're going swimming!",
-    chinese: "我們要去游泳！",
-    videoId: "0zrqVJg7O1g",
-    startTime: 14.5,
-    endTime: 19.8,
+    startTime: 115,
+    endTime: 121,
     difficulty: 'easy',
-    chineseGuide: "耶！要去游泳囉！swimming 是游泳，We're going 是「我們要去」，牧誠、奕荷喜歡游泳嗎？"
+    chineseGuide: "找到義大利麵了！spaghetti 是義大利麵喔！"
   },
-  {
-    id: 62,
-    english: "I'm a bit scared.",
-    chinese: "我有點害怕。",
-    videoId: "0zrqVJg7O1g",
-    startTime: 45.5,
-    endTime: 50.8,
-    difficulty: 'easy',
-    chineseGuide: "喬治有點害怕！scared 是「害怕」，a bit 是「一點點」，沒關係，慢慢來就好喔！"
-  },
-  {
-    id: 63,
-    english: "Don't worry, George.",
-    chinese: "別擔心，喬治。",
-    videoId: "0zrqVJg7O1g",
-    startTime: 55.5,
-    endTime: 60.8,
-    difficulty: 'easy',
-    chineseGuide: "Peppa 安慰喬治！Don't worry 是「不要擔心」，當朋友害怕時可以這樣說喔！"
-  },
-  {
-    id: 64,
-    english: "Splish, splash, splosh!",
-    chinese: "噗通噗通！",
-    videoId: "0zrqVJg7O1g",
-    startTime: 125.5,
-    endTime: 130.8,
-    difficulty: 'easy',
-    chineseGuide: "玩水的聲音！這是水花的聲音，玩水的時候會發出這種聲音，一起說說看！"
-  },
-
-  // === Cleaning the Car (洗車) ===
-  // 影片連結: https://www.youtube.com/watch?v=6oTlZnpYRgQ
-  {
-    id: 65,
-    english: "The car is very dirty.",
-    chinese: "車子好髒。",
-    videoId: "6oTlZnpYRgQ",
-    startTime: 14.5,
-    endTime: 19.8,
-    difficulty: 'easy',
-    chineseGuide: "車子好髒喔！dirty 是「髒」的意思，very 是「很」，所以要洗車囉！"
-  },
-  {
-    id: 66,
-    english: "Let's clean the car!",
-    chinese: "我們來洗車！",
-    videoId: "6oTlZnpYRgQ",
-    startTime: 25.5,
-    endTime: 30.8,
-    difficulty: 'easy',
-    chineseGuide: "來洗車囉！clean 是「清潔、洗」的意思，Let's 是「我們一起」喔！"
-  },
-  {
-    id: 67,
-    english: "I like cleaning the car.",
-    chinese: "我喜歡洗車。",
-    videoId: "6oTlZnpYRgQ",
-    startTime: 85.5,
-    endTime: 90.8,
-    difficulty: 'easy',
-    chineseGuide: "Peppa 喜歡幫忙洗車！I like 是「我喜歡」，牧誠、奕荷有幫忙洗過車嗎？"
-  },
-
-  // === The Sleepy Princess (睡美人) ===
-  // 影片連結: https://www.youtube.com/watch?v=wvh8tIXOcCo
-  {
-    id: 68,
-    english: "Once upon a time...",
-    chinese: "很久很久以前...",
-    videoId: "wvh8tIXOcCo",
-    startTime: 14.5,
-    endTime: 19.8,
-    difficulty: 'easy',
-    chineseGuide: "講故事的開頭！Once upon a time 是「很久很久以前」，故事都是這樣開始的喔！"
-  },
-  {
-    id: 69,
-    english: "There was a beautiful princess.",
-    chinese: "有一位美麗的公主。",
-    videoId: "wvh8tIXOcCo",
-    startTime: 25.5,
-    endTime: 31.8,
-    difficulty: 'medium',
-    chineseGuide: "故事裡有公主！princess 是公主，beautiful 是美麗的，There was 是「有一個」喔！"
-  },
-  {
-    id: 70,
-    english: "The prince woke up the princess.",
-    chinese: "王子把公主叫醒了。",
-    videoId: "wvh8tIXOcCo",
-    startTime: 155.5,
-    endTime: 161.8,
-    difficulty: 'medium',
-    chineseGuide: "王子來救公主了！prince 是王子，woke up 是「叫醒」的意思！"
-  },
-  {
-    id: 71,
-    english: "And they lived happily ever after.",
-    chinese: "然後他們過著幸福快樂的日子。",
-    videoId: "wvh8tIXOcCo",
-    startTime: 185.5,
-    endTime: 192.8,
-    difficulty: 'hard',
-    chineseGuide: "故事的結尾！happily ever after 是「從此幸福快樂」，童話故事都這樣結束的喔！"
-  },
-
-  // === The Tooth Fairy (牙仙子) ===
-  // 影片連結: https://www.youtube.com/watch?v=kHBzs5wXNtc
-  {
-    id: 72,
-    english: "My tooth is wobbly!",
-    chinese: "我的牙齒在搖！",
-    videoId: "kHBzs5wXNtc",
-    startTime: 14.5,
-    endTime: 19.8,
-    difficulty: 'easy',
-    chineseGuide: "Peppa 的牙齒在搖！tooth 是牙齒，wobbly 是「搖搖晃晃」的意思，牧誠、奕荷有掉過牙齒嗎？"
-  },
-  {
-    id: 73,
-    english: "The tooth fairy will come tonight.",
-    chinese: "牙仙子今晚會來。",
-    videoId: "kHBzs5wXNtc",
-    startTime: 85.5,
-    endTime: 91.8,
-    difficulty: 'medium',
-    chineseGuide: "牙仙子會來喔！tooth fairy 是牙仙子，tonight 是今晚，will come 是「會來」！"
-  },
-  {
-    id: 74,
-    english: "Put it under your pillow.",
-    chinese: "把它放在枕頭下面。",
-    videoId: "kHBzs5wXNtc",
-    startTime: 95.5,
-    endTime: 100.8,
-    difficulty: 'medium',
-    chineseGuide: "把牙齒放枕頭下！pillow 是枕頭，under 是「下面」，牙仙子會來換禮物喔！"
-  },
-
-  // === Flying a Kite (放風箏) ===
-  // 影片連結: https://www.youtube.com/watch?v=hSl7_8VdLyY
-  {
-    id: 75,
-    english: "Let's fly a kite!",
-    chinese: "我們來放風箏！",
-    videoId: "hSl7_8VdLyY",
-    startTime: 14.5,
-    endTime: 19.8,
-    difficulty: 'easy',
-    chineseGuide: "來放風箏囉！kite 是風箏，fly 是「飛」，fly a kite 就是放風箏！"
-  },
-  {
-    id: 76,
-    english: "It's very windy today.",
-    chinese: "今天風很大。",
-    videoId: "hSl7_8VdLyY",
-    startTime: 25.5,
-    endTime: 30.8,
-    difficulty: 'easy',
-    chineseGuide: "風好大！windy 是「有風的」，放風箏需要有風才行喔！"
-  },
-  {
-    id: 77,
-    english: "The kite is flying high!",
-    chinese: "風箏飛得好高！",
-    videoId: "hSl7_8VdLyY",
-    startTime: 95.5,
-    endTime: 100.8,
-    difficulty: 'easy',
-    chineseGuide: "風箏飛高高！high 是「高」的意思，flying 是「正在飛」，好厲害喔！"
-  },
-  {
-    id: 78,
-    english: "Oh no, it's stuck in the tree!",
-    chinese: "糟糕，卡在樹上了！",
-    videoId: "hSl7_8VdLyY",
-    startTime: 125.5,
-    endTime: 131.8,
-    difficulty: 'medium',
-    chineseGuide: "風箏卡住了！stuck 是「卡住」，tree 是樹，Oh no 是「糟糕」的意思！"
-  },
-
-  // === Snow (下雪) ===
-  // 影片連結: https://www.youtube.com/watch?v=LYD3GK0YKxE
-  {
-    id: 79,
-    english: "It's snowing!",
-    chinese: "下雪了！",
-    videoId: "LYD3GK0YKxE",
-    startTime: 14.5,
-    endTime: 19.8,
-    difficulty: 'easy',
-    chineseGuide: "哇，下雪了！snowing 是「正在下雪」，牧誠、奕荷有看過雪嗎？"
-  },
-  {
-    id: 80,
-    english: "Let's make a snowman!",
-    chinese: "我們來堆雪人！",
-    videoId: "LYD3GK0YKxE",
-    startTime: 45.5,
-    endTime: 50.8,
-    difficulty: 'easy',
-    chineseGuide: "來堆雪人！snowman 是雪人，snow 是雪，man 是人，聽聽看！"
-  },
-  {
-    id: 81,
-    english: "I'm making a snowball.",
-    chinese: "我在做雪球。",
-    videoId: "LYD3GK0YKxE",
-    startTime: 65.5,
-    endTime: 70.8,
-    difficulty: 'easy',
-    chineseGuide: "做雪球！snowball 是雪球，I'm making 是「我正在做」喔！"
-  },
-  {
-    id: 82,
-    english: "Let's have a snowball fight!",
-    chinese: "我們來打雪仗！",
-    videoId: "LYD3GK0YKxE",
-    startTime: 95.5,
-    endTime: 101.8,
-    difficulty: 'medium',
-    chineseGuide: "打雪仗囉！snowball fight 是打雪仗，fight 是戰鬥的意思，好好玩喔！"
-  },
-
-  // === George's Birthday (喬治的生日) ===
-  // 影片連結: https://www.youtube.com/watch?v=qH2TPP0a3Pg
-  {
-    id: 83,
-    english: "Happy Birthday, George!",
-    chinese: "生日快樂，喬治！",
-    videoId: "qH2TPP0a3Pg",
-    startTime: 14.5,
-    endTime: 19.8,
-    difficulty: 'easy',
-    chineseGuide: "喬治生日快樂！Happy Birthday 就是「生日快樂」，別人生日要這樣說喔！"
-  },
-  {
-    id: 84,
-    english: "What a lovely cake!",
-    chinese: "好漂亮的蛋糕！",
-    videoId: "qH2TPP0a3Pg",
-    startTime: 65.5,
-    endTime: 70.8,
-    difficulty: 'easy',
-    chineseGuide: "好漂亮的蛋糕！lovely 是「可愛的、漂亮的」，cake 是蛋糕！"
-  },
-  {
-    id: 85,
-    english: "Make a wish!",
-    chinese: "許個願！",
-    videoId: "qH2TPP0a3Pg",
-    startTime: 95.5,
-    endTime: 99.8,
-    difficulty: 'easy',
-    chineseGuide: "許願囉！Make a wish 是「許願」，吹蠟燭前要先許願喔！"
-  },
-  {
-    id: 86,
-    english: "Blow out the candles!",
-    chinese: "吹蠟燭！",
-    videoId: "qH2TPP0a3Pg",
-    startTime: 100.5,
-    endTime: 105.8,
-    difficulty: 'easy',
-    chineseGuide: "吹蠟燭囉！blow out 是「吹熄」，candles 是蠟燭，呼～！"
-  },
-
-  // === The Balloon Ride (熱氣球) ===
-  // 影片連結: https://www.youtube.com/watch?v=gVVz9NpcQoY
-  {
-    id: 87,
-    english: "Look at the balloon!",
-    chinese: "看那個氣球！",
-    videoId: "gVVz9NpcQoY",
-    startTime: 14.5,
-    endTime: 19.8,
-    difficulty: 'easy',
-    chineseGuide: "好大的氣球！balloon 是氣球，Look at 是「看」的意思！"
-  },
-  {
-    id: 88,
-    english: "It's a hot air balloon.",
-    chinese: "那是熱氣球。",
-    videoId: "gVVz9NpcQoY",
-    startTime: 25.5,
-    endTime: 30.8,
-    difficulty: 'medium',
-    chineseGuide: "是熱氣球耶！hot air balloon 是熱氣球，hot 是熱，air 是空氣！"
-  },
-  {
-    id: 89,
-    english: "We're going up!",
-    chinese: "我們在往上升！",
-    videoId: "gVVz9NpcQoY",
-    startTime: 85.5,
-    endTime: 90.8,
-    difficulty: 'easy',
-    chineseGuide: "要飛上去了！going up 是「往上升」，好刺激喔！"
-  },
-  {
-    id: 90,
-    english: "I can see our house!",
-    chinese: "我看得到我們的房子！",
-    videoId: "gVVz9NpcQoY",
-    startTime: 125.5,
-    endTime: 131.8,
-    difficulty: 'medium',
-    chineseGuide: "從天空看得到房子！I can see 是「我看得到」，house 是房子！"
-  },
-
-  // === Grandpa Pig's Boat (爺爺的船) ===
-  // 影片連結: https://www.youtube.com/watch?v=5oFjR71ynqM
-  {
-    id: 91,
-    english: "Grandpa Pig has a boat.",
-    chinese: "豬爺爺有一艘船。",
-    videoId: "5oFjR71ynqM",
-    startTime: 14.5,
-    endTime: 19.8,
-    difficulty: 'easy',
-    chineseGuide: "豬爺爺有一艘船！boat 是船，Grandpa 是爺爺，has 是「有」喔！"
-  },
-  {
-    id: 92,
-    english: "Let's go sailing!",
-    chinese: "我們去航行吧！",
-    videoId: "5oFjR71ynqM",
-    startTime: 35.5,
-    endTime: 40.8,
-    difficulty: 'easy',
-    chineseGuide: "要去坐船囉！sailing 是航行，Let's go 是「我們去」的意思！"
-  },
-  {
-    id: 93,
-    english: "I'm the captain!",
-    chinese: "我是船長！",
-    videoId: "5oFjR71ynqM",
-    startTime: 65.5,
-    endTime: 70.8,
-    difficulty: 'easy',
-    chineseGuide: "Peppa 要當船長！captain 是船長，開船的人就是 captain 喔！"
-  },
-
-  // === Sports Day (運動會) ===
-  // 影片連結: https://www.youtube.com/watch?v=6ovfyaHlGLs
-  {
-    id: 94,
-    english: "Today is sports day!",
-    chinese: "今天是運動會！",
-    videoId: "6ovfyaHlGLs",
-    startTime: 14.5,
-    endTime: 19.8,
-    difficulty: 'easy',
-    chineseGuide: "今天是運動會！sports day 是運動會，牧誠、奕荷學校有運動會嗎？"
-  },
-  {
-    id: 95,
-    english: "Ready, set, go!",
-    chinese: "預備，開始！",
-    videoId: "6ovfyaHlGLs",
-    startTime: 55.5,
-    endTime: 60.8,
-    difficulty: 'easy',
-    chineseGuide: "要開始比賽了！Ready 是準備好，set 是預備，go 是開始！"
-  },
-  {
-    id: 96,
-    english: "Run as fast as you can!",
-    chinese: "盡全力跑！",
-    videoId: "6ovfyaHlGLs",
-    startTime: 75.5,
-    endTime: 81.8,
-    difficulty: 'medium',
-    chineseGuide: "要用力跑！as fast as you can 是「盡你所能地快」，加油！"
-  },
-  {
-    id: 97,
-    english: "I won!",
-    chinese: "我贏了！",
-    videoId: "6ovfyaHlGLs",
-    startTime: 125.5,
-    endTime: 129.8,
-    difficulty: 'easy',
-    chineseGuide: "贏了！won 是「贏」的意思，I won 就是「我贏了」，好棒喔！"
-  },
-
-  // === Pizza (披薩) ===
-  // 影片連結: https://www.youtube.com/watch?v=9g1SQxS0hD4
-  {
-    id: 98,
-    english: "We're making pizza!",
-    chinese: "我們在做披薩！",
-    videoId: "9g1SQxS0hD4",
-    startTime: 14.5,
-    endTime: 19.8,
-    difficulty: 'easy',
-    chineseGuide: "來做披薩囉！pizza 是披薩，We're making 是「我們正在做」！"
-  },
-  {
-    id: 99,
-    english: "I want cheese on my pizza.",
-    chinese: "我要在我的披薩上加起司。",
-    videoId: "9g1SQxS0hD4",
-    startTime: 55.5,
-    endTime: 61.8,
-    difficulty: 'medium',
-    chineseGuide: "要加起司！cheese 是起司，I want 是「我要」，牧誠、奕荷喜歡吃披薩嗎？"
-  },
-  {
-    id: 100,
-    english: "The pizza is ready!",
-    chinese: "披薩好了！",
-    videoId: "9g1SQxS0hD4",
-    startTime: 125.5,
-    endTime: 130.8,
-    difficulty: 'easy',
-    chineseGuide: "披薩做好囉！ready 是「準備好了」的意思，可以吃了！"
-  },
-
-  // === The Rainbow (彩虹) ===
-  // 影片連結: https://www.youtube.com/watch?v=RNHyNQzOaug
-  {
-    id: 101,
-    english: "Look, a rainbow!",
-    chinese: "看，彩虹！",
-    videoId: "RNHyNQzOaug",
-    startTime: 14.5,
-    endTime: 19.8,
-    difficulty: 'easy',
-    chineseGuide: "哇，有彩虹！rainbow 是彩虹，Look 是「看」，好漂亮喔！"
-  },
-  {
-    id: 102,
-    english: "It has seven colours.",
-    chinese: "它有七種顏色。",
-    videoId: "RNHyNQzOaug",
-    startTime: 35.5,
-    endTime: 40.8,
-    difficulty: 'easy',
-    chineseGuide: "彩虹有七種顏色！seven 是七，colours 是顏色，你知道是哪七種嗎？"
-  },
-  {
-    id: 103,
-    english: "Red, orange, yellow, green, blue...",
-    chinese: "紅、橙、黃、綠、藍...",
-    videoId: "RNHyNQzOaug",
-    startTime: 45.5,
-    endTime: 52.8,
-    difficulty: 'medium',
-    chineseGuide: "來學顏色！red 紅色，orange 橙色，yellow 黃色，green 綠色，blue 藍色，跟著說！"
-  },
-
-  // === Polly Parrot (鸚鵡波莉) ===
-  // 影片連結: https://www.youtube.com/watch?v=j5OG-hKSlbY
-  {
-    id: 104,
-    english: "This is Polly Parrot.",
-    chinese: "這是鸚鵡波莉。",
-    videoId: "j5OG-hKSlbY",
-    startTime: 14.5,
-    endTime: 19.8,
-    difficulty: 'easy',
-    chineseGuide: "這是鸚鵡波莉！Parrot 是鸚鵡，鸚鵡會說話喔！"
-  },
-  {
-    id: 105,
-    english: "Polly can talk!",
-    chinese: "波莉會說話！",
-    videoId: "j5OG-hKSlbY",
-    startTime: 35.5,
-    endTime: 40.8,
-    difficulty: 'easy',
-    chineseGuide: "鸚鵡會說話！can talk 是「會說話」，好神奇喔！"
-  },
-  {
-    id: 106,
-    english: "Hello, Polly!",
-    chinese: "哈囉，波莉！",
-    videoId: "j5OG-hKSlbY",
-    startTime: 55.5,
-    endTime: 60.8,
-    difficulty: 'easy',
-    chineseGuide: "跟波莉打招呼！Hello 是「哈囉」，鸚鵡會學你說話喔！"
-  },
-
-  // === Daddy Gets Fit (爸爸健身) ===
-  // 影片連結: https://www.youtube.com/watch?v=n-oLhJyV8vE
-  {
-    id: 107,
-    english: "Daddy Pig needs exercise.",
-    chinese: "豬爸爸需要運動。",
-    videoId: "n-oLhJyV8vE",
-    startTime: 14.5,
-    endTime: 19.8,
-    difficulty: 'medium',
-    chineseGuide: "豬爸爸要運動！exercise 是運動，needs 是「需要」的意思喔！"
-  },
-  {
-    id: 108,
-    english: "Touch your toes!",
-    chinese: "摸你的腳趾！",
-    videoId: "n-oLhJyV8vE",
-    startTime: 55.5,
-    endTime: 60.8,
-    difficulty: 'easy',
-    chineseGuide: "做運動！Touch 是「摸」，toes 是腳趾，牧誠、奕荷可以摸到腳趾嗎？"
-  },
-  {
-    id: 109,
-    english: "Jump up and down!",
-    chinese: "跳上跳下！",
-    videoId: "n-oLhJyV8vE",
-    startTime: 85.5,
-    endTime: 90.8,
-    difficulty: 'easy',
-    chineseGuide: "跳跳跳！Jump 是跳，up 是上，down 是下，一起跳跳看！"
-  },
-  {
-    id: 110,
-    english: "I'm very tired.",
-    chinese: "我好累。",
-    videoId: "n-oLhJyV8vE",
-    startTime: 155.5,
-    endTime: 160.8,
-    difficulty: 'easy',
-    chineseGuide: "運動完好累！tired 是「累」的意思，very 是「很」，運動很累但很健康喔！"
-  }
 ];
+
+// 以下影片已確認不可用（影片被移除或設為私人），無法加入句子：
+// - Swimming (0zrqVJg7O1g)
+// - Cleaning the Car (6oTlZnpYRgQ)
+// - The Sleepy Princess (wvh8tIXOcCo)
+// - The Tooth Fairy (kHBzs5wXNtc)
+// - Flying a Kite (hSl7_8VdLyY)
+// - Snow (LYD3GK0YKxE)
+// - George's Birthday (qH2TPP0a3Pg)
+// - The Balloon Ride (gVVz9NpcQoY)
+// - Grandpa Pig's Boat (5oFjR71ynqM)
+// - Sports Day (6ovfyaHlGLs)
+// - Pizza (9g1SQxS0hD4)
+// - The Rainbow (RNHyNQzOaug)
+// - Polly Parrot (j5OG-hKSlbY)
+// - Daddy Gets Fit (n-oLhJyV8vE)
+
+
