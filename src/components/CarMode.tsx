@@ -31,10 +31,12 @@ export function CarMode() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [pauseCountdown, setPauseCountdown] = useState(0);
   const [showSelector, setShowSelector] = useState(false);
+  const [isPlayerReady, setIsPlayerReady] = useState(false);
 
   const youtubeRef = useRef<YouTubePlayerRef>(null);
   const ttsRef = useRef<TextToSpeechRef>(null);
   const pauseTimerRef = useRef<number | null>(null);
+  const pendingPlayRef = useRef(false);  // 追蹤是否有待播放的請求
 
   // 用 ref 追蹤最新狀態，避免 closure 問題
   const stepRef = useRef(step);
@@ -54,9 +56,21 @@ export function CarMode() {
   useEffect(() => {
     currentIndexRef.current = currentIndex;
     currentSentenceRef.current = sentences[currentIndex];
+    // 當句子改變時，重置 player ready 狀態（可能是不同影片）
+    setIsPlayerReady(false);
   }, [currentIndex]);
 
   const currentSentence = sentences[currentIndex];
+
+  // 當 player 準備好的回調
+  const handlePlayerReady = useCallback(() => {
+    setIsPlayerReady(true);
+    // 如果有待播放的請求，立即播放
+    if (pendingPlayRef.current && stepRef.current === CarModeStep.VIDEO_PLAY) {
+      pendingPlayRef.current = false;
+      youtubeRef.current?.playSegment();
+    }
+  }, []);
 
   // 步驟描述
   const stepDescriptions: Record<CarModeStepType, string> = {
@@ -162,6 +176,7 @@ export function CarMode() {
   // 開始播放流程
   const startPlayback = useCallback(async () => {
     setIsPlaying(true);
+    pendingPlayRef.current = false;
     await playChineseGuide();
 
     // 檢查是否仍在播放
@@ -169,9 +184,14 @@ export function CarMode() {
 
     // 播放影片片段
     if (youtubeRef.current) {
-      youtubeRef.current.playSegment();
+      // 如果 player 還沒準備好，標記為待播放
+      if (!isPlayerReady) {
+        pendingPlayRef.current = true;
+      } else {
+        youtubeRef.current.playSegment();
+      }
     }
-  }, [playChineseGuide]);
+  }, [playChineseGuide, isPlayerReady]);
 
   // 當步驟為 IDLE 且正在播放時，自動開始下一輪
   useEffect(() => {
@@ -192,6 +212,7 @@ export function CarMode() {
     if (isPlaying) {
       // 暫停
       setIsPlaying(false);
+      pendingPlayRef.current = false;
       clearPauseTimer();
       ttsRef.current?.stop();
       youtubeRef.current?.pauseVideo();
@@ -203,14 +224,18 @@ export function CarMode() {
         setIsPlaying(true);
         // 根據當前步驟恢復
         if (step === CarModeStep.VIDEO_PLAY) {
-          youtubeRef.current?.playSegment();
+          if (isPlayerReady) {
+            youtubeRef.current?.playSegment();
+          } else {
+            pendingPlayRef.current = true;
+          }
         } else if (step === CarModeStep.REPEAT_PAUSE) {
           // 恢復倒數計時
           startRepeatPause();
         }
       }
     }
-  }, [isPlaying, step, clearPauseTimer, startPlayback, startRepeatPause]);
+  }, [isPlaying, step, isPlayerReady, clearPauseTimer, startPlayback, startRepeatPause]);
 
   // 跳到下一句
   const skipToNext = useCallback(() => {
@@ -271,6 +296,7 @@ export function CarMode() {
           startTime={currentSentence.startTime}
           endTime={currentSentence.endTime}
           isLooping={false}
+          onReady={handlePlayerReady}
           onSegmentEnd={handleVideoSegmentEnd}
         />
       </div>
