@@ -1,0 +1,480 @@
+{
+  "passed": [
+    {
+      "id": 1,
+      "english": "I'm Peppa Pig!",
+      "expected_start": 0.0,
+      "actual_start": 2.6,
+      "diff": 2.6,
+      "score": 0.95
+    },
+    {
+      "id": 2,
+      "english": "This is my little brother George.",
+      "expected_start": 4.5,
+      "actual_start": 2.6,
+      "diff": 1.9,
+      "score": 0.95
+    },
+    {
+      "id": 3,
+      "english": "This is Mummy Pig.",
+      "expected_start": 8.0,
+      "actual_start": 5.7,
+      "diff": 2.3,
+      "score": 0.6267326732673266
+    },
+    {
+      "id": 4,
+      "english": "This is Daddy Pig.",
+      "expected_start": 9.0,
+      "actual_start": 9.9,
+      "diff": 0.9000000000000004,
+      "score": 0.95
+    },
+    {
+      "id": 5,
+      "english": "Peppa Pig!",
+      "expected_start": 13.0,
+      "actual_start": 13.5,
+      "diff": 0.5,
+      "score": 0.95
+    },
+    {
+      "id": 6,
+      "english": "Muddy Puddles!",
+      "expected_start": 19.0,
+      "actual_start": 20.3,
+      "diff": 1.3000000000000007,
+      "score": 0.95
+    },
+    {
+      "id": 7,
+      "english": "It is raining today.",
+      "expected_start": 26.0,
+      "actual_start": 26.9,
+      "diff": 0.8999999999999986,
+      "score": 0.95
+    },
+    {
+      "id": 8,
+      "english": "So Peppa and George cannot play outside.",
+      "expected_start": 26.0,
+      "actual_start": 26.9,
+      "diff": 0.8999999999999986,
+      "score": 0.95
+    },
+    {
+      "id": 10,
+      "english": "Can we go out to play?",
+      "expected_start": 35.0,
+      "actual_start": 33.7,
+      "diff": 1.2999999999999972,
+      "score": 0.95
+    },
+    {
+      "id": 11,
+      "english": "Alright, run along you two.",
+      "expected_start": 38.0,
+      "actual_start": 36.4,
+      "diff": 1.6000000000000014,
+      "score": 0.6862903225806452
+    },
+    {
+      "id": 12,
+      "english": "Peppa loves jumping in muddy puddles!",
+      "expected_start": 51.0,
+      "actual_start": 51.1,
+      "diff": 0.10000000000000142,
+      "score": 0.95
+    },
+    {
+      "id": 13,
+      "english": "I love muddy puddles!",
+      "expected_start": 54.0,
+      "actual_start": 54.2,
+      "diff": 0.20000000000000284,
+      "score": 0.95
+    },
+    {
+      "id": 14,
+      "english": "Peppa, if you jump in muddy puddles, you must wear your boots.",
+      "expected_start": 60.0,
+      "actual_start": 60.2,
+      "diff": 0.20000000000000284,
+      "score": 0.95
+    },
+    {
+      "id": 15,
+      "english": "Sorry, Mummy.",
+      "expected_start": 65.0,
+      "actual_start": 65.8,
+      "diff": 0.7999999999999972,
+      "score": 0.6907894736842105
+    },
+    {
+      "id": 16,
+      "english": "George, let's find some more puddles!",
+      "expected_start": 100.0,
+      "actual_start": 101.0,
+      "diff": 1.0,
+      "score": 0.95
+    },
+    {
+      "id": 17,
+      "english": "Look, George!",
+      "expected_start": 129.0,
+      "actual_start": 130.1,
+      "diff": 1.0999999999999943,
+      "score": 0.95
+    },
+    {
+      "id": 18,
+      "english": "There's a really big puddle!",
+      "expected_start": 130.0,
+      "actual_start": 130.1,
+      "diff": 0.09999999999999432,
+      "score": 0.95
+    },
+    {
+      "id": 19,
+      "english": "Good. It is safe for you.",
+      "expected_start": 147.0,
+      "actual_start": 148.2,
+      "diff": 1.1999999999999886,
+      "score": 0.95
+    },
+    {
+      "id": 20,
+      "english": "Everyone loves jumping in muddy puddles!",
+      "expected_start": 253.0,
+      "actual_start": 251.4,
+      "diff": 1.5999999999999943,
+      "score": 0.8277372262773723
+    },
+    {
+      "id": 21,
+      "english": "George's favourite toy is Mr Dinosaur.",
+      "expected_start": 25.0,
+      "actual_start": 25.9,
+      "diff": 0.8999999999999986,
+      "score": 0.718343949044586
+    },
+    {
+      "id": 22,
+      "english": "George has lost Mr Dinosaur!",
+      "expected_start": 129.0,
+      "actual_start": 129.7,
+      "diff": 0.6999999999999886,
+      "score": 0.95
+    },
+    {
+      "id": 23,
+      "english": "Don't worry, George. We'll find Mr Dinosaur.",
+      "expected_start": 133.0,
+      "actual_start": 133.4,
+      "diff": 0.4000000000000057,
+      "score": 0.95
+    },
+    {
+      "id": 24,
+      "english": "Where's Mr Dinosaur?",
+      "expected_start": 169.0,
+      "actual_start": 169.2,
+      "diff": 0.19999999999998863,
+      "score": 0.95
+    },
+    {
+      "id": 25,
+      "english": "Maybe we should try the garden.",
+      "expected_start": 212.0,
+      "actual_start": 212.7,
+      "diff": 0.6999999999999886,
+      "score": 0.95
+    },
+    {
+      "id": 26,
+      "english": "There he is! There he is!",
+      "expected_start": 245.0,
+      "actual_start": 245.7,
+      "diff": 0.6999999999999886,
+      "score": 0.95
+    },
+    {
+      "id": 28,
+      "english": "Hello, Suzy! Hello, Peppa!",
+      "expected_start": 35.0,
+      "actual_start": 32.4,
+      "diff": 2.6000000000000014,
+      "score": 0.7493438320209973
+    },
+    {
+      "id": 30,
+      "english": "I want to be a nurse!",
+      "expected_start": 157.0,
+      "actual_start": 157.8,
+      "diff": 0.8000000000000114,
+      "score": 0.95
+    },
+    {
+      "id": 31,
+      "english": "I want to be a doctor!",
+      "expected_start": 160.0,
+      "actual_start": 160.3,
+      "diff": 0.30000000000001137,
+      "score": 0.95
+    },
+    {
+      "id": 32,
+      "english": "Peppa and George are playing hide and seek.",
+      "expected_start": 28.0,
+      "actual_start": 28.88,
+      "diff": 0.879999999999999,
+      "score": 0.95
+    },
+    {
+      "id": 34,
+      "english": "Ready or not, here I come!",
+      "expected_start": 51.0,
+      "actual_start": 50.64,
+      "diff": 0.35999999999999943,
+      "score": 0.95
+    },
+    {
+      "id": 35,
+      "english": "Found you!",
+      "expected_start": 61.0,
+      "actual_start": 61.76,
+      "diff": 0.759999999999998,
+      "score": 0.95
+    },
+    {
+      "id": 36,
+      "english": "Where can he be?",
+      "expected_start": 227.0,
+      "actual_start": 226.799,
+      "diff": 0.2009999999999934,
+      "score": 0.95
+    },
+    {
+      "id": 37,
+      "english": "It is George's first day.",
+      "expected_start": 27.0,
+      "actual_start": 27.84,
+      "diff": 0.8399999999999999,
+      "score": 0.95
+    },
+    {
+      "id": 38,
+      "english": "Hello, this is my little brother George.",
+      "expected_start": 95.0,
+      "actual_start": 95.56,
+      "diff": 0.5600000000000023,
+      "score": 0.95
+    },
+    {
+      "id": 39,
+      "english": "George is my brother. He's brilliant!",
+      "expected_start": 141.0,
+      "actual_start": 141.08,
+      "diff": 0.0800000000000125,
+      "score": 0.95
+    },
+    {
+      "id": 40,
+      "english": "I will show him how to paint a flower.",
+      "expected_start": 163.0,
+      "actual_start": 163.04,
+      "diff": 0.03999999999999204,
+      "score": 0.95
+    },
+    {
+      "id": 41,
+      "english": "George is riding his tricycle.",
+      "expected_start": 54.0,
+      "actual_start": 53.96,
+      "diff": 0.03999999999999915,
+      "score": 0.95
+    },
+    {
+      "id": 42,
+      "english": "Let's race to Daddy Pig's pumpkin!",
+      "expected_start": 61.0,
+      "actual_start": 61.8,
+      "diff": 0.7999999999999972,
+      "score": 0.95
+    },
+    {
+      "id": 43,
+      "english": "Ready, steady, go!",
+      "expected_start": 173.0,
+      "actual_start": 173.599,
+      "diff": 0.5989999999999895,
+      "score": 0.95
+    },
+    {
+      "id": 44,
+      "english": "Peppa is riding on her own!",
+      "expected_start": 190.0,
+      "actual_start": 190.84,
+      "diff": 0.8400000000000034,
+      "score": 0.95
+    },
+    {
+      "id": 45,
+      "english": "I love pancakes!",
+      "expected_start": 33.0,
+      "actual_start": 33.16,
+      "diff": 0.1599999999999966,
+      "score": 0.95
+    },
+    {
+      "id": 46,
+      "english": "Everyone loves pancakes!",
+      "expected_start": 38.0,
+      "actual_start": 38.2,
+      "diff": 0.20000000000000284,
+      "score": 0.95
+    },
+    {
+      "id": 47,
+      "english": "Peppa loves stirring.",
+      "expected_start": 83.0,
+      "actual_start": 83.799,
+      "diff": 0.7990000000000066,
+      "score": 0.95
+    },
+    {
+      "id": 48,
+      "english": "I love camping!",
+      "expected_start": 19.0,
+      "actual_start": 19.88,
+      "diff": 0.879999999999999,
+      "score": 0.95
+    },
+    {
+      "id": 49,
+      "english": "I'm an expert at camping.",
+      "expected_start": 40.0,
+      "actual_start": 40.28,
+      "diff": 0.28000000000000114,
+      "score": 0.95
+    },
+    {
+      "id": 50,
+      "english": "Collecting sticks is fun!",
+      "expected_start": 96.0,
+      "actual_start": 96.24,
+      "diff": 0.23999999999999488,
+      "score": 0.7371428571428571
+    },
+    {
+      "id": 51,
+      "english": "Listen to the sounds of nature.",
+      "expected_start": 145.0,
+      "actual_start": 142.8,
+      "diff": 2.1999999999999886,
+      "score": 0.95
+    },
+    {
+      "id": 52,
+      "english": "Peppa and George love going to the beach.",
+      "expected_start": 22.0,
+      "actual_start": 22.199,
+      "diff": 0.19900000000000162,
+      "score": 0.95
+    },
+    {
+      "id": 53,
+      "english": "Is the water cold?",
+      "expected_start": 117.0,
+      "actual_start": 117.039,
+      "diff": 0.03900000000000148,
+      "score": 0.95
+    },
+    {
+      "id": 54,
+      "english": "I love being at the beach.",
+      "expected_start": 141.0,
+      "actual_start": 141.48,
+      "diff": 0.47999999999998977,
+      "score": 0.95
+    },
+    {
+      "id": 55,
+      "english": "George, let's make sand castles!",
+      "expected_start": 205.0,
+      "actual_start": 208.0,
+      "diff": 3.0,
+      "score": 0.95
+    },
+    {
+      "id": 56,
+      "english": "Peppa and George like shopping.",
+      "expected_start": 27.0,
+      "actual_start": 27.48,
+      "diff": 0.4800000000000004,
+      "score": 0.95
+    },
+    {
+      "id": 57,
+      "english": "First, we need tomatoes.",
+      "expected_start": 68.0,
+      "actual_start": 68.4,
+      "diff": 0.4000000000000057,
+      "score": 0.95
+    },
+    {
+      "id": 58,
+      "english": "I can see it! This way!",
+      "expected_start": 111.0,
+      "actual_start": 111.119,
+      "diff": 0.11899999999999977,
+      "score": 0.95
+    },
+    {
+      "id": 59,
+      "english": "Here's the spaghetti!",
+      "expected_start": 115.0,
+      "actual_start": 115.64,
+      "diff": 0.6400000000000006,
+      "score": 0.95
+    }
+  ],
+  "warning": [
+    {
+      "id": 9,
+      "english": "Daddy, it's stopped raining!",
+      "expected_start": 33.0,
+      "actual_start": 29.4,
+      "diff": 3.6000000000000014,
+      "score": 0.6657428571428571
+    },
+    {
+      "id": 27,
+      "english": "Peppa is waiting for her best friend, Suzy Sheep.",
+      "expected_start": 25.0,
+      "actual_start": 21.2,
+      "diff": 3.8000000000000007,
+      "score": 0.8520238095238095
+    },
+    {
+      "id": 29,
+      "english": "Why don't you and Suzy go and play in your bedroom?",
+      "expected_start": 55.0,
+      "actual_start": 51.5,
+      "diff": 3.5,
+      "score": 0.7874542124542124
+    },
+    {
+      "id": 33,
+      "english": "One, two, three, four, five!",
+      "expected_start": 38.0,
+      "actual_start": 42.8,
+      "diff": 4.799999999999997,
+      "score": 0.40912087912087924
+    }
+  ],
+  "failed": [],
+  "errors": []
+}
