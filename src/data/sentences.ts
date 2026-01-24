@@ -78,8 +78,8 @@ export const sentences: Sentence[] = [
     english: "It is raining today.",
     chinese: "今天下雨了。",
     videoId: "z9wHUokAyvI",
-    startTime: 24,
-    endTime: 27,
+    startTime: 26,
+    endTime: 29,
     difficulty: 'easy',
     chineseGuide: "哇，外面下雨了耶！Peppa 說「今天在下雨」，raining 就是下雨的意思，聽聽看！"
   },
@@ -148,8 +148,8 @@ export const sentences: Sentence[] = [
     english: "Peppa, if you jump in muddy puddles, you must wear your boots.",
     chinese: "佩佩，如果你要跳泥巴水坑，必須穿靴子。",
     videoId: "z9wHUokAyvI",
-    startTime: 58,
-    endTime: 65,
+    startTime: 60,
+    endTime: 66,
     difficulty: 'hard',
     chineseGuide: "豬媽咪提醒 Peppa，must 是「必須」，boots 是靴子。跳水坑要穿靴子才不會弄濕腳喔！這句比較長，慢慢聽！"
   },
@@ -223,60 +223,60 @@ export const sentences: Sentence[] = [
     english: "George's favourite toy is Mr Dinosaur.",
     chinese: "喬治最喜歡的玩具是恐龍先生。",
     videoId: "8t1WdjVZbiE",
-    startTime: 24,
+    startTime: 25,
     endTime: 30,
     difficulty: 'medium',
     chineseGuide: "喬治有一個最愛的玩具，就是恐龍先生！favourite 就是「最喜歡的」意思，聽聽看！"
   },
   {
     id: 22,
+    english: "George has lost Mr Dinosaur!",
+    chinese: "喬治把恐龍先生弄丟了！",
+    videoId: "8t1WdjVZbiE",
+    startTime: 129,
+    endTime: 134,
+    difficulty: 'easy',
+    chineseGuide: "糟糕！喬治把恐龍先生弄丟了！lost 是「弄丟」的意思喔！"
+  },
+  {
+    id: 23,
+    english: "Don't worry, George. We'll find Mr Dinosaur.",
+    chinese: "別擔心，喬治。我們會找到恐龍先生的。",
+    videoId: "8t1WdjVZbiE",
+    startTime: 133,
+    endTime: 138,
+    difficulty: 'medium',
+    chineseGuide: "Peppa 安慰喬治！Don't worry 是「別擔心」，we'll find 是「我們會找到」的意思喔！"
+  },
+  {
+    id: 24,
     english: "Where's Mr Dinosaur?",
     chinese: "恐龍先生在哪裡？",
     videoId: "8t1WdjVZbiE",
-    startTime: 88,
-    endTime: 92,
+    startTime: 169,
+    endTime: 174,
     difficulty: 'easy',
     chineseGuide: "喬治找不到恐龍先生了！Where's 是「在哪裡」的意思，想問東西在哪就用這個字喔！"
   },
   {
-    id: 23,
-    english: "George, don't cry.",
-    chinese: "喬治，不要哭。",
-    videoId: "8t1WdjVZbiE",
-    startTime: 98,
-    endTime: 102,
-    difficulty: 'easy',
-    chineseGuide: "喬治哭了！Peppa 安慰他說「不要哭」，don't cry 就是不要哭的意思喔！"
-  },
-  {
-    id: 24,
-    english: "We'll find Mr Dinosaur.",
-    chinese: "我們會找到恐龍先生的。",
-    videoId: "8t1WdjVZbiE",
-    startTime: 102,
-    endTime: 107,
-    difficulty: 'easy',
-    chineseGuide: "Peppa 說「我們會找到的」！We'll 是「我們會」，find 是找，好溫暖的話喔！"
-  },
-  {
     id: 25,
-    english: "Maybe the dinosaur is in the garden.",
-    chinese: "也許恐龍在花園裡。",
+    english: "Maybe we should try the garden.",
+    chinese: "也許我們應該去花園找找。",
     videoId: "8t1WdjVZbiE",
-    startTime: 150,
-    endTime: 156,
+    startTime: 212,
+    endTime: 218,
     difficulty: 'medium',
     chineseGuide: "Maybe 是「也許」的意思，garden 是花園。大家在猜恐龍先生在哪裡呢！"
   },
   {
     id: 26,
-    english: "There it is! In the tree!",
-    chinese: "在那裡！在樹上！",
+    english: "There he is! There he is!",
+    chinese: "在那裡！在那裡！",
     videoId: "8t1WdjVZbiE",
-    startTime: 232,
-    endTime: 238,
+    startTime: 245,
+    endTime: 250,
     difficulty: 'easy',
-    chineseGuide: "找到了！There it is 是「就在那裡」，tree 是樹。恐龍先生在樹上耶！"
+    chineseGuide: "找到了！There he is 是「他在那裡」的意思，找到東西的時候可以這樣說喔！"
   },
 
   // === Best Friend (好朋友) ===
@@ -285,53 +285,53 @@ export const sentences: Sentence[] = [
   // 時間戳已根據實際影片校正 (2024-01)
   {
     id: 27,
-    english: "Suzy Sheep is Peppa's best friend.",
-    chinese: "蘇西羊是佩佩最好的朋友。",
+    english: "Peppa is waiting for her best friend, Suzy Sheep.",
+    chinese: "佩佩正在等她最好的朋友蘇西羊。",
     videoId: "-qjzaeBNNOs",
-    startTime: 21,
-    endTime: 28,
+    startTime: 25,
+    endTime: 30,
     difficulty: 'medium',
     chineseGuide: "Peppa 有一個最好的朋友叫蘇西！best friend 就是「最好的朋友」，牧誠、奕荷有 best friend 嗎？"
   },
   {
     id: 28,
-    english: "Hello, Suzy!",
-    chinese: "哈囉，蘇西！",
+    english: "Hello, Suzy! Hello, Peppa!",
+    chinese: "哈囉，蘇西！哈囉，佩佩！",
     videoId: "-qjzaeBNNOs",
-    startTime: 40,
-    endTime: 45,
+    startTime: 35,
+    endTime: 40,
     difficulty: 'easy',
-    chineseGuide: "Peppa 跟蘇西打招呼！Hello 是「哈囉」，見到朋友要開心地說 Hello 喔！"
+    chineseGuide: "Peppa 跟蘇西互相打招呼！Hello 是「哈囉」，見到朋友要開心地說 Hello 喔！"
   },
   {
     id: 29,
-    english: "Let's play in my bedroom.",
-    chinese: "我們去我房間玩吧。",
+    english: "Why don't you and Suzy go and play in your bedroom?",
+    chinese: "妳和蘇西何不去妳房間玩呢？",
     videoId: "-qjzaeBNNOs",
-    startTime: 58,
-    endTime: 64,
-    difficulty: 'easy',
-    chineseGuide: "Peppa 邀請蘇西去房間玩！Let's play 是「我們一起玩」，bedroom 是臥室喔！"
+    startTime: 55,
+    endTime: 61,
+    difficulty: 'medium',
+    chineseGuide: "豬媽咪建議她們去房間玩！Why don't you 是「你何不...」，bedroom 是臥室喔！"
   },
   {
     id: 30,
-    english: "I'm a doctor!",
-    chinese: "我是醫生！",
+    english: "I want to be a nurse!",
+    chinese: "我想當護士！",
     videoId: "-qjzaeBNNOs",
-    startTime: 168,
-    endTime: 173,
+    startTime: 157,
+    endTime: 162,
     difficulty: 'easy',
-    chineseGuide: "她們在玩扮家家酒！doctor 是醫生，I'm a 是「我是一個」，你想當什麼呢？"
+    chineseGuide: "她們在玩扮家家酒！nurse 是護士，I want to be 是「我想當」的意思喔！"
   },
   {
     id: 31,
-    english: "And I'm a nurse!",
-    chinese: "我是護士！",
+    english: "I want to be a doctor!",
+    chinese: "我想當醫生！",
     videoId: "-qjzaeBNNOs",
-    startTime: 173,
-    endTime: 178,
+    startTime: 160,
+    endTime: 165,
     difficulty: 'easy',
-    chineseGuide: "蘇西說她要當護士！nurse 是護士，And 是「而且」的意思，醫生和護士一起照顧病人喔！"
+    chineseGuide: "doctor 是醫生！I want to be 是「我想當」，你想當什麼呢？"
   },
 
   // === Hide and Seek (捉迷藏) ===
