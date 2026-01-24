@@ -2,15 +2,35 @@
 <html lang="zh-TW">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐷</text></svg>" />
+    <link rel="icon" href="/icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="theme-color" content="#FFB6C1" />
+    <meta name="theme-color" content="#e94560" />
+    <meta name="description" content="跟著佩佩豬學英文，適合兒童的英文學習 App" />
+    <link rel="manifest" href="/manifest.json" />
     <title>佩佩豬英文跟讀</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Register Service Worker with correct base path
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          // Get base path from current location
+          const basePath = location.pathname.replace(/\/[^/]*$/, '/');
+          navigator.serviceWorker.register(basePath + 'sw.js')
+            .then((registration) => {
+              console.log('SW registered:', registration.scope);
+            })
+            .catch((error) => {
+              console.log('SW registration failed:', error);
+            });
+        });
+      }
+    </script>
   </body>
 </html>

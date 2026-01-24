@@ -1,0 +1,26 @@
+{
+  "name": "佩佩豬英文跟讀",
+  "short_name": "佩佩豬英文",
+  "description": "跟著佩佩豬學英文，適合兒童的英文學習 App",
+  "start_url": "/kids-learning-english/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#1a1a2e",
+  "theme_color": "#e94560",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "kids"],
+  "lang": "zh-TW"
+}
