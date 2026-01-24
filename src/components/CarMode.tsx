@@ -462,7 +462,7 @@ export function CarMode() {
           {currentSentence.difficulty === 'easy' ? '簡單' :
            currentSentence.difficulty === 'medium' ? '中等' : '困難'}
         </span>
-        <span className="version-info">v1.5.1</span>
+        <span className="version-info">v1.5.2</span>
       </div>
 
       {/* 句子選擇彈窗 */}

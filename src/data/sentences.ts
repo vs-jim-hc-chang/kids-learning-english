@@ -703,35 +703,35 @@ export const sentences: Sentence[] = [
   },
   {
     id: 65,
-    english: "I found you!",
-    chinese: "我找到你了！",
+    english: "Found you!",
+    chinese: "找到你了！",
     videoId: "z0JlpI0KfVU",
     startTime: 61,
     endTime: 65,
     difficulty: 'easy',
-    chineseGuide: "找到人的時候大喊！found 是「找到」的過去式喔！"
+    chineseGuide: "玩捉迷藏找到人的時候大喊！Found you 是「找到你了」喔！"
   },
   {
     id: 66,
-    english: "Where is he?",
-    chinese: "他在哪裡？",
+    english: "Where can he be?",
+    chinese: "他到底在哪裡呢？",
     videoId: "z0JlpI0KfVU",
     startTime: 227,
     endTime: 233,
     difficulty: 'easy',
-    chineseGuide: "找人的時候問！Where is 是「在哪裡」的意思喔！"
+    chineseGuide: "找不到人的時候可以這樣問！Where can he be 是「他到底在哪裡」喔！"
   },
 
   // --- Playgroup ---
   {
     id: 67,
-    english: "I'm very good at painting!",
-    chinese: "我很會畫畫！",
+    english: "I'm very good. I will show him how to paint a flower.",
+    chinese: "我很厲害。我來教他怎麼畫一朵花。",
     videoId: "4cKnoK2KYPc",
     startTime: 163,
     endTime: 170,
-    difficulty: 'medium',
-    chineseGuide: "Peppa 很有自信！I'm good at 是「我很擅長」，painting 是畫畫喔！"
+    difficulty: 'hard',
+    chineseGuide: "Peppa 很有自信要教弟弟！I'm very good 是「我很厲害」，show him how to 是「教他怎麼」喔！"
   },
   {
     id: 68,
@@ -760,8 +760,8 @@ export const sentences: Sentence[] = [
     english: "I can do it!",
     chinese: "我可以的！",
     videoId: "HqYNifbUzzY",
-    startTime: 177,
-    endTime: 183,
+    startTime: 155,
+    endTime: 162,
     difficulty: 'easy',
     chineseGuide: "有自信的說法！I can do it 是「我做得到」，表示你很有信心喔！"
   },
@@ -804,32 +804,32 @@ export const sentences: Sentence[] = [
     english: "What is that sound?",
     chinese: "那是什麼聲音？",
     videoId: "J2DrjpYPjo4",
-    startTime: 152,
-    endTime: 158,
+    startTime: 147,
+    endTime: 153,
     difficulty: 'easy',
     chineseGuide: "聽到聲音好奇的問！What is that 是「那是什麼」，sound 是聲音喔！"
   },
   {
     id: 75,
-    english: "Wow! Look at that!",
-    chinese: "哇！看那個！",
+    english: "Look, there it is!",
+    chinese: "看，在那裡！",
     videoId: "J2DrjpYPjo4",
-    startTime: 168,
-    endTime: 174,
+    startTime: 156,
+    endTime: 162,
     difficulty: 'easy',
-    chineseGuide: "看到驚奇的東西！Wow 表示驚嘆，Look at that 是「看那個」喔！"
+    chineseGuide: "發現東西的時候說！Look 是「看」，there it is 是「在那裡」喔！"
   },
 
   // --- Beach ---
   {
     id: 76,
-    english: "Can we play in the water?",
-    chinese: "我們可以在水裡玩嗎？",
+    english: "My turn!",
+    chinese: "換我了！",
     videoId: "cu6xvXv-YTU",
-    startTime: 88,
-    endTime: 94,
+    startTime: 100,
+    endTime: 107,
     difficulty: 'easy',
-    chineseGuide: "想玩水的時候問！play in the water 是「在水裡玩」喔！"
+    chineseGuide: "輪到自己的時候說！My turn 是「換我了」，玩遊戲排隊時可以用喔！"
   },
   {
     id: 77,
@@ -881,8 +881,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: 81,
-    english: "If you jump in muddy puddles, you must wear your boots.",
-    chinese: "如果你要跳泥巴水坑，必須穿靴子。",
+    english: "Peppa, if you jump in muddy puddles, you must wear your boots.",
+    chinese: "佩佩，如果你要跳泥巴水坑，必須穿靴子。",
     videoId: "z9wHUokAyvI",
     startTime: 60,
     endTime: 66,
@@ -894,14 +894,14 @@ export const sentences: Sentence[] = [
     english: "Let's clean up quickly before Mommy sees the mess.",
     chinese: "趁媽咪看到之前趕快清理乾淨。",
     videoId: "z9wHUokAyvI",
-    startTime: 228,
-    endTime: 236,
+    startTime: 222,
+    endTime: 228,
     difficulty: 'hard',
     chineseGuide: "爸爸說要趕快清理！clean up 是「清理」，quickly 是「快速地」，mess 是「亂」喔！"
   },
   {
     id: 83,
-    english: "Look at the mess you're in!",
+    english: "And look at the mess you're in!",
     chinese: "看看你們弄得多髒！",
     videoId: "z9wHUokAyvI",
     startTime: 215,
@@ -913,13 +913,13 @@ export const sentences: Sentence[] = [
   // --- Mr Dinosaur Is Lost ---
   {
     id: 84,
-    english: "Don't worry, George. We'll find it.",
-    chinese: "別擔心，喬治。我們會找到的。",
+    english: "Don't worry, George. We'll find Mr Dinosaur.",
+    chinese: "別擔心，喬治。我們會找到恐龍先生的。",
     videoId: "8t1WdjVZbiE",
     startTime: 133,
     endTime: 140,
     difficulty: 'medium',
-    chineseGuide: "安慰小朋友的話！Don't worry 是「別擔心」，We'll find it 是「我們會找到」。爸媽可以用這句安慰小朋友喔！"
+    chineseGuide: "安慰小朋友的話！Don't worry 是「別擔心」，We'll find 是「我們會找到」。爸媽可以用這句安慰小朋友喔！"
   },
   {
     id: 85,
@@ -933,13 +933,13 @@ export const sentences: Sentence[] = [
   },
   {
     id: 86,
-    english: "Well done, Peppa! You really are good at finding things.",
-    chinese: "做得好，佩佩！你真的很會找東西。",
+    english: "Well done, Peppa! You really are a very good detective.",
+    chinese: "做得好，佩佩！你真的是個很棒的偵探。",
     videoId: "8t1WdjVZbiE",
     startTime: 250,
-    endTime: 258,
+    endTime: 260,
     difficulty: 'hard',
-    chineseGuide: "稱讚小朋友！Well done 是「做得好」，good at 是「擅長」。爸媽誇獎小朋友的時候可以說！"
+    chineseGuide: "稱讚小朋友！Well done 是「做得好」，detective 是「偵探」。爸媽誇獎小朋友的時候可以說！"
   },
 
   // --- Best Friend ---
@@ -982,8 +982,8 @@ export const sentences: Sentence[] = [
     english: "He'll be fine.",
     chinese: "他會沒事的。",
     videoId: "4cKnoK2KYPc",
-    startTime: 73,
-    endTime: 78,
+    startTime: 70,
+    endTime: 76,
     difficulty: 'easy',
     chineseGuide: "安慰別人的話！He'll be fine 是「他會沒事的」，可以用來安慰擔心的人喔！"
   },
@@ -1004,8 +1004,8 @@ export const sentences: Sentence[] = [
     english: "Would you like some help?",
     chinese: "你需要幫忙嗎？",
     videoId: "HqYNifbUzzY",
-    startTime: 173,
-    endTime: 179,
+    startTime: 166,
+    endTime: 173,
     difficulty: 'medium',
     chineseGuide: "主動提供幫助！Would you like 是「你想要嗎」，這是很有禮貌的問法喔！"
   },
@@ -1014,8 +1014,8 @@ export const sentences: Sentence[] = [
     english: "Don't worry, I've got you.",
     chinese: "別擔心，我扶著你。",
     videoId: "HqYNifbUzzY",
-    startTime: 182,
-    endTime: 188,
+    startTime: 179,
+    endTime: 185,
     difficulty: 'medium',
     chineseGuide: "扶著小朋友的時候說！I've got you 是「我抓著你」，讓小朋友安心喔！"
   },
@@ -1034,8 +1034,8 @@ export const sentences: Sentence[] = [
     english: "In future, you really must look where you are going.",
     chinese: "以後你真的要看路。",
     videoId: "HqYNifbUzzY",
-    startTime: 268,
-    endTime: 276,
+    startTime: 260,
+    endTime: 268,
     difficulty: 'hard',
     chineseGuide: "提醒小朋友注意安全！In future 是「以後」，look where you are going 是「看路」喔！"
   },
@@ -1068,8 +1068,8 @@ export const sentences: Sentence[] = [
     english: "Listen to the sounds of nature.",
     chinese: "聽聽大自然的聲音。",
     videoId: "J2DrjpYPjo4",
-    startTime: 145,
-    endTime: 152,
+    startTime: 142,
+    endTime: 150,
     difficulty: 'medium',
     chineseGuide: "欣賞大自然！Listen to 是「聽」，nature 是大自然。帶小朋友出去玩的時候可以說喔！"
   },
