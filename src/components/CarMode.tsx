@@ -37,6 +37,7 @@ export function CarMode() {
   const ttsRef = useRef<TextToSpeechRef>(null);
   const pauseTimerRef = useRef<number | null>(null);
   const pendingPlayRef = useRef(false);  // 追蹤是否有待播放的請求
+  const prevVideoIdRef = useRef<string | null>(null);  // 追蹤上一個影片 ID
 
   // 用 ref 追蹤最新狀態，避免 closure 問題
   const stepRef = useRef(step);
@@ -56,8 +57,13 @@ export function CarMode() {
   useEffect(() => {
     currentIndexRef.current = currentIndex;
     currentSentenceRef.current = sentences[currentIndex];
-    // 當句子改變時，重置 player ready 狀態（可能是不同影片）
-    setIsPlayerReady(false);
+
+    // 只有當影片 ID 改變時才重置 player ready 狀態
+    const newVideoId = sentences[currentIndex].videoId;
+    if (prevVideoIdRef.current !== null && prevVideoIdRef.current !== newVideoId) {
+      setIsPlayerReady(false);
+    }
+    prevVideoIdRef.current = newVideoId;
   }, [currentIndex]);
 
   const currentSentence = sentences[currentIndex];
@@ -353,7 +359,7 @@ export function CarMode() {
           {currentSentence.difficulty === 'easy' ? '簡單' :
            currentSentence.difficulty === 'medium' ? '中等' : '困難'}
         </span>
-        <span className="version-info">v1.2.0</span>
+        <span className="version-info">v1.2.1</span>
       </div>
 
       {/* 句子選擇彈窗 */}
