@@ -845,6 +845,7 @@ body {
   align-items: center;
   z-index: 1000;
   padding: 16px;
+  touch-action: none;  /* 背景不處理觸控，讓子元素處理 */
 }
 
 .sentence-selector-modal {
@@ -856,6 +857,8 @@ body {
   display: flex;
   flex-direction: column;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  overflow: hidden;  /* 確保圓角裁切 */
+  touch-action: none;  /* 讓子元素處理觸控 */
 }
 
 .selector-header {
@@ -896,7 +899,11 @@ body {
 .selector-list {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 8px;
+  -webkit-overflow-scrolling: touch;  /* iOS 順暢滾動 */
+  overscroll-behavior: contain;       /* 防止滾動穿透 */
+  touch-action: pan-y;                /* 只允許垂直滾動 */
 }
 
 .selector-item {
@@ -910,8 +917,9 @@ body {
   background: var(--white);
   cursor: pointer;
   text-align: left;
-  transition: all 0.2s;
+  transition: border-color 0.2s, background 0.2s;  /* 只 transition 必要屬性 */
   gap: 12px;
+  touch-action: manipulation;  /* 允許點擊和滾動 */
 }
 
 .selector-item:hover {

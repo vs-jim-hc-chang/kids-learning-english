@@ -462,13 +462,17 @@ export function CarMode() {
           {currentSentence.difficulty === 'easy' ? '簡單' :
            currentSentence.difficulty === 'medium' ? '中等' : '困難'}
         </span>
-        <span className="version-info">v1.5.0</span>
+        <span className="version-info">v1.5.1</span>
       </div>
 
       {/* 句子選擇彈窗 */}
       {showSelector && (
         <div className="sentence-selector-overlay" onClick={() => setShowSelector(false)}>
-          <div className="sentence-selector-modal" onClick={e => e.stopPropagation()}>
+          <div
+            className="sentence-selector-modal"
+            onClick={e => e.stopPropagation()}
+            onTouchMove={e => e.stopPropagation()}
+          >
             <div className="selector-header">
               <h2>選擇句子</h2>
               <button className="close-btn" onClick={() => setShowSelector(false)}>✕</button>
