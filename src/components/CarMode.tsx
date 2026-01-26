@@ -33,7 +33,11 @@ const REPEAT_PAUSE_DURATION: Record<Sentence['difficulty'], number> = {
   hard: 7
 };
 
-export function CarMode() {
+interface CarModeProps {
+  onSongMode?: () => void;
+}
+
+export function CarMode({ onSongMode }: CarModeProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [step, setStep] = useState<CarModeStepType>(CarModeStep.IDLE);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -373,6 +377,15 @@ export function CarMode() {
         <div className="header-row">
           <h1>🐷 佩佩豬英文跟讀</h1>
           <div className="header-buttons">
+            {onSongMode && (
+              <button
+                className="icon-btn song-mode-btn"
+                onClick={onSongMode}
+                title="歌曲模式"
+              >
+                🎵
+              </button>
+            )}
             <button
               className="icon-btn"
               onClick={toggleFullscreen}
@@ -462,7 +475,7 @@ export function CarMode() {
           {currentSentence.difficulty === 'easy' ? '簡單' :
            currentSentence.difficulty === 'medium' ? '中等' : '困難'}
         </span>
-        <span className="version-info">v1.5.2</span>
+        <span className="version-info">v1.6.0</span>
       </div>
 
       {/* 句子選擇彈窗 */}
