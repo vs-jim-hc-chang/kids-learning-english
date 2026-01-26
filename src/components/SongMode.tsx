@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { YouTubePlayer } from './YouTubePlayer';
 import type { YouTubePlayerRef } from './YouTubePlayer';
+import { TextToSpeech } from './TextToSpeech';
+import type { TextToSpeechRef } from './TextToSpeech';
 import { songs } from '../data/songs';
 import type { Song, SongVerse } from '../data/songs';
 
@@ -8,6 +10,7 @@ import type { Song, SongVerse } from '../data/songs';
 type SongStep =
   | 'SELECT'        // 選擇歌曲
   | 'SHOW_LYRICS'   // 顯示歌詞（準備播放）
+  | 'READ_LYRICS'   // 朗讀歌詞
   | 'PLAY_FIRST'    // 第一次播放（先聽）
   | 'PLAY_SECOND'   // 第二次播放（跟唱）
   | 'FULL_SONG';    // 播放完整歌曲
@@ -25,6 +28,7 @@ export function SongMode({ onBack }: SongModeProps) {
 
   // Refs
   const youtubeRef = useRef<YouTubePlayerRef>(null);
+  const ttsRef = useRef<TextToSpeechRef>(null);
   const stepRef = useRef(step);
   const verseIndexRef = useRef(currentVerseIndex);
 
@@ -87,16 +91,42 @@ export function SongMode({ onBack }: SongModeProps) {
     }
   }, [selectedSong]);
 
-  // 開始播放當前段落
-  const startPlaying = () => {
-    if (!isPlayerReady) return;
-    setStep('PLAY_FIRST');
-    youtubeRef.current?.playSegment();
+  // 開始教學流程：先朗讀歌詞
+  const startTeaching = async () => {
+    if (!currentVerse) return;
+
+    setStep('READ_LYRICS');
+
+    // 先朗讀中文說明
+    if (ttsRef.current) {
+      await ttsRef.current.speakText(`這句是：${currentVerse.chinese}`, 'zh');
+    }
+
+    // 短暫停頓
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    // 朗讀英文歌詞兩次
+    if (ttsRef.current) {
+      await ttsRef.current.speakText(currentVerse.lyrics, 'en');
+      await new Promise(resolve => setTimeout(resolve, 600));
+      await ttsRef.current.speakText(currentVerse.lyrics, 'en');
+    }
+
+    // 朗讀完成，開始播放影片
+    await new Promise(resolve => setTimeout(resolve, 800));
+
+    if (stepRef.current === 'READ_LYRICS') {
+      setStep('PLAY_FIRST');
+      youtubeRef.current?.playSegment();
+    }
   };
 
   // 手動下一段
   const goToNextVerse = () => {
     if (!selectedSong) return;
+    ttsRef.current?.stop();
+    youtubeRef.current?.pauseVideo();
+
     if (currentVerseIndex < selectedSong.verses.length - 1) {
       setCurrentVerseIndex(prev => prev + 1);
       setStep('SHOW_LYRICS');
@@ -111,6 +141,9 @@ export function SongMode({ onBack }: SongModeProps) {
 
   // 手動上一段
   const goToPrevVerse = () => {
+    ttsRef.current?.stop();
+    youtubeRef.current?.pauseVideo();
+
     if (currentVerseIndex > 0) {
       setCurrentVerseIndex(prev => prev - 1);
       setStep('SHOW_LYRICS');
@@ -119,6 +152,7 @@ export function SongMode({ onBack }: SongModeProps) {
 
   // 返回歌曲選擇
   const backToSelect = () => {
+    ttsRef.current?.stop();
     youtubeRef.current?.pauseVideo();
     setStep('SELECT');
     setSelectedSong(null);
@@ -206,6 +240,14 @@ export function SongMode({ onBack }: SongModeProps) {
         />
       </div>
 
+      {/* 隱藏的 TTS 元件 */}
+      <div style={{ display: 'none' }}>
+        <TextToSpeech
+          ref={ttsRef}
+          text={currentVerse?.lyrics || ''}
+        />
+      </div>
+
       {/* 歌詞顯示 */}
       <div className="lyrics-display">
         {step === 'FULL_SONG' ? (
@@ -228,11 +270,17 @@ export function SongMode({ onBack }: SongModeProps) {
             <span>📖 準備好了嗎？</span>
             <button
               className="play-button"
-              onClick={startPlaying}
+              onClick={startTeaching}
               disabled={!isPlayerReady}
             >
-              ▶️ 開始播放
+              ▶️ 開始學習
             </button>
+          </div>
+        )}
+        {step === 'READ_LYRICS' && (
+          <div className="status-reading">
+            <span className="status-icon">🗣️</span>
+            <span className="status-text">朗讀歌詞中...</span>
           </div>
         )}
         {step === 'PLAY_FIRST' && (

@@ -1405,6 +1405,7 @@ body {
   cursor: not-allowed;
 }
 
+.status-reading,
 .status-listen,
 .status-sing,
 .status-full {
@@ -1417,6 +1418,10 @@ body {
   font-size: 20px;
   font-weight: bold;
   animation: status-bounce 1s infinite;
+}
+
+.status-reading {
+  background: linear-gradient(135deg, #9b59b6, #8e44ad);
 }
 
 .status-listen {
