@@ -1,5 +1,5 @@
 // Service Worker for 佩佩豬英文跟讀 PWA
-const CACHE_NAME = 'peppa-english-v1.6.0';
+const CACHE_NAME = 'peppa-english-v1.6.1';
 
 // Get base path from service worker location
 const BASE_PATH = self.location.pathname.replace(/sw\.js$/, '');
