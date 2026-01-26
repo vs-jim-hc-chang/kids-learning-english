@@ -6,14 +6,19 @@ import type { TextToSpeechRef } from './TextToSpeech';
 import { songs } from '../data/songs';
 import type { Song, SongVerse } from '../data/songs';
 
-// 教學步驟
+// 教學步驟（跟 CarMode 一樣的流程）
 type SongStep =
   | 'SELECT'        // 選擇歌曲
-  | 'SHOW_LYRICS'   // 顯示歌詞（準備播放）
-  | 'READ_LYRICS'   // 朗讀歌詞
-  | 'PLAY_FIRST'    // 第一次播放（先聽）
-  | 'PLAY_SECOND'   // 第二次播放（跟唱）
+  | 'IDLE'          // 等待開始
+  | 'CHINESE_GUIDE' // 中文引導
+  | 'VIDEO_PLAY'    // 播放影片
+  | 'ENGLISH_TTS'   // 英文朗讀
+  | 'REPEAT_PAUSE'  // 等待跟讀
+  | 'COMPLETE'      // 完成
   | 'FULL_SONG';    // 播放完整歌曲
+
+// 跟讀等待時間（秒）
+const REPEAT_PAUSE_DURATION = 5;
 
 interface SongModeProps {
   onBack: () => void;
@@ -24,15 +29,21 @@ export function SongMode({ onBack }: SongModeProps) {
   const [selectedSong, setSelectedSong] = useState<Song | null>(null);
   const [currentVerseIndex, setCurrentVerseIndex] = useState(0);
   const [step, setStep] = useState<SongStep>('SELECT');
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isPlayerReady, setIsPlayerReady] = useState(false);
+  const [pauseCountdown, setPauseCountdown] = useState(0);
 
   // Refs
   const youtubeRef = useRef<YouTubePlayerRef>(null);
   const ttsRef = useRef<TextToSpeechRef>(null);
   const stepRef = useRef(step);
   const verseIndexRef = useRef(currentVerseIndex);
+  const isPlayingRef = useRef(isPlaying);
+  const pauseTimerRef = useRef<number | null>(null);
+  const selectedSongRef = useRef(selectedSong);
+  const pendingPlayRef = useRef(false);
 
-  // 同步 ref
+  // 同步 refs
   useEffect(() => {
     stepRef.current = step;
   }, [step]);
@@ -41,123 +52,255 @@ export function SongMode({ onBack }: SongModeProps) {
     verseIndexRef.current = currentVerseIndex;
   }, [currentVerseIndex]);
 
+  useEffect(() => {
+    isPlayingRef.current = isPlaying;
+  }, [isPlaying]);
+
+  useEffect(() => {
+    selectedSongRef.current = selectedSong;
+  }, [selectedSong]);
+
   // 當前段落
   const currentVerse: SongVerse | null = selectedSong
     ? selectedSong.verses[currentVerseIndex]
     : null;
 
+  const currentVerseRef = useRef(currentVerse);
+  useEffect(() => {
+    currentVerseRef.current = currentVerse;
+  }, [currentVerse]);
+
+  // 清除暫停計時器
+  const clearPauseTimer = useCallback(() => {
+    if (pauseTimerRef.current) {
+      clearInterval(pauseTimerRef.current);
+      pauseTimerRef.current = null;
+    }
+  }, []);
+
   // 選擇歌曲
   const handleSelectSong = (song: Song) => {
     setSelectedSong(song);
     setCurrentVerseIndex(0);
-    setStep('SHOW_LYRICS');
+    setStep('IDLE');
+    setIsPlaying(false);
     setIsPlayerReady(false);
   };
 
   // 播放器準備好
   const handlePlayerReady = useCallback(() => {
     setIsPlayerReady(true);
-  }, []);
-
-  // 片段播放完畢
-  const handleSegmentEnd = useCallback(() => {
-    const currentStep = stepRef.current;
-
-    if (currentStep === 'PLAY_FIRST') {
-      // 第一次播完，進入第二次
-      setStep('PLAY_SECOND');
-      // 稍等一下再播放第二次
-      setTimeout(() => {
-        youtubeRef.current?.playSegment();
-      }, 1000);
-    } else if (currentStep === 'PLAY_SECOND') {
-      // 第二次播完，進入下一段或完成
-      if (selectedSong && verseIndexRef.current < selectedSong.verses.length - 1) {
-        // 還有下一段
-        setCurrentVerseIndex(prev => prev + 1);
-        setStep('SHOW_LYRICS');
-      } else {
-        // 全部播完，播放完整歌曲
-        setStep('FULL_SONG');
-        setTimeout(() => {
-          youtubeRef.current?.playSegment();
-        }, 1500);
-      }
-    } else if (currentStep === 'FULL_SONG') {
-      // 完整歌曲播完，回到選擇
-      setStep('SELECT');
-      setSelectedSong(null);
-      setCurrentVerseIndex(0);
-    }
-  }, [selectedSong]);
-
-  // 開始教學流程：先朗讀歌詞
-  const startTeaching = async () => {
-    if (!currentVerse) return;
-
-    setStep('READ_LYRICS');
-
-    // 先朗讀中文說明
-    if (ttsRef.current) {
-      await ttsRef.current.speakText(`這句是：${currentVerse.chinese}`, 'zh');
-    }
-
-    // 短暫停頓
-    await new Promise(resolve => setTimeout(resolve, 500));
-
-    // 朗讀英文歌詞兩次
-    if (ttsRef.current) {
-      await ttsRef.current.speakText(currentVerse.lyrics, 'en');
-      await new Promise(resolve => setTimeout(resolve, 600));
-      await ttsRef.current.speakText(currentVerse.lyrics, 'en');
-    }
-
-    // 朗讀完成，開始播放影片
-    await new Promise(resolve => setTimeout(resolve, 800));
-
-    if (stepRef.current === 'READ_LYRICS') {
-      setStep('PLAY_FIRST');
+    // 如果有待播放的請求，立即播放
+    if (pendingPlayRef.current && stepRef.current === 'VIDEO_PLAY') {
+      pendingPlayRef.current = false;
       youtubeRef.current?.playSegment();
     }
-  };
+  }, []);
 
-  // 手動下一段
-  const goToNextVerse = () => {
-    if (!selectedSong) return;
-    ttsRef.current?.stop();
-    youtubeRef.current?.pauseVideo();
+  // 移動到下一段
+  const goToNext = useCallback(() => {
+    const song = selectedSongRef.current;
+    if (!song) return;
 
-    if (currentVerseIndex < selectedSong.verses.length - 1) {
+    if (verseIndexRef.current < song.verses.length - 1) {
       setCurrentVerseIndex(prev => prev + 1);
-      setStep('SHOW_LYRICS');
+      setStep('IDLE');
     } else {
-      // 最後一段，播放完整歌曲
+      // 全部播完，播放完整歌曲
+      setIsPlaying(false);
       setStep('FULL_SONG');
       setTimeout(() => {
         youtubeRef.current?.playSegment();
-      }, 500);
+      }, 1500);
     }
-  };
+  }, []);
+
+  // 步驟 4: 開始跟讀等待
+  const startRepeatPause = useCallback(() => {
+    setPauseCountdown(REPEAT_PAUSE_DURATION);
+    setStep('REPEAT_PAUSE');
+    clearPauseTimer();
+
+    let remaining = REPEAT_PAUSE_DURATION;
+    pauseTimerRef.current = window.setInterval(() => {
+      remaining -= 1;
+      setPauseCountdown(remaining);
+
+      if (remaining <= 0) {
+        clearPauseTimer();
+        if (isPlayingRef.current) {
+          goToNext();
+        }
+      }
+    }, 1000);
+  }, [clearPauseTimer, goToNext]);
+
+  // 步驟 3: 播放英文朗讀
+  const playEnglishTTS = useCallback(async () => {
+    if (!isPlayingRef.current) return;
+
+    const verse = currentVerseRef.current;
+    if (!verse) return;
+
+    setStep('ENGLISH_TTS');
+    if (ttsRef.current) {
+      // 朗讀兩次英文
+      await ttsRef.current.speakText(verse.lyrics, 'en');
+      if (!isPlayingRef.current) return;
+      await new Promise(resolve => setTimeout(resolve, 800));
+      if (!isPlayingRef.current) return;
+      await ttsRef.current.speakText(verse.lyrics, 'en');
+    }
+    // 開始跟讀等待時間
+    if (isPlayingRef.current) {
+      startRepeatPause();
+    }
+  }, [startRepeatPause]);
+
+  // 步驟 2: 影片播放結束後的回調
+  const handleSegmentEnd = useCallback(() => {
+    if (stepRef.current === 'VIDEO_PLAY' && isPlayingRef.current) {
+      // 開始英文朗讀
+      playEnglishTTS();
+    } else if (stepRef.current === 'FULL_SONG') {
+      // 完整歌曲播完
+      setStep('SELECT');
+      setSelectedSong(null);
+      setCurrentVerseIndex(0);
+      setIsPlaying(false);
+    }
+  }, [playEnglishTTS]);
+
+  // 步驟 1: 播放中文引導
+  const playChineseGuide = useCallback(async () => {
+    if (!isPlayingRef.current) return;
+
+    const verse = currentVerseRef.current;
+    if (!verse) return;
+
+    setStep('CHINESE_GUIDE');
+    if (ttsRef.current) {
+      await ttsRef.current.speakText(verse.chineseGuide, 'zh');
+    }
+
+    // 檢查是否仍在播放
+    if (!isPlayingRef.current) return;
+
+    // 短暫停頓後播放影片
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    if (!isPlayingRef.current) return;
+
+    setStep('VIDEO_PLAY');
+  }, []);
+
+  // 開始播放流程
+  const startPlayback = useCallback(async () => {
+    setIsPlaying(true);
+    pendingPlayRef.current = false;
+    await playChineseGuide();
+
+    // 檢查是否仍在播放
+    if (!isPlayingRef.current) return;
+
+    // 播放影片片段
+    if (youtubeRef.current) {
+      if (!isPlayerReady) {
+        pendingPlayRef.current = true;
+      } else {
+        youtubeRef.current.playSegment();
+      }
+    }
+  }, [playChineseGuide, isPlayerReady]);
+
+  // 當步驟為 IDLE 且正在播放時，自動開始下一輪
+  useEffect(() => {
+    if (step === 'IDLE' && isPlaying && selectedSong) {
+      const timeoutId = setTimeout(() => {
+        if (isPlayingRef.current && stepRef.current === 'IDLE') {
+          startPlayback();
+        }
+      }, 0);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [step, isPlaying, selectedSong, startPlayback]);
+
+  // 暫停/繼續
+  const togglePlayPause = useCallback(() => {
+    if (isPlaying) {
+      setIsPlaying(false);
+      pendingPlayRef.current = false;
+      clearPauseTimer();
+      ttsRef.current?.stop();
+      youtubeRef.current?.pauseVideo();
+    } else {
+      if (step === 'IDLE') {
+        startPlayback();
+      } else {
+        setIsPlaying(true);
+        // 根據當前步驟恢復
+        if (step === 'VIDEO_PLAY') {
+          if (isPlayerReady) {
+            youtubeRef.current?.playSegment();
+          } else {
+            pendingPlayRef.current = true;
+          }
+        } else if (step === 'REPEAT_PAUSE') {
+          startRepeatPause();
+        }
+      }
+    }
+  }, [isPlaying, step, isPlayerReady, clearPauseTimer, startPlayback, startRepeatPause]);
+
+  // 手動下一段
+  const skipToNext = useCallback(() => {
+    clearPauseTimer();
+    ttsRef.current?.stop();
+    youtubeRef.current?.pauseVideo();
+    goToNext();
+  }, [clearPauseTimer, goToNext]);
 
   // 手動上一段
-  const goToPrevVerse = () => {
+  const skipToPrev = useCallback(() => {
+    clearPauseTimer();
     ttsRef.current?.stop();
     youtubeRef.current?.pauseVideo();
 
-    if (currentVerseIndex > 0) {
+    if (verseIndexRef.current > 0) {
       setCurrentVerseIndex(prev => prev - 1);
-      setStep('SHOW_LYRICS');
+      setStep('IDLE');
     }
-  };
+  }, [clearPauseTimer]);
 
   // 返回歌曲選擇
   const backToSelect = () => {
+    clearPauseTimer();
     ttsRef.current?.stop();
     youtubeRef.current?.pauseVideo();
+    setIsPlaying(false);
     setStep('SELECT');
     setSelectedSong(null);
     setCurrentVerseIndex(0);
   };
+
+  // 步驟描述
+  const stepDescriptions: Record<SongStep, string> = {
+    'SELECT': '',
+    'IDLE': '準備開始',
+    'CHINESE_GUIDE': '媽媽引導中...',
+    'VIDEO_PLAY': '播放影片片段...',
+    'ENGLISH_TTS': '英文朗讀中...',
+    'REPEAT_PAUSE': `跟讀時間 (${pauseCountdown}秒)`,
+    'COMPLETE': '完成！',
+    'FULL_SONG': '🎉 完整歌曲播放中...'
+  };
+
+  // 清理
+  useEffect(() => {
+    return () => {
+      clearPauseTimer();
+    };
+  }, [clearPauseTimer]);
 
   // 渲染歌曲選擇畫面
   if (step === 'SELECT') {
@@ -264,43 +407,8 @@ export function SongMode({ onBack }: SongModeProps) {
       </div>
 
       {/* 狀態提示 */}
-      <div className="play-status">
-        {step === 'SHOW_LYRICS' && (
-          <div className="status-ready">
-            <span>📖 準備好了嗎？</span>
-            <button
-              className="play-button"
-              onClick={startTeaching}
-              disabled={!isPlayerReady}
-            >
-              ▶️ 開始學習
-            </button>
-          </div>
-        )}
-        {step === 'READ_LYRICS' && (
-          <div className="status-reading">
-            <span className="status-icon">🗣️</span>
-            <span className="status-text">朗讀歌詞中...</span>
-          </div>
-        )}
-        {step === 'PLAY_FIRST' && (
-          <div className="status-listen">
-            <span className="status-icon">🎧</span>
-            <span className="status-text">第 1 次：先聽一遍</span>
-          </div>
-        )}
-        {step === 'PLAY_SECOND' && (
-          <div className="status-sing">
-            <span className="status-icon">🎤</span>
-            <span className="status-text">第 2 次：跟著唱！</span>
-          </div>
-        )}
-        {step === 'FULL_SONG' && (
-          <div className="status-full">
-            <span className="status-icon">🎉</span>
-            <span className="status-text">完整歌曲播放中...</span>
-          </div>
-        )}
+      <div className={`song-status step-${step.toLowerCase().replace('_', '-')}`}>
+        {stepDescriptions[step]}
       </div>
 
       {/* 控制按鈕 */}
@@ -309,21 +417,29 @@ export function SongMode({ onBack }: SongModeProps) {
           <>
             <button
               className="control-btn prev"
-              onClick={goToPrevVerse}
+              onClick={skipToPrev}
               disabled={currentVerseIndex === 0}
             >
-              ⬅️ 上一段
+              ⏮️ 上一段
+            </button>
+            <button
+              className={`control-btn main ${isPlaying ? 'playing' : ''}`}
+              onClick={togglePlayPause}
+            >
+              {isPlaying ? '⏸️ 暫停' : '▶️ 開始播放'}
             </button>
             <button
               className="control-btn next"
-              onClick={goToNextVerse}
+              onClick={skipToNext}
+              disabled={currentVerseIndex >= (selectedSong?.verses.length || 1) - 1}
             >
-              {currentVerseIndex === (selectedSong?.verses.length || 0) - 1
-                ? '🎉 完整播放'
-                : '下一段 ➡️'}
+              ⏭️ 下一段
             </button>
           </>
         )}
+      </div>
+
+      <div className="song-controls secondary">
         <button className="control-btn back" onClick={backToSelect}>
           🎵 換首歌
         </button>
