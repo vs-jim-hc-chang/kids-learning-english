@@ -116,7 +116,7 @@ export const songs: Song[] = [
         chinese: "數到三，大喊 Blippi 垃圾車！",
         chineseGuide: "這一句要學一個新的動作單字：yell，大喊的意思。yell 比 say 說還要大聲很多喔！跟我說：yell。很好！on the count of three，count 是數數，on the count of three 就是「數到三的時候」。所以整句是：數到三的時候，大喊 Blippi garbage truck！還記得 garbage truck 嗎？垃圾車！等一下 Blippi 會數 one, two, three，數到 three 你就要大聲 yell 出來喔！來聽這句怎麼說！",
         startTime: 6,
-        endTime: 16
+        endTime: 12
       },
       {
         id: 3,
@@ -124,23 +124,47 @@ export const songs: Song[] = [
         chinese: "一...二...三！Blippi 垃圾車！",
         chineseGuide: "我們來複習數字！one 是一，two 是二，three 是三。跟我說：one, two, three。很好！再說一次，這次大聲一點：one, two, three。太棒了！數完 three 之後，要大聲喊 Blippi garbage trucks！還記得剛才學的 yell 嗎？大喊！現在就是要 yell 的時候！準備好了嗎？來聽 Blippi 數數，然後跟著一起大聲喊！",
         startTime: 12,
-        endTime: 22
+        endTime: 20
       },
       {
         id: 4,
-        lyrics: "I'm a garbage truck, picking up trash all day",
-        chinese: "我是垃圾車，整天都在收垃圾",
-        chineseGuide: "這一句有一個很實用的片語：pick up，撿起來的意思。pick up 加了 ing 變成 picking up，正在撿。跟我說：picking up。很好！trash 是垃圾，跟 garbage 一樣的意思。跟我說：trash。很棒！all day 是「整天」的意思，從早上到晚上。所以 I'm a garbage truck, picking up trash all day 就是「我是垃圾車，整天都在撿垃圾」。垃圾車每天都很忙，把大家的垃圾都收走，讓城市乾乾淨淨！來聽這句怎麼唱！",
-        startTime: 28,
-        endTime: 40
+        lyrics: "Garbage trucks, garbage trucks, driving through the town",
+        chinese: "垃圾車，垃圾車，開過城鎮",
+        chineseGuide: "這是歌曲的副歌部分喔！很好記！Garbage trucks, garbage trucks 就是「垃圾車，垃圾車」，重複兩次。然後 driving through the town，driving 是開車，through 是穿過，town 是城鎮。跟我說：town。很好！所以整句是：垃圾車，垃圾車，開過城鎮。垃圾車每天都要開遍整個城鎮收垃圾呢！來聽這句怎麼唱！",
+        startTime: 25,
+        endTime: 33
       },
       {
         id: 5,
-        lyrics: "Beep beep beep, get out of my way!",
-        chinese: "嗶嗶嗶，讓開讓開！",
-        chineseGuide: "這一句有一個很重要的片語：get out of my way，讓開的意思。get out 是出去、離開，my way 是我的路，所以 get out of my way 就是「離開我的路」，也就是「讓開」！跟我說：get out of my way。很好！Beep beep beep 是垃圾車倒車時發出的聲音，在告訴大家：小心，我要倒車了！所以整句是垃圾車在說：嗶嗶嗶，請讓開，我要工作了！來聽這句怎麼唱！",
+        lyrics: "Picking cans above the ground, garbage trucks",
+        chinese: "把垃圾桶舉起來，垃圾車",
+        chineseGuide: "這一句有一個很有畫面的動作！picking 是撿、拿起來的意思。cans 是垃圾桶。跟我說：cans。很好！above the ground 是「離開地面」的意思，就是把垃圾桶舉高高！你有沒有看過垃圾車把垃圾桶舉起來倒垃圾？那個動作就是 picking cans above the ground！最後再說一次 garbage trucks，垃圾車。來聽這句怎麼唱！",
+        startTime: 33,
+        endTime: 40
+      },
+      {
+        id: 6,
+        lyrics: "Sometimes when I wake up early in the morning, I hear a monster sound",
+        chinese: "有時候我一大早醒來，我聽到一個怪物的聲音",
+        chineseGuide: "這一句在說垃圾車的聲音喔！sometimes 是「有時候」，wake up 是「醒來」，early in the morning 是「一大早」。跟我說：wake up。很好！然後 I hear 是「我聽到」，a monster sound 是「一個怪物的聲音」。monster 是怪物。跟我說：monster。很棒！垃圾車的聲音很大聲，就像怪物一樣！來聽這句怎麼唱！",
         startTime: 40,
-        endTime: 50
+        endTime: 47
+      },
+      {
+        id: 7,
+        lyrics: "I look at the window and there's a garbage truck",
+        chinese: "我看向窗戶，有一輛垃圾車",
+        chineseGuide: "這一句很簡單！I look at 是「我看」，the window 是「窗戶」。跟我說：window。很好！and there's 是「然後有」的意思，a garbage truck 我們學過了，垃圾車！所以整句是：我看向窗戶，有一輛垃圾車！原來剛才的怪物聲音是垃圾車啊！來聽這句怎麼唱！",
+        startTime: 47,
+        endTime: 55
+      },
+      {
+        id: 8,
+        lyrics: "The garbage man drives up in the garbage truck and takes that garbage up",
+        chinese: "垃圾車司機開著垃圾車，把垃圾收走",
+        chineseGuide: "這一句介紹垃圾車司機！garbage man 就是垃圾車司機，收垃圾的人。跟我說：garbage man。很好！drives up 是「開過來」，in the garbage truck 是「開著垃圾車」。然後 takes that garbage up 是「把垃圾收走」。takes up 是「拿走、收走」的意思。垃圾車司機每天都很辛苦，把大家的垃圾都收走！來聽這句怎麼唱！",
+        startTime: 84,
+        endTime: 92
       }
     ]
   },
@@ -154,35 +178,67 @@ export const songs: Song[] = [
     verses: [
       {
         id: 1,
-        lyrics: "If you like fire trucks, yell Blippi fire truck!",
-        chinese: "如果你喜歡消防車，大喊 Blippi 消防車！",
-        chineseGuide: "這首歌要學 fire truck，消防車。fire 是火，像蠟燭上面的火焰。跟我說：fire。很好！truck 是卡車，fire truck 合起來就是消防車，救火的車。跟我說：fire truck。太棒了！歌詞說 If you like fire trucks，If 是「如果」，you like 是「你喜歡」。還記得 yell 嗎？是大喊的意思！如果你喜歡消防車，就要大聲 yell 出來：Blippi fire truck！來聽 Blippi 怎麼唱這句！",
+        lyrics: "If you like fire trucks, on the count of three, yell Blippi fire truck!",
+        chinese: "如果你喜歡消防車，數到三，大喊 Blippi 消防車！",
+        chineseGuide: "這首歌要學 fire truck，消防車。fire 是火，像蠟燭上面的火焰。跟我說：fire。很好！truck 是卡車，fire truck 合起來就是消防車，救火的車。跟我說：fire truck。太棒了！歌詞說 If you like fire trucks，If 是「如果」，you like 是「你喜歡」。還記得 on the count of three 嗎？數到三的時候！還有 yell 是大喊的意思！來聽 Blippi 怎麼唱這句！",
         startTime: 0,
-        endTime: 12
+        endTime: 8
       },
       {
         id: 2,
-        lyrics: "One... two... three! Blippi fire truck!",
+        lyrics: "One... two... three! Blippi fire trucks!",
         chinese: "一...二...三！Blippi 消防車！",
-        chineseGuide: "又要數數了！還記得數字嗎？one 是一，two 是二，three 是三。跟我數一次：one, two, three。很好！這次要比剛才更大聲喔，因為消防車很勇敢，要去救火！消防員是英雄，消防車也是英雄車！數完 one, two, three 之後，要大聲 yell：Blippi fire truck！還記得 fire truck 嗎？消防車！準備好了嗎？來聽 Blippi 數，然後一起大聲喊！",
+        chineseGuide: "又要數數了！還記得數字嗎？one 是一，two 是二，three 是三。跟我數一次：one, two, three。很好！這次要比剛才更大聲喔，因為消防車很勇敢，要去救火！消防員是英雄，消防車也是英雄車！數完 one, two, three 之後，要大聲 yell：Blippi fire trucks！準備好了嗎？來聽 Blippi 數，然後一起大聲喊！",
         startTime: 8,
-        endTime: 18
+        endTime: 17
       },
       {
         id: 3,
-        lyrics: "I'm a fire truck, here to save the day",
-        chinese: "我是消防車，來拯救大家",
-        chineseGuide: "這一句有一個很棒的片語：save the day，拯救大家的意思。save 是拯救、救，the day 在這裡不是白天的意思喔，save the day 是一個片語，表示「解決問題、拯救大家」。跟我說：save the day。很好！here to 是「來這裡要」的意思。所以 I'm a fire truck, here to save the day 就是「我是消防車，我來拯救大家」。當有火災的時候，消防車就會趕快出動，把火撲滅，保護大家！來聽這句怎麼唱！",
-        startTime: 25,
-        endTime: 38
+        lyrics: "Fire truck, fire truck, I wish I could ride a fire truck",
+        chinese: "消防車，消防車，我希望能坐上消防車",
+        chineseGuide: "這是歌曲的副歌部分！Fire truck, fire truck 重複兩次，很好記！然後 I wish I could，I wish 是「我希望」，I could 是「我能夠」。跟我說：I wish。很好！ride 是「騎、坐」的意思，ride a fire truck 就是「坐上消防車」。你是不是也想坐上消防車呢？I wish I could ride a fire truck！來聽這句怎麼唱！",
+        startTime: 29,
+        endTime: 40
       },
       {
         id: 4,
-        lyrics: "Wee-oo wee-oo, I'm on my way!",
-        chinese: "嗚咿嗚咿，我來了！",
-        chineseGuide: "這一句有一個很實用的片語：I'm on my way，我在路上、我來了的意思。on my way 是「在我的路上」，表示正在去的途中。跟我說：I'm on my way。很好！再說一次：I'm on my way。太棒了！Wee-oo wee-oo 是消防車的警報聲，叫做 siren，告訴路上的車子：消防車來了，請讓路！所以整句是消防車在說：警報聲，我在路上了，我來救火了！來聽最後這句怎麼唱！",
-        startTime: 38,
-        endTime: 50
+        lyrics: "I wish I could wake up in the fire station to the sound of the fire bell",
+        chinese: "我希望能在消防局醒來，聽到消防鐘的聲音",
+        chineseGuide: "這一句有很多新單字喔！fire station 是消防局，消防員住的地方。跟我說：fire station。很好！wake up 還記得嗎？是醒來的意思。fire bell 是消防鐘，有火災的時候會響的鈴聲。跟我說：fire bell。很棒！所以整句是：我希望能在消防局醒來，聽到消防鐘的聲音。想像一下，住在消防局裡面，一聽到鈴聲就要出動救火！來聽這句怎麼唱！",
+        startTime: 43,
+        endTime: 51
+      },
+      {
+        id: 5,
+        lyrics: "I'd slide down the fire pole and hop onto the fire truck",
+        chinese: "我會滑下消防滑竿，跳上消防車",
+        chineseGuide: "這一句超酷的！slide down 是「滑下來」的意思。跟我說：slide down。很好！fire pole 是消防滑竿，就是消防局裡面那根可以滑下來的柱子！消防員聽到鈴聲，就會從樓上滑下來，很快很快！然後 hop onto 是「跳上」的意思。跟我說：hop onto。很棒！所以整句是：我會滑下消防滑竿，然後跳上消防車！來聽這句怎麼唱！",
+        startTime: 51,
+        endTime: 58
+      },
+      {
+        id: 6,
+        lyrics: "People see the truck come, they put their hands over their ears, the siren is so loud",
+        chinese: "人們看到消防車來，他們把手摀住耳朵，警報聲好大聲",
+        chineseGuide: "這一句在說消防車的警報聲！people 是人們，see the truck come 是「看到消防車來」。然後 put their hands over their ears，put 是放，hands 是手，over 是在上面，ears 是耳朵。跟我說：ears。很好！為什麼要摀住耳朵呢？因為 the siren is so loud！siren 是警報聲，就是消防車發出的聲音。跟我說：siren。很棒！so loud 是「好大聲」的意思。來聽這句怎麼唱！",
+        startTime: 70,
+        endTime: 83
+      },
+      {
+        id: 7,
+        lyrics: "I wish I could hook the hose to the hydrant, spray the water on the fire",
+        chinese: "我希望能把水管接到消防栓，把水噴到火上",
+        chineseGuide: "這一句在說滅火的動作！hook 是「鉤住、接上」的意思。hose 是水管，就是消防員用來噴水的管子。跟我說：hose。很好！hydrant 是消防栓，路邊那個紅色的東西，可以接水管。跟我說：hydrant。很棒！然後 spray 是噴的意思，spray the water on the fire 就是「把水噴到火上」。跟我說：spray。太棒了！來聽這句怎麼唱！",
+        startTime: 101,
+        endTime: 112
+      },
+      {
+        id: 8,
+        lyrics: "Once the fire is all put out, everyone will scream and shout: Great job, Mr. Fireman!",
+        chinese: "火撲滅之後，大家會大聲歡呼：消防員先生做得好！",
+        chineseGuide: "最後一句啦！once the fire is all put out，once 是「一旦」，put out 是「撲滅」的意思。跟我說：put out。很好！然後 everyone will scream and shout，scream 和 shout 都是「大叫、歡呼」的意思。跟我說：scream and shout。很棒！最後大家會說什麼？Great job, Mr. Fireman！Great job 是「做得好」，Mr. Fireman 是「消防員先生」。fireman 就是消防員。跟我說：fireman。太棒了！我們來複習今天學的單字：fire truck 消防車，fire station 消防局，siren 警報聲，hose 水管，fireman 消防員。來聽最後這句！",
+        startTime: 129,
+        endTime: 142
       }
     ]
   }
