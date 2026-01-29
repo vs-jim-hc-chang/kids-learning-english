@@ -30,67 +30,27 @@ export const songs: Song[] = [
     verses: [
       {
         id: 1,
-        lyrics: "Excavator! Hey dirt, see you later! I'm an excavator!",
-        chinese: "挖土機！嘿泥土，再見啦！我是挖土機！",
-        chineseGuide: "今天我們要學一個很長的英文字喔！這個字是 excavator，意思是挖土機。我們來把它拆開：Ex，ca，va，tor。跟我說一次：excavator。很好！再說一次：excavator。太棒了！這首歌裡面，Blippi 會跟泥土說 Hey dirt, see you later。dirt 是泥土，see you later 是再見的意思。最後一句 I'm an excavator，I'm 是我是，所以整句是「我是挖土機」。現在我們來聽 Blippi 怎麼唱，聽的時候注意 excavator 這個字喔！",
-        startTime: 9,
-        endTime: 20
+        lyrics: "Excavator! Hey dirt, see you later! I'm an excavator!\nI've got a great big arm and a great big boom\nIf I start digging now, I'll be done real soon\nI'm a dirt separator, I'm an excavator!",
+        chinese: "挖土機！嘿泥土，再見啦！我是挖土機！\n我有一個大手臂和大吊臂\n如果我現在開始挖，很快就會完成\n我是泥土分離器，我是挖土機！",
+        chineseGuide: "這一段在介紹挖土機！它有大手臂和吊臂，挖土很快。注意聽押韻的字喔！",
+        startTime: 10,
+        endTime: 35
       },
       {
         id: 2,
-        lyrics: "I've got a great big arm and a great big boom",
-        chinese: "我有一個大手臂和大吊臂",
-        chineseGuide: "這一句我們要學兩個身體部位的單字。第一個是 arm，手臂。摸摸你的手臂，這就是 arm。跟我說：arm。很好！第二個字是 boom，是挖土機的吊臂，就是那個長長可以伸出去的部分。跟我說：boom。很棒！歌詞說 I've got，意思是「我有」。a great big arm，great big 是「好大好大」的意思。所以整句是說：我有一個好大的手臂，還有一個好大的吊臂。現在來聽 Blippi 唱，注意聽 arm 和 boom 這兩個字！",
-        startTime: 20,
-        endTime: 28
-      },
-      {
-        id: 3,
-        lyrics: "If I start digging now, I'll be done real soon",
-        chinese: "如果我現在開始挖，很快就會完成",
-        chineseGuide: "這一句有一個很重要的動作單字：digging，就是挖土的意思。dig 是挖，加上 ing 變成 digging，正在挖。跟我說：digging。很好！再說一次：digging。太棒了！歌詞說 If I start digging now，If 是如果，start 是開始，now 是現在。所以是「如果我現在開始挖土」。然後 I'll be done real soon，done 是完成，real soon 是很快很快。為什麼挖土機挖這麼快呢？因為它的 arm 好大，還記得 arm 嗎？現在來聽這句怎麼唱！",
-        startTime: 24,
-        endTime: 32
-      },
-      {
-        id: 4,
-        lyrics: "I'm a dirt separator, I'm an excavator!",
-        chinese: "我是泥土分離器，我是挖土機！",
-        chineseGuide: "這一句有一個新單字：separator。se，pa，ra，tor。separator 是分離器，可以把東西分開的機器。跟我說：separator。很好！你有沒有發現，separator 和 excavator 聽起來很像？都是 tor 結尾。這叫做押韻，唱起來特別好聽。我們來試試看：separator，excavator。很棒！dirt separator 就是泥土分離器，因為挖土機可以把泥土從地上分開，挖到別的地方去。現在來聽 Blippi 唱這句，注意聽押韻的部分！",
-        startTime: 28,
-        endTime: 36
-      },
-      {
-        id: 5,
-        lyrics: "I've got a big old bucket and I scoop all the time",
-        chinese: "我有一個大鏟子，一直在挖",
-        chineseGuide: "這一句有兩個新單字要學喔！第一個是 bucket，挖土機前面那個大大的鏟斗，像一個大碗。跟我說：bucket。很好！第二個字是 scoop，舀的意思，就像用湯匙舀東西的動作。跟我說：scoop。很棒！還記得 I've got 嗎？是「我有」的意思。a big old bucket，這裡的 old 不是老的意思喔，a big old 是一種說法，表示「好大一個」。all the time 是「一直」的意思。所以整句是：我有一個大鏟斗，一直在舀土。來聽這句怎麼唱！",
+        lyrics: "I've got a big old bucket and I scoop all the time\nDigging holes in the ground, wonder what I'll find\nI'm an earth investigator, I'm an excavator!",
+        chinese: "我有一個大鏟斗，一直在挖\n在地上挖洞，不知道會找到什麼\n我是地球調查員，我是挖土機！",
+        chineseGuide: "挖土機有大鏟斗，一直在挖洞找東西，像在調查地球的秘密！",
         startTime: 36,
-        endTime: 44
-      },
-      {
-        id: 6,
-        lyrics: "Digging holes in the ground, wonder what I'll find",
-        chinese: "在地上挖洞，不知道會找到什麼",
-        chineseGuide: "還記得 digging 嗎？是挖土的意思。這一句說 digging holes，holes 是洞，所以是「挖洞」。跟我說：holes。很好！in the ground，ground 是地面，所以 in the ground 是「在地上」。跟我說：ground。很棒！然後 wonder 是一個很有趣的字，意思是「好奇、想知道」。what I'll find 是「我會找到什麼」。挖土機在想：我挖一挖，會找到什麼呢？也許是石頭，也許是寶藏！這就是 wonder 的感覺。來聽這句怎麼唱！",
-        startTime: 39,
         endTime: 50
       },
       {
-        id: 7,
-        lyrics: "I roll on tracks to get to where I need to be",
-        chinese: "我用履帶移動到我需要去的地方",
-        chineseGuide: "你知道嗎？挖土機沒有輪子喔！它用履帶移動。履帶的英文是 tracks，就是那個像坦克車一樣繞一圈的帶子。跟我說：tracks。很好！roll 是滾動的意思，I roll on tracks 就是「我用履帶滾動」。跟我說：roll。很棒！to get to 是「到達」的意思，where I need to be 是「我需要去的地方」。履帶很厲害喔，可以在泥巴地、沙地上走，都不會滑倒！來聽 Blippi 唱這句，注意聽 tracks 和 roll 這兩個字！",
-        startTime: 58,
-        endTime: 70
-      },
-      {
-        id: 8,
-        lyrics: "I'm an excavator! Excavator!",
-        chinese: "我是挖土機！挖土機！",
-        chineseGuide: "最後一句啦！還記得我們一開始學的那個長長的字嗎？excavator，挖土機！我們來複習一下今天學的單字：excavator 挖土機，arm 手臂，boom 吊臂，digging 挖土，bucket 鏟斗，scoop 舀，tracks 履帶。你學了好多單字，太厲害了！現在這一句 I'm an excavator 就是「我是挖土機」，要大聲唱出來喔！來聽最後這句，然後跟著一起唱！",
-        startTime: 65,
-        endTime: 80
+        id: 3,
+        lyrics: "Oh can't you see that I don't have feet?\nNo feet? How do you get around?\nI roll on tracks to get to where I need to be\nI'm an excavator! Excavator!",
+        chinese: "你沒看到嗎，我沒有腳？\n沒有腳？那你怎麼移動？\n我用履帶滾動，到達我需要去的地方\n我是挖土機！挖土機！",
+        chineseGuide: "這段是對話！挖土機沒有腳，但它用履帶移動，像坦克車一樣！最後跟著一起唱！",
+        startTime: 50,
+        endTime: 77
       }
     ]
   },
