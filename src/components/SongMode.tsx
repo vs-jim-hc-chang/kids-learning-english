@@ -139,15 +139,16 @@ export function SongMode({ onBack }: SongModeProps) {
     }
   }, [startRepeatPause]);
 
-  // 播放下一句（英文朗讀 → 中文教學 → 下一句或播放影片）
-  const playNextLine = useCallback(async () => {
+  // 播放指定句子（英文朗讀 → 中文教學 → 下一句或播放影片）
+  const playLine = useCallback(async (lineIdx: number) => {
     if (!isPlayingRef.current) return;
     const verse = currentVerseRef.current;
     if (!verse) return;
 
-    const lineIdx = lineIndexRef.current;
     const line = verse.lines[lineIdx];
     if (!line) return;
+
+    setCurrentLineIndex(lineIdx);
 
     // 步驟 1: 英文朗讀
     setStep('LINE_ENGLISH');
@@ -171,8 +172,8 @@ export function SongMode({ onBack }: SongModeProps) {
 
     // 檢查是否還有下一句
     if (lineIdx < verse.lines.length - 1) {
-      setCurrentLineIndex(prev => prev + 1);
-      // 繼續下一句（通過 useEffect 觸發）
+      // 遞歸播放下一句
+      await playLine(lineIdx + 1);
     } else {
       // 所有句子教完，播放影片
       setStep('VIDEO_PLAY');
@@ -189,21 +190,13 @@ export function SongMode({ onBack }: SongModeProps) {
   // 開始播放流程
   const startPlayback = useCallback(async () => {
     setIsPlaying(true);
-    setCurrentLineIndex(0);
     pendingPlayRef.current = false;
 
     // 等待狀態更新後開始
     setTimeout(() => {
-      playNextLine();
+      playLine(0);
     }, 100);
-  }, [playNextLine]);
-
-  // 當 lineIndex 改變且在播放中時，繼續下一句
-  useEffect(() => {
-    if (isPlaying && (step === 'LINE_ENGLISH' || step === 'LINE_TEACHING') && currentLineIndex > 0) {
-      playNextLine();
-    }
-  }, [currentLineIndex]);
+  }, [playLine]);
 
   // 當步驟為 IDLE 且正在播放時，自動開始
   useEffect(() => {
