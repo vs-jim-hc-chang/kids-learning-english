@@ -32,7 +32,7 @@ export const songs: Song[] = [
         id: 1,
         lyrics: "Excavator! Hey dirt, see you later! I'm an excavator!\nI've got a great big arm and a great big boom\nIf I start digging now, I'll be done real soon\nI'm a dirt separator, I'm an excavator!",
         chinese: "挖土機！嘿泥土，再見啦！我是挖土機！\n我有一個大手臂和大吊臂\n如果我現在開始挖，很快就會完成\n我是泥土分離器，我是挖土機！",
-        chineseGuide: "這一段在介紹挖土機！它有大手臂和吊臂，挖土很快。注意聽押韻的字喔！",
+        chineseGuide: "這一段介紹挖土機！dirt 是泥土，arm 是手臂，boom 是吊臂，digging 是挖土。separator 和 excavator 押韻，注意聽！",
         startTime: 10,
         endTime: 35
       },
@@ -40,7 +40,7 @@ export const songs: Song[] = [
         id: 2,
         lyrics: "I've got a big old bucket and I scoop all the time\nDigging holes in the ground, wonder what I'll find\nI'm an earth investigator, I'm an excavator!",
         chinese: "我有一個大鏟斗，一直在挖\n在地上挖洞，不知道會找到什麼\n我是地球調查員，我是挖土機！",
-        chineseGuide: "挖土機有大鏟斗，一直在挖洞找東西，像在調查地球的秘密！",
+        chineseGuide: "bucket 是鏟斗，scoop 是舀的動作，holes 是洞，ground 是地面。investigator 是調查員，又是押韻！",
         startTime: 36,
         endTime: 50
       },
@@ -48,7 +48,7 @@ export const songs: Song[] = [
         id: 3,
         lyrics: "Oh can't you see that I don't have feet?\nNo feet? How do you get around?\nI roll on tracks to get to where I need to be\nI'm an excavator! Excavator!",
         chinese: "你沒看到嗎，我沒有腳？\n沒有腳？那你怎麼移動？\n我用履帶滾動，到達我需要去的地方\n我是挖土機！挖土機！",
-        chineseGuide: "這段是對話！挖土機沒有腳，但它用履帶移動，像坦克車一樣！最後跟著一起唱！",
+        chineseGuide: "這段是對話！feet 是腳，tracks 是履帶，roll 是滾動。挖土機沒有腳，用履帶移動，像坦克車！",
         startTime: 50,
         endTime: 77
       }

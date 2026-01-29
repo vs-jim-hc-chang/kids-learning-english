@@ -475,7 +475,7 @@ export function CarMode({ onSongMode }: CarModeProps) {
           {currentSentence.difficulty === 'easy' ? '簡單' :
            currentSentence.difficulty === 'medium' ? '中等' : '困難'}
         </span>
-        <span className="version-info">v1.6.2</span>
+        <span className="version-info">v1.6.3</span>
       </div>
 
       {/* 句子選擇彈窗 */}
