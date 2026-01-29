@@ -43,6 +43,7 @@ export function SongMode({ onBack }: SongModeProps) {
   const pauseTimerRef = useRef<number | null>(null);
   const selectedSongRef = useRef(selectedSong);
   const pendingPlayRef = useRef(false);
+  const isPlayingLineRef = useRef(false); // 防止重複觸發播放
 
   // 同步 refs
   useEffect(() => { stepRef.current = step; }, [step]);
@@ -141,12 +142,30 @@ export function SongMode({ onBack }: SongModeProps) {
 
   // 播放指定句子（英文朗讀 → 中文教學 → 下一句或播放影片）
   const playLine = useCallback(async (lineIdx: number) => {
-    if (!isPlayingRef.current) return;
+    // 防止重複觸發
+    if (lineIdx === 0) {
+      if (isPlayingLineRef.current) {
+        console.log('playLine already running, skipping');
+        return;
+      }
+      isPlayingLineRef.current = true;
+    }
+
+    if (!isPlayingRef.current) {
+      isPlayingLineRef.current = false;
+      return;
+    }
     const verse = currentVerseRef.current;
-    if (!verse) return;
+    if (!verse) {
+      isPlayingLineRef.current = false;
+      return;
+    }
 
     const line = verse.lines[lineIdx];
-    if (!line) return;
+    if (!line) {
+      isPlayingLineRef.current = false;
+      return;
+    }
 
     setCurrentLineIndex(lineIdx);
 
@@ -155,20 +174,32 @@ export function SongMode({ onBack }: SongModeProps) {
     if (ttsRef.current) {
       await ttsRef.current.speakText(line.english, 'en');
     }
-    if (!isPlayingRef.current) return;
+    if (!isPlayingRef.current) {
+      isPlayingLineRef.current = false;
+      return;
+    }
 
     await new Promise(resolve => setTimeout(resolve, 500));
-    if (!isPlayingRef.current) return;
+    if (!isPlayingRef.current) {
+      isPlayingLineRef.current = false;
+      return;
+    }
 
     // 步驟 2: 中文教學
     setStep('LINE_TEACHING');
     if (ttsRef.current) {
       await ttsRef.current.speakText(line.teaching, 'zh');
     }
-    if (!isPlayingRef.current) return;
+    if (!isPlayingRef.current) {
+      isPlayingLineRef.current = false;
+      return;
+    }
 
     await new Promise(resolve => setTimeout(resolve, 500));
-    if (!isPlayingRef.current) return;
+    if (!isPlayingRef.current) {
+      isPlayingLineRef.current = false;
+      return;
+    }
 
     // 檢查是否還有下一句
     if (lineIdx < verse.lines.length - 1) {
@@ -176,6 +207,7 @@ export function SongMode({ onBack }: SongModeProps) {
       await playLine(lineIdx + 1);
     } else {
       // 所有句子教完，播放影片
+      isPlayingLineRef.current = false;
       setStep('VIDEO_PLAY');
       if (youtubeRef.current) {
         if (!isPlayerReady) {
@@ -190,12 +222,11 @@ export function SongMode({ onBack }: SongModeProps) {
   // 開始播放流程
   const startPlayback = useCallback(async () => {
     setIsPlaying(true);
+    isPlayingRef.current = true; // 立即同步
     pendingPlayRef.current = false;
 
-    // 等待狀態更新後開始
-    setTimeout(() => {
-      playLine(0);
-    }, 100);
+    // 直接開始播放
+    playLine(0);
   }, [playLine]);
 
   // 當步驟為 IDLE 且正在播放時，自動開始
@@ -214,6 +245,8 @@ export function SongMode({ onBack }: SongModeProps) {
   const togglePlayPause = useCallback(() => {
     if (isPlaying) {
       setIsPlaying(false);
+      isPlayingRef.current = false; // 立即同步
+      isPlayingLineRef.current = false; // 重置播放鎖
       pendingPlayRef.current = false;
       clearPauseTimer();
       ttsRef.current?.stop();
@@ -223,6 +256,7 @@ export function SongMode({ onBack }: SongModeProps) {
         startPlayback();
       } else {
         setIsPlaying(true);
+        isPlayingRef.current = true; // 立即同步
         if (step === 'VIDEO_PLAY') {
           if (isPlayerReady) {
             youtubeRef.current?.playSegment();
